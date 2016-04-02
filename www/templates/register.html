@@ -1,0 +1,48 @@
+<ion-view view-title="Register">
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+      <form name="regForm" ng-submit="register(regForm)">
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Nama Lengkap</span>
+                <input type="text" placeholder="Nama Lengkap" ng-model="user.name" required />
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Email</span>
+                <input type="email" placeholder="Email" ng-model="user.email" required />
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Username</span>
+                <input type="text" placeholder="Username" ng-model="user.username" required />
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Password</span>
+                <input type="password" placeholder="Password" ng-model="user.password" required />
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Ulangi Password</span>
+                <input type="password" placeholder="Ulangi Password" ng-model="user.repass" required />
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Telpon</span>
+                <input type="number" placeholder="Telpon" ng-model="user.phone" required />
+            </label>
+            <label class="item item-input item-select">
+                <span class="input-label">Gender</span>
+                <select ng-model="user.gender" required />
+                    <option value="L">Laki-Laki</option>
+                    <option value="P">Perempuan</option>
+                </select>
+            </label>
+        </div>
+        <div class="padding">
+            <button type="submit" class="button button-block button-positive">
+              Register
+            </button>
+        </div>
+      </form>
+    </ion-content>
+</ion-view>
