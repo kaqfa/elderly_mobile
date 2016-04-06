@@ -19,3 +19,21 @@ angular.module('starter.controllers', [])
     }
   };
 })
+
+.controller('DashCtrl', function($scope, Elders, $state) {
+  // Form data for the login modal
+  $scope.loginData = {};
+  $scope.$on('$ionicView.beforeEnter', function(){
+    if(localStorage.getItem('token') === null)
+      $state.go('login')
+  })
+  $scope.logout = function(){
+    localStorage.removeItem('token');
+    $state.go('login');
+  }
+
+})
+
+.controller('KondisiCtrl', function($scope, Elders, $state) {
+  
+})

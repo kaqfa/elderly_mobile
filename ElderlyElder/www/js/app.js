@@ -26,10 +26,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('login', {
+  .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
+  })
+  
+  .state('dashboard', {
+    url: '/dashboard',
+    templateUrl: 'templates/dashboard.html',
+    controller: 'DashCtrl'
+  })
+  
+  .state('kondisi', {
+    url: '/kondisi',
+    templateUrl: 'templates/kondisi.html',
+    controller: 'KondisiCtrl'
+  })
+  
+  .state('anatomi', {
+    url: '/anatomi',
+    templateUrl: 'templates/anatomi.html',
   })
   
   // if none of the above states are matched, use this as the fallback
