@@ -29,19 +29,19 @@ angular.module('starter.services', [])
       name: 'Ortu 1',
       birthdate: '1980-10-10',
       gender: "L",
-      code: "7x123"
+      phone: "7213123"
     },{
       id: 2,
       name: 'Ortu 2',
       birthdate: '1980-10-09',
       gender: "P",
-      code: "7x1x3"
+      phone: "7213123"
     },{
       id: 3,
       name: 'Ortu 3',
       birthdate: '1979-12-10',
       gender: "L",
-      code: "7x1ab"
+      phone: "7213123"
     }];
 
     return {

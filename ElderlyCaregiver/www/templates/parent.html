@@ -5,6 +5,7 @@
         <p>Nama: {{elder.name}}</p>
         <p>Tanggal lahir: {{elder.birthdate | date: "dd-MM-yyyy"}}</p>
         <p>Gender: {{elder.gender=='L' ? "Laki-Laki":"Perempuan"}}</p>
+        <p>No. Handphone: {{elder.phone}} </p>
       </div>
       <div class="item item-divider">
             <button class="button button-small button-balanced" ui-sref="app.editParent({parentId:elder.id})">
