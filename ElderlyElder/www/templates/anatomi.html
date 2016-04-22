@@ -2,12 +2,10 @@
     <div class="bar bar-header bar-positive">
       <a ui-sref="kondisi"><h1 class="title">&lt; Kembali</h1></a>
     </div>
-    <ion-content class="has-header fixed-height">
+    <ion-content class="has-header fixed-height" scroll="false">
       <div class="image">
-        <img src="img/human.png" alt="image" />
-        <a ui-sref="kondisi" style="top: 10%; left: 10%; width: 15%; height: 15%;">
-        <a ui-sref="anatomi" style="top: 20%; left: 50%; width: 15%; height: 15%;">
-        <a ui-sref="dashboard" style="top: 50%; left: 80%; width: 15%; height: 15%;">
+        <img ng-repeat-start="img in imgs" ng-show="img.show" src="img/{{ img.name }}.png" alt="image"  />
+        <a ng-repeat-end ng-if="img.location" on-touch="changeImg(img.name)" on-release="changeImg('human')" ng-mouseout="changeImg('human')" style="{{img.location}}"></a>
       </div>
     </ion-content>
 </ion-view>

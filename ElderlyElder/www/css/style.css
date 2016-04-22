@@ -13,6 +13,21 @@
   position: absolute;
 }
 
-.fixed-height>div.scroll{
-  height: 100%;
+.fixed-height{
+  text-align: center;
+}
+
+.wrapper{
+  padding:0;
+  margin:0;
+}
+
+.preload{
+  position: fixed;
+  top: px;
+  right: 0px;
+  width: 10px;
+  height: 10px;
+  overflow:hidden; 
+  z-index:-1;
 }

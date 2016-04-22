@@ -37,3 +37,10 @@ angular.module('starter.controllers', [])
 .controller('KondisiCtrl', function($scope, Elders, $state) {
   
 })
+
+.controller('AnatomiCtrl', function($scope, Anatomy, $state) {
+  $scope.imgs=Anatomy.getData();
+  $scope.changeImg=function(image){
+    Anatomy.show(image);
+  }
+})
