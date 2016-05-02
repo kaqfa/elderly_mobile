@@ -22,6 +22,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
+.constant('ApiEndpoint', {
+    url: 'http://localhost:8100/api'
+    //url: 'http://elderlyapps.net/api' 
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
@@ -58,6 +63,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'menuContent': {
         templateUrl: 'templates/reg-parent.html',
+        controller: 'regParentCtrl'
       }
     }
   })

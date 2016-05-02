@@ -6,35 +6,35 @@
     <ion-content>
       <form name="regForm" ng-submit="register(regForm)">
         <div class="list">
-            <label class="item item-input item-floating-label">
+            <label class="item item-input item-floating-label" ng-class="{ 'has-error' : regForm.fullname.$invalid && !regForm.fullname.$error.required }">
                 <span class="input-label">Nama Lengkap</span>
-                <input type="text" placeholder="Nama Lengkap" ng-model="user.name" required />
+                <input type="text" name="fullname" placeholder="Nama Lengkap" ng-model="user.fullname" required />
             </label>
-            <label class="item item-input item-floating-label">
+            <label class="item item-input item-floating-label" ng-class="{ 'has-error' : regForm.email.$invalid && !regForm.email.$error.required }">
                 <span class="input-label">Email</span>
-                <input type="email" placeholder="Email" ng-model="user.email" required />
+                <input type="email" name="email" placeholder="Email" ng-model="user.email" required />
             </label>
-            <label class="item item-input item-floating-label">
+            <label class="item item-input item-floating-label" ng-class="{ 'has-error' : regForm.username.$invalid && !regForm.username.$error.required }">
                 <span class="input-label">Username</span>
-                <input type="text" placeholder="Username" ng-model="user.username" required />
+                <input type="text" name="username" placeholder="Username" ng-model="user.username" required />
             </label>
-            <label class="item item-input item-floating-label">
+            <label class="item item-input item-floating-label" ng-class="{ 'has-error' : regForm.password.$invalid && !regForm.password.$error.required }">
                 <span class="input-label">Password</span>
-                <input type="password" placeholder="Password" ng-model="user.password" required />
+                <input type="password" name="password" placeholder="Password" ng-model="user.password" ng-change="isMatch()" required />
             </label>
-            <label class="item item-input item-floating-label">
+            <label class="item item-input item-floating-label" ng-class="{ 'has-error' : !passMatch }">
                 <span class="input-label">Ulangi Password</span>
-                <input type="password" placeholder="Ulangi Password" ng-model="user.repass" required />
+                <input type="password" name="repass" placeholder="Ulangi Password" ng-model="user.repass" ng-change="isMatch()" required />
             </label>
-            <label class="item item-input item-floating-label">
+            <label class="item item-input item-floating-label" ng-class="{ 'has-error' : regForm.phone.$invalid && !regForm.phone.$error.required }">
                 <span class="input-label">Telpon</span>
-                <input type="number" placeholder="Telpon" ng-model="user.phone" required />
+                <input type="number" name="phone" placeholder="Telpon" ng-model="user.phone" required />
             </label>
             <label class="item item-input item-select">
                 <span class="input-label">Gender</span>
                 <select ng-model="user.gender" required />
-                    <option value="L">Laki-Laki</option>
-                    <option value="P">Perempuan</option>
+                    <option value="l">Laki-Laki</option>
+                    <option value="p">Perempuan</option>
                 </select>
             </label>
         </div>

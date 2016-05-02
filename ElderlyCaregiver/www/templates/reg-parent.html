@@ -1,30 +1,32 @@
 <ion-view view-title="Tambah Orang Tua">
     <ion-content>
+      <form name="regForm" ng-submit="register(regForm)">
         <div class="list">
             <label class="item item-input item-floating-label">
                 <span class="input-label">Nama Lengkap</span>
-                <input type="text" placeholder="Nama Lengkap">
+                <input type="text" name="fullname" ng-model="user.fullname" placeholder="Nama Lengkap" required>
             </label>
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Tanggal Lahir</span>
-                <input type="date" placeholder="Tanggal Lahir">
+                <input type="date" name="birthday" ng-model="user.birthday" placeholder="Tanggal Lahir" required>
             </label>
             <label class="item item-input item-select">
                 <span class="input-label">Gender</span>
-                <select>
-                    <option value="L" selected>Laki-Laki</option>
-                    <option value="P">Perempuan</option>
+                <select ng-model="user.gender">
+                    <option value="l" selected>Laki-Laki</option>
+                    <option value="p">Perempuan</option>
                 </select>
             </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">No. Handphone</span>
-                <input type="text" placeholder="No. Handphone">
+                <input type="text" name="phone" ng-model="phone" placeholder="No. Handphone" required>
             </label>
         </div>
         <div class="padding">
-            <a href="#/app/dashboard" class="button button-block button-positive">
+            <button type="submit" class="button button-block button-positive">
               Tambah
-            </a>
+            </button>
         </div>
+      <form name="regForm" ng-submit="register(regForm)">
     </ion-content>
 </ion-view>
