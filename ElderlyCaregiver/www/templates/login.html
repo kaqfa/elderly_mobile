@@ -1,29 +1,33 @@
 
-<ion-view view-title="Login">
-    <ion-nav-bar class="bar-positive">
+<ion-view view-title="Berbakti [Anak]">
+<!--
+    <ion-nav-bar class="bar-warning">
     </ion-nav-bar>
-    <ion-content>
+-->
+    <ion-content id="login-content">
+     <img src="../img/logo.png" alt="" style="width: 50%; margin-top: 40px;">
       <form name="userForm" ng-submit="login(userForm)">
         <div class="list">
           <label class="item item-input item-floating-label" 
                  ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$error.required }">
-            <span class="input-label">Username</span>
+<!--            <span class="input-label">Username</span>-->
             <input type="text" name="username" placeholder="Username" ng-model="user.username" 
                    required />
           </label>
           <label class="item item-input item-floating-label"
                  ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$error.required }">
-            <span class="input-label">Password</span>
+<!--            <span class="input-label">Password</span>-->
             <input type="password" name="password" placeholder="Password" ng-model="user.password" 
                    required />
           </label>
-        </div>
-        <div class="padding">
+          <div class="padding">
           <button type="submit" class="button button-block button-positive">
             Login
           </button>
         </div>
+        </div>
+
       </form>
-      <center>Belum punya akun? <a href="#/register">Register</a></center>
+      <center>Belum punya akun? <a href="#/register">Daftar</a></center>
     </ion-content>
 </ion-view>

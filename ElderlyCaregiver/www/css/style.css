@@ -1,4 +1,27 @@
 /* Empty. Add your own CSS if you like */
+
+ion-content{
+    background-image: url(../img/bokeh.jpg);
+    background-color: dodgerblue;
+}
+
+#login-content{
+
+    text-align: center;
+}
+
+#login-content .item{
+    border: none;
+}
+
+#login-content input{
+    display: block;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 95%;
+    color: aqua;
+    padding: 5px 10px;
+}
+
 .nopadding {
   padding: 0;
 }
