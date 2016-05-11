@@ -5,7 +5,7 @@
     <ion-content class="has-header fixed-height" scroll="false">
       <div class="image">
         <img ng-repeat-start="img in imgs" ng-show="img.show" src="img/{{ img.name }}.png" alt="image"  />
-        <a ng-repeat-end ng-if="img.location" on-touch="changeImg(img.name)" on-release="changeImg('human')" ng-mouseout="changeImg('human')" style="{{img.location}}"></a>
+        <a ng-repeat-end ng-if="img.location" on-touch="changeImg(img.name)" on-release="confirm(img.code)" style="{{img.location}}"></a>
       </div>
     </ion-content>
 </ion-view>
