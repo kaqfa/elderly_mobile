@@ -1,4 +1,39 @@
 /* Empty. Add your own CSS if you like */
+
+#register-image{
+    height: 300px;
+    background: blue;
+}
+
+.placeholder-icon{
+    color: #555;
+    margin-right: 10px;
+}
+
+#login-content{
+    text-align: center;
+}
+
+.bar.bar-header .button+.title {
+    text-align: center !important;
+}
+
+.item-input{
+    margin-bottom: 10px;
+}
+
+#login-content .item{
+    border: none;
+}
+
+#login-content input{
+    display: block;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 95%;
+    color: aqua;
+    padding: 5px 10px;
+}
+
 .nopadding {
   padding: 0;
 }
@@ -43,4 +78,12 @@ label.item.valid-lr {
 .form-error {
   padding: 2px 0 2px 16px;
   color: red;
+}
+
+input::-webkit-input-placeholder {
+ color: #ccc;
+}
+
+input:-moz-input-placeholder {
+ color: #ccc;
 }

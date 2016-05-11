@@ -28,9 +28,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     //url: 'http://localhost:8000/api' 
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider,  $ionicConfigProvider) {
+  $ionicConfigProvider.backButton.text('&nbsp;').icon('ion-ios-arrow-back')
+  $ionicConfigProvider.navBar.alignTitle('center')
   $stateProvider
-
     .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
