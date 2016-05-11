@@ -23,8 +23,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 })
 
 .constant('ApiEndpoint', {
-    url: 'http://localhost:8100/api'
-    //url: 'http://elderlyapps.net/api' 
+    //url: 'http://localhost:8100/api'
+    url: 'http://elderlyapps.net/api' 
+    //url: 'http://localhost:8000/api' 
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -54,6 +55,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       views: {
         'menuContent': {
           templateUrl: 'templates/dashboard.html',
+          controller: 'dashCtrl'
         }
       }
     })

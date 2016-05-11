@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, Users, Elders, $timeout, $state) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicLoading, Users, Elders, $timeout, $state) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -16,9 +16,48 @@ angular.module('starter.controllers', [])
       $state.go('login')
   })
   $scope.elders=Elders.all();
+  $scope.dateFormat = function(date){
+    return moment(date).locale('id').format('DD MMMM YYYY');
+  };
+  $scope.datetimeFormat = function(date){
+    return moment(date).locale('id').format('DD MMMM YYYY HH:mm');
+  };
   $scope.logout = function(){
     Users.logout();
     $state.go('login');
+  }
+  
+  $scope.refreshData=function(){
+    $ionicLoading.show({
+      template: 'Loading...'
+    })
+    Users.getData(localStorage.token, function(data){
+        Elders.setAll(localStorage.token, function(data){
+          $ionicLoading.hide();
+          $state.go($state.current, {}, {reload: true});
+        }, function(response){
+          $ionicLoading.hide();
+          var msg="Koneksi gagal";
+          $ionicPopup.alert({
+           title: 'Error',
+           template: msg
+          });
+        });
+      }, function(response){
+        Users.logout();
+        $scope.noToken=true;
+        $ionicLoading.hide();
+        var msg="";
+        if(response.status==401){
+          msg="Username atau password salah";
+        }else{
+          msg="Koneksi gagal";
+          $ionicPopup.alert({
+           title: 'Error',
+           template: msg
+          });
+        }
+      })
   }
 
 })
@@ -27,6 +66,41 @@ angular.module('starter.controllers', [])
   $scope.$on('$ionicView.beforeEnter', function(){
     if(Users.cekLogin())
       $state.go('app.dashboard');
+    else if(localStorage.getItem("token")!==null){
+      $scope.noToken=false;
+      $ionicLoading.show({
+        template: 'Loading...'
+      })
+      Users.getData(localStorage.token, function(data){
+        Elders.setAll(localStorage.token, function(data){
+          $ionicLoading.hide();
+          $state.go('app.dashboard');
+        }, function(response){
+          $ionicLoading.hide();
+          var msg="Koneksi gagal";
+          $ionicPopup.alert({
+           title: 'Error',
+           template: msg
+          });
+        });
+      }, function(response){
+        Users.logout();
+        $scope.noToken=true;
+        $ionicLoading.hide();
+        var msg="";
+        if(response.status==401){
+          msg="Username atau password salah";
+        }else{
+          msg="Koneksi gagal";
+          $ionicPopup.alert({
+           title: 'Error',
+           template: msg
+          });
+        }
+      })
+    }else{
+      $scope.noToken=true;
+    }
   })
   $scope.user={
     username:"",
@@ -140,17 +214,108 @@ angular.module('starter.controllers', [])
     if(!Users.cekLogin())
       $state.go('login')
   })
+  
   $scope.user={
     fullname:"",
-    birthdate:"",
+    birthday:"",
     phone:"",
     gender:"l"
   }
   $scope.register = function(user){
-    console.log($scope.user);
+    if(user.$valid){
+      $ionicLoading.show({
+        template: 'Loading...'
+      })
+      Elders.add($scope.user, Users.getToken(), function(data){
+        $ionicLoading.hide();
+        $state.go('app.dashboard');
+      },function(response){
+        $ionicLoading.hide();
+        var msg="";
+        if(response.status==400){
+          msg="Nomor handphone sudah terdaftar";
+        }else{
+          msg="Koneksi gagal";
+        }
+        $ionicPopup.alert({
+         title: 'Error',
+         template: msg
+        });
+      });
+    }
   };
 })
 
-.controller('ParentCtrl', function($scope, Elders, $stateParams) {
-  $scope.elder=Elders.get($stateParams.parentId);
+.controller('ParentCtrl', function($scope, $ionicLoading, $state, Elders, Users, $stateParams) {
+  $scope.$on('$ionicView.beforeEnter', function(){
+    elder=Elders.get($stateParams.parentId);
+    if(elder!=null){
+      $scope.elder=elder.elder;
+      $scope.tracker=elder.tracker;
+    }else{
+      $scope.elder={};
+      $scope.tracker={};
+    }
+    $scope.$parent.refreshData=function(){
+      $ionicLoading.show({
+        template: 'Loading...'
+      })
+      Elders.refreshTrackElder($scope.elder.id, localStorage.token, function(data){
+        $ionicLoading.hide();
+        $state.go($state.current, {}, {reload: true});
+      }, function(callback){
+        $ionicLoading.hide();
+        var msg="Koneksi gagal";
+        $ionicPopup.alert({
+         title: 'Error',
+         template: msg
+        });
+      });
+    }
+  });
+  
+  $scope.$on('$ionicView.beforeLeave', function(){
+    $scope.$parent.refreshData=function(){
+      $ionicLoading.show({
+        template: 'Loading...'
+      })
+      Users.getData(localStorage.token, function(data){
+        Elders.setAll(localStorage.token, function(data){
+          $ionicLoading.hide();
+          $state.go($state.current, {}, {reload: true});
+        }, function(response){
+          $ionicLoading.hide();
+          var msg="Koneksi gagal";
+          $ionicPopup.alert({
+           title: 'Error',
+           template: msg
+          });
+        });
+      }, function(response){
+        Users.logout();
+        $scope.noToken=true;
+        $ionicLoading.hide();
+        var msg="";
+        if(response.status==401){
+          msg="Username atau password salah";
+        }else{
+          msg="Koneksi gagal";
+          $ionicPopup.alert({
+           title: 'Error',
+           template: msg
+          });
+        }
+      })
+    }
+  });
+  
+  $scope.convertCondition=function(cond){
+    return Elders.convertCondition(cond);
+  }
+})
+
+.controller('dashCtrl', function($scope, $ionicHistory, $ionicLoading, Elders) {
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $ionicHistory.clearHistory();
+  });
 });

@@ -7,10 +7,11 @@ angular.module('starter.services', [])
     return {
     login: function(username, password, callback, error) {
       $http.post(ApiEndpoint.url + '/login/', {username: username, password: password}).then(function(response){
+        token = response.data.token;
+        localStorage.token=token;
+        data = response.data.profile;
         if(callback!=null)
           callback(response.data);
-        token = response.data.token;
-        console.log(token);
       }, function(response){
         if(error!=null)
           error(response);
@@ -29,6 +30,7 @@ angular.module('starter.services', [])
     logout: function(){
       token=null;
       data=null;
+      localStorage.removeItem("token");
     },
     cekLogin: function(){
       if(token==null)
@@ -36,24 +38,24 @@ angular.module('starter.services', [])
       else
         return true;
     },
-    setData: function(token, callback, error){
-      $http.get(ApiEndpoint.url + '/caregivers/', {
+    getData: function(inputToken, callback, error){
+      $http.get(ApiEndpoint.url + '/profile/', {
         headers: {
-          Authorization: "Token "+token
+          Authorization: "Token "+inputToken
         }
       }).then(function(response){
+        token=inputToken;
+        data=response.data;
         if(callback!=null)
           callback(response.data);
-        console.log(data);
       }, function(response){
         if(error!=null)
           error(response);
-        console.log(response);
       });
     },
     getToken: function(){
-      if(data!=null)
-        return data.token;
+      if(data!=null&&token!=null)
+        return token;
       else
         return null;
     }
@@ -61,7 +63,8 @@ angular.module('starter.services', [])
 })
 
 .factory('Elders', function($http, ApiEndpoint) {
-    var data = {};
+    var data = [];
+    var tracker = [];
 
     return {
     all: function(){
@@ -72,9 +75,42 @@ angular.module('starter.services', [])
           Authorization: "Token "+token
         }
       }).then(function(response){
+        data.splice(0, data.length);
+        for(i=0;i<response.data.length;i++){
+          data.push(response.data[i]);
+          tracker[response.data[i].id]=[];
+        }
+        $http.get(ApiEndpoint.url + '/trackers/', {
+          headers: {
+            Authorization: "Token "+token
+          }
+        }).then(function(response){
+          for(i=0;i<response.data.length;i++){
+            tracker[response.data[i].elder].push(response.data[i]);
+          }
+        });
         if(callback!=null)
           callback(response.data);
-        data=response.data;
+      }, function(response){
+        if(error!=null)
+          error(response);
+      });
+    },
+    add: function(elder, token, callback, error){
+      var day=elder.birthday.getDate();
+      var month = elder.birthday.getMonth()+1;
+      var year = elder.birthday.getFullYear();
+      elder = JSON.parse(JSON.stringify(elder));
+      elder.type='e';
+      elder.birthday=year+"-"+month+"-"+day;
+      $http.post(ApiEndpoint.url + '/members/', elder, {
+        headers: {
+          Authorization: "Token "+token
+        }
+      }).then(function(response){
+        data.push(response.data);
+        if(callback!=null)
+          callback(response.data);
       }, function(response){
         if(error!=null)
           error(response);
@@ -86,10 +122,100 @@ angular.module('starter.services', [])
     get: function(elderId) {
       for (var i = 0; i < data.length; i++) {
         if (data[i].id === parseInt(elderId)) {
-          return data[i];
+          return {elder:data[i],tracker:tracker[elderId]};
         }
       }
       return null;
+    },
+    refreshTrack: function(callback, error){
+      $http.get(ApiEndpoint.url + '/trackers/', {
+        headers: {
+          Authorization: "Token "+token
+        }
+      }).then(function(response){
+        for(i=0;i<data.length;i++){
+          tracker[data[i].id]=[]
+        }
+        for(i=0;i<response.data.length;i++){
+          tracker[response.data[i].elder].push(response.data[i]);
+        }
+        if(callback!=null)
+          callback(response.data);
+      }, function(response){
+      if(error!=null)
+        error(response);
+      });
+    },
+    refreshTrackElder: function(elderId, token, callback, error){
+      $http.get(ApiEndpoint.url + '/trackers/?elder='+elderId, {
+        headers: {
+          Authorization: "Token "+token
+        }
+      }).then(function(response){
+        tracker[elderId]=[]
+        for(i=0;i<response.data.length;i++){
+          tracker[response.data[i].elder].push(response.data[i]);
+        }
+        if(callback!=null)
+          callback(response.data);
+      }, function(response){
+        if(error!=null)
+          error(response);
+      });
+    },
+    convertCondition: function(cond){
+      switch(cond){
+        case "ba":
+          return "baik";
+          break;
+        case "bi":
+          return "biasa";
+          break;
+        case "tb":
+          return "tidak baik";
+          break;
+        case "sk":
+          return "sakit kepala";
+          break;
+        case "sl":
+          return "sakit leher";
+          break;
+        case "sdl":
+          return "sakit dada kiri";
+          break;
+        case "sdr":
+          return "sakit dada kanan";
+          break;
+        case "sll":
+          return "sakit lengan kiri";
+          break;
+        case "slr":
+          return "sakit lengan kanan";
+          break;
+        case "sp":
+          return "sakit perut";
+          break;
+        case "spl":
+          return "sakit paha kiri";
+          break;
+        case "spr":
+          return "sakit paha kanan";
+          break;
+        case "sbl":
+          return "sakit betis kiri";
+          break;
+        case "sbr":
+          return "sakit betis kanan";
+          break;
+        case "stl":
+          return "sakit telapak kaki kiri";
+          break;
+        case "str":
+          return "sakit telapak kaki kanan";
+          break;
+        default:
+          return "baik";
+      }
     }
   };
 });

@@ -10,7 +10,7 @@
         </button>
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
-        <button class="button">
+        <button class="button" ng-click="refreshData()">
           <i class="icon ion-loop"></i>
         </button>
       </ion-nav-buttons>
@@ -35,7 +35,7 @@
             Daftar Orang Tua
         </ion-item>
         <ion-item menu-close ng-repeat="elder in elders track by $index" ui-sref="app.parent({parentId:elder.id})" ui-sref-active="active">
-          {{elder.name}}
+          {{elder.user.first_name}} {{elder.user.last_name}}
         </ion-item>  
       </ion-list>
       <div>&nbsp;
