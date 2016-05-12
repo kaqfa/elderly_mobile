@@ -28,7 +28,8 @@
                 <ion-item class="item-divider">
                     Daftar Orang Tua
                 </ion-item>
-                <ion-item menu-close ng-repeat="elder in elders track by $index" ui-sref="app.parent({parentId:elder.id})" ui-sref-active="active">
+                <ion-item menu-close ng-repeat="elder in elders track by $index" 
+                    ui-sref="app.parent({parentId:elder.id})" ui-sref-active="active">
                     {{elder.name}}
                 </ion-item>
             </ion-list>

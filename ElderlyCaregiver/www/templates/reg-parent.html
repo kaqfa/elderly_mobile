@@ -1,24 +1,25 @@
-<ion-view view-title="Tambah">
+<ion-view view-title="Tambah Orang Tua">
     <ion-content>
+        <img class="full-image" src="../img/logo.png" alt="">
         <form name="regForm" ng-submit="register(regForm)">
-            <div class="list">
-                <label class="item item-input item-floating-label">
-                    <span class="input-label">Nama Lengkap</span>
+            <div class="list list-inset">
+                <label class="item item-input">                    
+                    <i class="icon ion-android-person placeholder-icon"></i>
                     <input type="text" name="fullname" ng-model="user.fullname" placeholder="Nama Lengkap" required>
                 </label>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Tanggal Lahir</span>
+                <label class="item item-input">                    
+                    <i class="icon ion-android-calendar placeholder-icon"></i>
                     <input type="date" name="birthday" ng-model="user.birthday" placeholder="Tanggal Lahir" required>
                 </label>
-                <label class="item item-input item-select">
-                    <span class="input-label">Gender</span>
+                <label class="item item-input item-select">                    
+                    <i class="icon ion-transgender placeholder-icon"></i>
                     <select ng-model="user.gender">
                         <option value="l" selected>Laki-Laki</option>
                         <option value="p">Perempuan</option>
                     </select>
                 </label>
-                <label class="item item-input item-floating-label">
-                    <span class="input-label">No. Handphone</span>
+                <label class="item item-input">                    
+                    <i class="icon ion-android-phone-portrait placeholder-icon"></i>
                     <input type="text" name="phone" ng-model="phone" placeholder="No. Handphone" required>
                 </label>
             </div>

@@ -15,7 +15,7 @@ angular.module('starter.controllers', [])
     if(!Users.cekLogin())
       $state.go('login')
   })
-  $scope.elders=Elders.all();
+  $scope.elders = Elders.all();
   $scope.dateFormat = function(date){
     return moment(date).locale('id').format('DD MMMM YYYY');
   };
@@ -233,6 +233,7 @@ angular.module('starter.controllers', [])
         $ionicLoading.hide();
         var msg="";
         if(response.status==400){
+          console.log(response);
           msg="Nomor handphone sudah terdaftar";
         }else{
           msg="Koneksi gagal";
