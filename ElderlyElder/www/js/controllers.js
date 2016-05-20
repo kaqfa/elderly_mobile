@@ -112,19 +112,19 @@ angular.module('starter.controllers', [])
 })
 
 .controller('KondisiCtrl', function($scope, $ionicHistory, Elders, $state) {
-  $scope.$on('$ionicView.beforeEnter', function(){
+  $scope.$on('$ionicView.beforeEnter', function(){    
     if(!Elders.cekLogin()){
       $ionicHistory.nextViewOptions({
         disableAnimate: true
       });
-      $state.go('login')
+      $state.go('login');      
     }
     else
       $ionicHistory.clearHistory();
   })
-  $scope.addTrack=function(cond){
-    elder=Elders.getProfile();
-    track={
+  $scope.addTrack = function(cond){
+    elder = Elders.getProfile();    
+    track = {
       elder: elder.id,
       type: "dc",
       created: new Date(),
@@ -135,9 +135,25 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('AnatomiCtrl', function($scope, Anatomy, $state) {
-  $scope.imgs=Anatomy.getData();
-  $scope.changeImg=function(image){
+.controller('AnatomiCtrl', function($scope, Anatomy, Elders, $state) {
+  $scope.imgs = Anatomy.getData();
+  
+  $scope.changeImg = function(image){
     Anatomy.show(image);
   }
+
+  $scope.postCondition = function(cond){
+      elder = Elders.getProfile();
+      console.log(Elders.getProfile());
+      track = {
+        elder: elder.id,
+        type: "dc",
+        created: new Date(),
+        condition: cond
+      }
+      Elders.addTrack(track);
+      $state.go('dashboard');
+      Anatomy.show('human');
+  }
+
 })

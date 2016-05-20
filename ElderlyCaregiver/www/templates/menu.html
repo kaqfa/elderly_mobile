@@ -22,15 +22,19 @@
                     <i class="icon ion-home"></i> Dashboard
                 </ion-item>
             </ion-list>
-            <div>&nbsp;
-            </div>
+            <ion-list>
+                <ion-item menu-close href="#/app/parents/add">
+                    <i class="icon ion-plus-circled"></i> Tambah Orang Tua
+                </ion-item>
+            </ion-list>
+            <div>&nbsp;</div>
             <ion-list ng-show="elders">
                 <ion-item class="item-divider">
                     Daftar Orang Tua
                 </ion-item>
-                <ion-item menu-close ng-repeat="elder in elders track by $index" 
+                <ion-item style="text-transform: capitalize;" menu-close ng-repeat="elder in elders track by $index" 
                     ui-sref="app.parent({parentId:elder.id})" ui-sref-active="active">
-                    {{elder.name}}
+                    {{elder.user.first_name}} {{elder.user.last_name}}
                 </ion-item>
             </ion-list>
             <div>&nbsp;

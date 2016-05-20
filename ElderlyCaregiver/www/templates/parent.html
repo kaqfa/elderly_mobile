@@ -1,33 +1,82 @@
-<ion-view view-title="{{elder.name}}">
-  <ion-content class="padding">
-    <div class="card">
-      <div class="item item-text-wrap item-icon-right">
-        <p>Nama: {{elder.name}}</p>
-        <p>Tanggal lahir: {{elder.birthdate | date: "dd-MM-yyyy"}}</p>
-        <p>Gender: {{elder.gender=='L' ? "Laki-Laki":"Perempuan"}}</p>
-        <p>No. Handphone: {{elder.phone}} </p>
-      </div>
-      <div class="item item-divider">
-            <button class="button button-small button-balanced" ui-sref="app.editParent({parentId:elder.id})">
-              Ubah
-            </button>&nbsp;
-            <button class="button button-small button-assertive">
-              Hapus
-            </button>
-      </div>
+<ion-view view-title="Profil Orang Tua">
+  <ion-content class="has-header">
+    
+    <div class="hero has-mask bg-header" style="background-image:url(img/soft-bokeh.jpg);">
+        <img src="img/karakter-circle-shadow.png" alt="" style="width: 30%; margin-top: 20px;">
+        <h3 class="">
+          {{elder.user.first_name}} {{elder.user.last_name}}
+        </h3>
     </div>
-    <ion-list>
-        <ion-item class="item-divider">
-            <h2>Kondisi orang tua</h2>
-        </ion-item>
-        <ion-item>
-            <h2>Baik</h2>
-            <p>03-03-2016 20:20</p>
-        </ion-item>
-        <ion-item>
-            <h2>Biasa</h2>
-            <p>03-02-2016 20:20</p>
-        </ion-item>
-    </ion-list>
+
+    <ion-tabs class="tabs-positive tabs-icon-top">
+        <ion-tab title="Kondisi" icon="ion-ios-pulse-strong">
+          
+            <div class="list padding">
+                <div class="item item-divider positive-bg light">Kondisi Harian</div>
+                <ion-scroll direction="x">
+                <a class="item item-avatar" ng-repeat="t in tracker track by $index" href="#">                        
+                  <img ng-if="convertCondition(t.condition) == 'baik'" src = "img/hijau.png">
+                  <img ng-if="convertCondition(t.condition) == 'biasa'" src = "img/biasa.png">
+                  <img ng-if="convertCondition(t.condition) != 'biasa' && convertCondition(t.condition) != 'baik' " src = "img/merah.png">
+                  
+                  <h2 style="font-weight:bold; text-transform: capitalize;">{{convertCondition(t.condition)}}</h2>
+                  <p>{{datetimeFormat(t.modified)}}</p>
+                </a>
+                </ion-scroll>
+            </div>              
+        </ion-tab>
+        <ion-tab title="Profil" icon="ion-android-person">
+            <div class="list padding" >
+              <div class="list list-inset">
+                  <label class="item item-input">                    
+                      <i class="icon ion-android-person placeholder-icon"></i>
+                      <input type="text" name="fullname" ng-model="user.fullname" placeholder="Nama Lengkap" required>
+                  </label>
+                  <label class="item item-input">                    
+                      <i class="icon ion-android-calendar placeholder-icon"></i>
+                      <input type="date" name="birthday" ng-model="user.birthday" placeholder="Tanggal Lahir" required>
+                  </label>
+                  <label class="item item-input item-select">                    
+                      <i class="icon ion-transgender placeholder-icon"></i>
+                      <select ng-model="user.gender">
+                          <option value="l" selected>Laki-Laki</option>
+                          <option value="p">Perempuan</option>
+                      </select>
+                  </label>
+                  <label class="item item-input">
+                      <i class="icon ion-android-phone-portrait placeholder-icon"></i>
+                      <input type="text" name="phone" ng-model="user.phone" placeholder="No. Handphone" required>
+                  </label>
+                  <div class="">
+                      <button type="submit" class="button button-block button-positive">Tambah</button>
+                  </div> 
+              </div>
+            </div>
+        </ion-tab>
+        <ion-tab title="Panggil" icon="ion-android-call">
+            
+        </ion-tab>        
+    </ion-tabs>
+
+    <!-- <div class="button-bar bar-dark padding">
+        <div class="button-bar">
+            <a class="button button-assertive" tab-state ui-sref="tabs.customer">Kondisi</a>&nbsp;
+            <a class="button button-positive" tab-state ui-sref="tabs.policy">Profil</a>&nbsp;
+            <a class="button" tab-state ui-sref="tabs.vehicle">Apa Lagi</a>                  
+        </div>
+    </div>
+    
+      <div class="list padding">
+          <div class="item item-divider positive-bg light">Kondisi Harian</div>
+          <a class="item item-avatar" ng-repeat="t in tracker track by $index" href="#">                        
+            <img ng-if="convertCondition(t.condition) == 'baik'" src = "img/hijau.png">
+            <img ng-if="convertCondition(t.condition) == 'biasa'" src = "img/biasa.png">
+            <img ng-if="convertCondition(t.condition) != 'biasa' && convertCondition(t.condition) != 'baik' " src = "img/merah.png">
+            
+            <h2 style="font-weight:bold; text-transform: capitalize;">{{convertCondition(t.condition)}}</h2>
+            <p>{{datetimeFormat(t.modified)}}</p>
+          </a>
+      </div>  -->         
+    
   </ion-content>
 </ion-view>

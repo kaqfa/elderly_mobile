@@ -31,6 +31,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 .config(function($stateProvider, $urlRouterProvider,  $ionicConfigProvider) {
   $ionicConfigProvider.backButton.text('&nbsp;').icon('ion-ios-arrow-back')
   $ionicConfigProvider.navBar.alignTitle('center')
+  $ionicConfigProvider.tabs.position('top')
+
   $stateProvider
     .state('login', {
     url: '/login',

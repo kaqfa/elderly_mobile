@@ -1,26 +1,27 @@
-
-<ion-view view-title="Login Berbakti [Anak]">
-    <ion-nav-bar class="bar-dark"></ion-nav-bar>
+<ion-view view-title="">    
+    <ion-header-bar align-title="center" class="bar-stable">        
+      <h1 class="title"> <!-- <img src="../img/2c-logo.png" height="60%" style="padding-top:10px;"> --> Aplikasi 
+        <img src="img/2c-text.png" height="60%" style="padding-top:10px;"> [Anak]</h1>
+    </ion-header-bar>
     <ion-content id="login-content">
-     <img src="../img/logo.png" alt="" style="width: 50%; margin-top: 40px;">
+   <!--  <div style="background-image:url(../img/sunrise-crop.jpg); background-size:cover; background-repeat:no-repeat; background-position:center center;"> -->      
+      <img src="img/karakter-circle.png" alt="" style="width: 40%; margin-top: 15px;"> 
+      <img src="img/logo_tagline.png" alt="" style="width: 60%; margin-top: 5px;"> 
+    <!-- </div>      -->
       <form name="userForm" ng-submit="login(userForm)">
         <div class="list">
           <label class="item item-input item-floating-label" 
                  ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$error.required }">
-<!--            <span class="input-label">Username</span>-->
-            <input type="text" name="username" placeholder="Username" ng-model="user.username" 
-                   required />
+            <span class="input-label">Username</span>
+            <input type="text" name="username" placeholder="Username" ng-model="user.username" required />
           </label>
           <label class="item item-input item-floating-label"
                  ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$error.required }">
-<!--            <span class="input-label">Password</span>-->
-            <input type="password" name="password" placeholder="Password" ng-model="user.password" 
-                   required />
+            <span class="input-label">Password</span>
+            <input type="password" name="password" placeholder="Password" ng-model="user.password" required />
           </label>
           <div class="padding">
-          <button type="submit" class="button button-block button-positive">
-            Login
-          </button>
+          <button type="submit" class="button button-block button-positive">Login</button>
           <a class="button button-block button-positive" href="#/register">Daftar Akun Baru</a>
         </div>
         </div>

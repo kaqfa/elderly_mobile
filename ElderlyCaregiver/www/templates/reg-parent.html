@@ -1,6 +1,8 @@
 <ion-view view-title="Tambah Orang Tua">
     <ion-content>
-        <img class="full-image" src="../img/logo.png" alt="">
+        <div style="background-image:url(img/soft-bokeh.jpg); background-size:cover; background-repeat:no-repeat; background-position:center center; min-height: 150px; text-align:center">
+            <img src="img/karakter-circle.png" alt="" style="width: 30%; margin-top: 20px;">
+        </div>
         <form name="regForm" ng-submit="register(regForm)">
             <div class="list list-inset">
                 <label class="item item-input">                    
@@ -18,15 +20,13 @@
                         <option value="p">Perempuan</option>
                     </select>
                 </label>
-                <label class="item item-input">                    
+                <label class="item item-input">
                     <i class="icon ion-android-phone-portrait placeholder-icon"></i>
-                    <input type="text" name="phone" ng-model="phone" placeholder="No. Handphone" required>
+                    <input type="text" name="phone" ng-model="user.phone" placeholder="No. Handphone" required>
                 </label>
             </div>
             <div class="padding">
-                <button type="submit" class="button button-block button-positive">
-                    Tambah
-                </button>
+                <button type="submit" class="button button-block button-positive">Tambah</button>
             </div>
         </form>
     </ion-content>

@@ -221,8 +221,10 @@ angular.module('starter.controllers', [])
     phone:"",
     gender:"l"
   }
+
   $scope.register = function(user){
     if(user.$valid){
+      console.log("user valid");
       $ionicLoading.show({
         template: 'Loading...'
       })
