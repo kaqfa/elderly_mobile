@@ -32,10 +32,11 @@
                       <i class="icon ion-android-person placeholder-icon"></i>
                       <input type="text" name="fullname" ng-model="user.fullname" placeholder="Nama Lengkap" required>
                   </label>
-                  <label class="item item-input">                    
-                      <i class="icon ion-android-calendar placeholder-icon"></i>
-                      <input type="text" name="birthday" ng-model="user.birthday" placeholder="Tanggal Lahir" required>
-                  </label>
+                  <div class="item item-input">                    
+                      <label><i class="icon ion-android-calendar placeholder-icon"></i></label> 
+                      <input type="text" name="birthday" ng-model="user.birthday" ng-focus="datePick();" 
+                              placeholder="Tanggal Lahir" required>
+                  </div>
                   <label class="item item-input item-select">                    
                       <i class="icon ion-transgender placeholder-icon"></i>
                       <select ng-model="user.gender">
@@ -48,35 +49,12 @@
                       <input type="text" name="phone" ng-model="user.phone" placeholder="No. Handphone" required>
                   </label>
                   <div class="">
-                      <button type="submit" class="button button-block button-positive">Tambah</button>
+                      <button type="submit" class="button button-block button-positive">Simpan</button>
                   </div> 
               </div>
             </div>
         </ion-tab>
-        <ion-tab title="Panggil" icon="ion-android-call">
-            
-        </ion-tab>        
-    </ion-tabs>
-
-    <!-- <div class="button-bar bar-dark padding">
-        <div class="button-bar">
-            <a class="button button-assertive" tab-state ui-sref="tabs.customer">Kondisi</a>&nbsp;
-            <a class="button button-positive" tab-state ui-sref="tabs.policy">Profil</a>&nbsp;
-            <a class="button" tab-state ui-sref="tabs.vehicle">Apa Lagi</a>                  
-        </div>
-    </div>
-    
-      <div class="list padding">
-          <div class="item item-divider positive-bg light">Kondisi Harian</div>
-          <a class="item item-avatar" ng-repeat="t in tracker track by $index" href="#">                        
-            <img ng-if="convertCondition(t.condition) == 'baik'" src = "img/hijau.png">
-            <img ng-if="convertCondition(t.condition) == 'biasa'" src = "img/biasa.png">
-            <img ng-if="convertCondition(t.condition) != 'biasa' && convertCondition(t.condition) != 'baik' " src = "img/merah.png">
-            
-            <h2 style="font-weight:bold; text-transform: capitalize;">{{convertCondition(t.condition)}}</h2>
-            <p>{{datetimeFormat(t.modified)}}</p>
-          </a>
-      </div>  -->         
+    </ion-tabs>        
     
   </ion-content>
 </ion-view>

@@ -248,27 +248,34 @@ angular.module('starter.controllers', [])
     }
   };
 
-  var ipObj1 = {
-        callback: function (val) {  //Mandatory
-          tgl = new Date(val);
-          text = tgl.getFullYear()+'-'+(tgl.getMonth()+1)+'-'+tgl.getDate();
-          // console.log('Return value from the datepicker popup is : ' + val);
-          $scope.user.birthday = text;
-        },        
-        inputDate: new Date(),
-        mondayFirst: true,
-        disableWeekdays: [0],
-        closeOnSelect: false,
-        templateType: 'popup'
-  };  
+  $scope.subsYear = function(date, years){
+      date.setYear(date.getYear() - years);
+      return date;
+  };
 
-  $scope.ODP = function(){
+  $scope.datePick = function(){
+    var ipObj1 = {
+      callback: function (val) {  //Mandatory
+        tgl = new Date(val);
+        text = tgl.getFullYear()+'-'+(tgl.getMonth()+1)+'-'+tgl.getDate();
+        // console.log('Return value from the datepicker popup is : ' + val);
+        $scope.user.birthday = text;
+      },        
+      
+      from: new Date(1930, 1, 1), //Optional
+      to: new Date(1990, 1, 1), //Optional
+      inputDate: $scope.subsYear(new Date(), 40),
+      mondayFirst: true,
+      disableWeekdays: [0],
+      closeOnSelect: false,
+      templateType: 'popup'
+    };
     ionicDatePicker.openDatePicker(ipObj1);
   };
   
 })
 
-.controller('ParentCtrl', function($scope, $ionicLoading, $state, Elders, Users, $stateParams) {
+.controller('ParentCtrl', function($scope, $ionicLoading, $state, Elders, Users, $stateParams, ionicDatePicker) {
   $scope.$on('$ionicView.beforeEnter', function(){
     elder = Elders.get($stateParams.parentId);
     if(elder!=null){
@@ -335,7 +342,28 @@ angular.module('starter.controllers', [])
         }
       })
     }
-  });
+  });  
+  
+  $scope.datePick = function(){    
+    var ipObj1 = {
+      callback: function (val) {  //Mandatory
+        tgl = new Date(val);
+        text = tgl.getFullYear()+'-'+(tgl.getMonth()+1)+'-'+tgl.getDate();
+        // console.log('Return value from the datepicker popup is : ' + val);
+        $scope.user.birthday = text;
+      },
+      
+      from: new Date(1930, 1, 1), //Optional
+      to: new Date(1990, 1, 1), //Optional        
+      mondayFirst: true,
+      inputDate: new Date($scope.user.birthday),
+      disableWeekdays: [0],
+      closeOnSelect: false,
+      templateType: 'popup'
+    };
+    ionicDatePicker.openDatePicker(ipObj1);
+    console.log();
+  };
   
   $scope.convertCondition=function(cond){
     return Elders.convertCondition(cond);

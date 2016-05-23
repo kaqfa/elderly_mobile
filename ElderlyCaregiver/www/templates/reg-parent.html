@@ -11,7 +11,8 @@
                 </div>
                 <div class="item item-input">                    
                     <i class="icon ion-android-calendar placeholder-icon"></i>
-                    <input type="text" id="birthday" name="birthday" ng-model="user.birthday" ng-focus="ODP();" placeholder="Tanggal Lahir">
+                    <input type="text" id="birthday" name="birthday" ng-model="user.birthday" 
+                                        ng-focus="datePick();" placeholder="Tanggal Lahir">
                 </div>                
                 <label class="item item-input item-select">                    
                     <i class="icon ion-transgender placeholder-icon"></i>
@@ -25,8 +26,7 @@
                     <input type="text" name="phone" ng-model="user.phone" placeholder="No. Handphone" required>
                 </label>
             </div>
-            <div class="padding">
-                <input type="button" class="button button-block button-positive" name="fota" ng-click="ODP();" value="+" />
+            <div class="padding">                
                 <button type="submit" class="button button-block button-positive">Tambah</button>
             </div>
         </form>

@@ -135,25 +135,50 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('AnatomiCtrl', function($scope, Anatomy, Elders, $state) {
-  $scope.imgs = Anatomy.getData();
-  
-  $scope.changeImg = function(image){
+.controller('AnatomiCtrl', function($scope, $ionicPopup, $ionicHistory, Anatomy, $state, Elders) {
+  $scope.$on('$ionicView.beforeEnter', function(){
+    if(!Elders.cekLogin()){
+      $ionicHistory.nextViewOptions({
+        disableAnimate: true
+      });
+      $state.go('login')
+    }
+    else
+      $ionicHistory.clearHistory();
+  })
+  $scope.imgs=Anatomy.getData();
+  $scope.condition="";
+  $scope.changeImg=function(image){
     Anatomy.show(image);
   }
-
-  $scope.postCondition = function(cond){
-      elder = Elders.getProfile();
-      console.log(Elders.getProfile());
-      track = {
-        elder: elder.id,
-        type: "dc",
-        created: new Date(),
-        condition: cond
-      }
-      Elders.addTrack(track);
-      $state.go('dashboard');
-      Anatomy.show('human');
+  $scope.confirm=function(cond){
+    $scope.changeImg('human');
+    $scope.condition=Elders.convertCondition(cond);
+    var confirmPopup = $ionicPopup.show({
+      title: 'Konfirmasi',
+      template: 'Apakah anda sedang '+$scope.condition+'?',
+      buttons: [
+      { text: 'Tidak',
+        type: 'button-assertive'
+      },
+      {
+        text: '<b>Ya</b>',
+        type: 'button-positive',
+        onTap: function(e) {
+          $scope.addTrack(cond);
+        }
+      }]
+    });
   }
-
+  $scope.addTrack=function(cond){
+    elder=Elders.getProfile();
+    track={
+      elder: elder.id,
+      type: "dc",
+      created: new Date(),
+      condition: cond
+    }
+    Elders.addTrack(track);
+    $state.go('dashboard');
+  }
 })
