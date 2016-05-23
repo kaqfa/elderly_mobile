@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-datepicker'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -23,12 +23,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 })
 
 .constant('ApiEndpoint', {
-    //url: 'http://localhost:8100/api'
-    // url: 'http://elderlyapps.net/api' 
-    url: 'http://localhost:8000/api' 
+    // url: 'http://localhost:8100/api'
+    url: 'http://elderlyapps.net/api' 
+    // url: 'http://localhost:8000/api' 
 })
 
-.config(function($stateProvider, $urlRouterProvider,  $ionicConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider,  $ionicConfigProvider, ionicDatePickerProvider) {
   $ionicConfigProvider.backButton.text('&nbsp;').icon('ion-ios-arrow-back')
   $ionicConfigProvider.navBar.alignTitle('center')
   $ionicConfigProvider.tabs.position('top')
@@ -94,4 +94,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
+
+  var datePickerObj = {
+      setLabel: 'Pilih',
+      todayLabel: 'Today',
+      closeLabel: 'Tutup',
+      mondayFirst: false,
+      inputDate: new Date(),
+      weeksList: ["S", "M", "T", "W", "T", "F", "S"],
+      monthsList: ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
+      templateType: 'popup',
+      showTodayButton: false,
+      dateFormat: 'dd MMM yyyy',
+      closeOnSelect: false,
+      disableWeekdays: [8]
+    };
+
+    ionicDatePickerProvider.configDatePicker(datePickerObj);
+
 });

@@ -7,24 +7,24 @@
     <ion-content>
       <div class="row">
         <div class="col">
-          <a ui-sref="kondisi" class=""> <img src="../img/cek-btn.png" width="100%" alt=""> </a>
+          <a ui-sref="kondisi" class=""> <img src="img/cek-btn.png" width="100%" alt=""> </a>
         </div>
         <div class="col">
-          <a href="tel:083862743100" class=""> <img src="../img/sapa_btn.png" width="100%" alt=""> </a>
+          <a href="tel:083862743100" class=""> <img src="img/sapa_btn.png" width="100%" alt=""> </a>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <a href="tel:083862743100" class=""> <img src="../img/panik_btn.png" width="100%" alt=""> </a>
+          <a href="tel:083862743100" class=""> <img src="img/panik_btn.png" width="100%" alt=""> </a>
         </div>        
       </div>
 
       <div class="list padding">
           <div class="item item-divider positive-bg light">Kondisi Harian</div>
           <a class="item item-avatar" ng-repeat="t in trackers track by $index" href="#">
-            <img ng-if="convertCondition(t.condition) == 'baik'" src="../img/hijau.png">
-            <img ng-if="convertCondition(t.condition) == 'biasa'" src="../img/biasa.png">
-            <img ng-if="convertCondition(t.condition) != 'biasa' && convertCondition(t.condition) != 'baik' " src="../img/merah.png">
+            <img ng-if="convertCondition(t.condition) == 'baik'" src="img/hijau.png">
+            <img ng-if="convertCondition(t.condition) == 'biasa'" src="img/biasa.png">
+            <img ng-if="convertCondition(t.condition) != 'biasa' && convertCondition(t.condition) != 'baik' " src="img/merah.png">
             
             <h2 style="font-weight:bold; text-transform: capitalize;">{{convertCondition(t.condition)}}</h2>
             <p>{{datetimeFormat(t.modified)}} <i ng-show="isLocal(t)" class="energized icon ion-checkmark-round"></i></p>

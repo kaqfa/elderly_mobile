@@ -24,7 +24,7 @@
             <p>{{dateFormat(elder.birthday)}}</p>
           </div>
           <div class="item item-body button-bar">
-            <button class="button button-balanced icon-left ion-android-call">Panggil</button>&nbsp;
+            <a href="tel:{{elder.phone}}" class="button button-balanced icon-left ion-android-call">Panggil</a>&nbsp;
             <button class="button button-positive icon-right ion-android-list" ui-sref="app.parent({parentId:elder.id})" ui-sref-active="active">Detail</button>
           </div>
         </div>

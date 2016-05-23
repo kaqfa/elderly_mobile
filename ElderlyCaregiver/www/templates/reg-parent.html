@@ -5,14 +5,14 @@
         </div>
         <form name="regForm" ng-submit="register(regForm)">
             <div class="list list-inset">
-                <label class="item item-input">                    
-                    <i class="icon ion-android-person placeholder-icon"></i>
+                <div class="item item-input">                    
+                    <label for=""><i class="icon ion-android-person placeholder-icon"></i></label>
                     <input type="text" name="fullname" ng-model="user.fullname" placeholder="Nama Lengkap" required>
-                </label>
-                <label class="item item-input">                    
+                </div>
+                <div class="item item-input">                    
                     <i class="icon ion-android-calendar placeholder-icon"></i>
-                    <input type="date" name="birthday" ng-model="user.birthday" placeholder="Tanggal Lahir" required>
-                </label>
+                    <input type="text" id="birthday" name="birthday" ng-model="user.birthday" ng-focus="ODP();" placeholder="Tanggal Lahir">
+                </div>                
                 <label class="item item-input item-select">                    
                     <i class="icon ion-transgender placeholder-icon"></i>
                     <select ng-model="user.gender">
@@ -26,6 +26,7 @@
                 </label>
             </div>
             <div class="padding">
+                <input type="button" class="button button-block button-positive" name="fota" ng-click="ODP();" value="+" />
                 <button type="submit" class="button button-block button-positive">Tambah</button>
             </div>
         </form>

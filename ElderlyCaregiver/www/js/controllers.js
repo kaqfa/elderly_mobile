@@ -209,13 +209,13 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('regParentCtrl', function($scope, Users, Elders, $state, $ionicPopup, $ionicLoading) {
+.controller('regParentCtrl', function($scope, Users, Elders, $state, $ionicPopup, $ionicLoading, ionicDatePicker) {
   $scope.$on('$ionicView.beforeEnter', function(){
     if(!Users.cekLogin())
       $state.go('login')
   })
   
-  $scope.user={
+  $scope.user = {
     fullname:"",
     birthday:"",
     phone:"",
@@ -247,19 +247,44 @@ angular.module('starter.controllers', [])
       });
     }
   };
+
+  var ipObj1 = {
+        callback: function (val) {  //Mandatory
+          tgl = new Date(val);
+          text = tgl.getFullYear()+'-'+(tgl.getMonth()+1)+'-'+tgl.getDate();
+          // console.log('Return value from the datepicker popup is : ' + val);
+          $scope.user.birthday = text;
+        },        
+        inputDate: new Date(),
+        mondayFirst: true,
+        disableWeekdays: [0],
+        closeOnSelect: false,
+        templateType: 'popup'
+  };  
+
+  $scope.ODP = function(){
+    ionicDatePicker.openDatePicker(ipObj1);
+  };
+  
 })
 
 .controller('ParentCtrl', function($scope, $ionicLoading, $state, Elders, Users, $stateParams) {
   $scope.$on('$ionicView.beforeEnter', function(){
-    elder=Elders.get($stateParams.parentId);
+    elder = Elders.get($stateParams.parentId);
     if(elder!=null){
-      $scope.elder=elder.elder;
-      $scope.tracker=elder.tracker;
-    }else{
-      $scope.elder={};
-      $scope.tracker={};
+      $scope.elder = elder.elder;
+      $scope.tracker = elder.tracker;
+      $scope.user = {
+        fullname: $scope.elder.user.first_name+" "+$scope.elder.user.last_name,
+        birthday: $scope.elder.birthday,
+        phone: $scope.elder.phone,
+        gender: $scope.elder.gender
+      };
+    } else {
+      $scope.elder = {};
+      $scope.tracker = {};
     }
-    $scope.$parent.refreshData=function(){
+    $scope.$parent.refreshData = function(){
       $ionicLoading.show({
         template: 'Loading...'
       })

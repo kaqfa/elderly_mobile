@@ -97,12 +97,12 @@ angular.module('starter.services', [])
       });
     },
     add: function(elder, token, callback, error){
-      var day=elder.birthday.getDate();
-      var month = elder.birthday.getMonth()+1;
-      var year = elder.birthday.getFullYear();
+      // var day = elder.birthday.getDate();
+      // var month = elder.birthday.getMonth()+1;
+      // var year = elder.birthday.getFullYear();
       elder = JSON.parse(JSON.stringify(elder));
       elder.type='e';
-      elder.birthday=year+"-"+month+"-"+day;
+      // elder.birthday = year+"-"+month+"-"+day;
       $http.post(ApiEndpoint.url + '/members/', elder, {
         headers: {
           Authorization: "Token "+token
