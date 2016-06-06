@@ -158,8 +158,11 @@ angular.module('starter.services', [])
           return "baik";
           break;
         case "bi":
-          return "biasa";
+          return "kangen";
           break;
+        case "kg":
+            return "kangen";
+            break;
         case "tb":
           return "tidak baik";
           break;
@@ -290,7 +293,7 @@ angular.module('starter.services', [])
     code: 'spr',
     location: 'top: 51%;left: 50.8%;width: 16%;height: 24%;'
   }];
-  
+
   return {
     getData: function() {
       return data;

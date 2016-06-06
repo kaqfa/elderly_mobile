@@ -116,6 +116,38 @@ angular.module('starter.services', [])
           error(response);
       });
     },
+    update: function(elder, token, callback, error){
+      postelder = JSON.parse(JSON.stringify(elder));
+      console.log(postelder);
+      console.log(data[0]);
+      elder = null;
+      for (var i = 0, len = data.length; i < len; i++) {
+        if (data[i].id === postelder.id){
+            elder = data[i];
+            break;
+        }
+      }
+      console.log(elder);
+      // elder.birthday = year+"-"+month+"-"+day;
+      $http.patch(ApiEndpoint.url + '/elders/' + elder.id +'/', postelder, {
+        headers: {
+          Authorization: "Token "+token
+        }
+      }).then(function(response){
+        console.log(response);
+        for (var i = 0, len = data.length; i < len; i++) {
+          if (data[i].id === postelder.id){
+              data[i] = response.data;
+              break;
+          }
+        }
+        if(callback!=null)
+          callback(response.data);
+      }, function(response){
+        if(error!=null)
+          error(response);
+      });
+    },
     remove: function(elder) {
       data.splice(data.indexOf(elder), 1);
     },

@@ -26,7 +26,7 @@ angular.module('starter.controllers', [])
     Users.logout();
     $state.go('login');
   }
-  
+
   $scope.refreshData=function(){
     $ionicLoading.show({
       template: 'Loading...'
@@ -176,11 +176,11 @@ angular.module('starter.controllers', [])
        template: msg
       });
     }
-    if(user.$valid&&$scope.passMatch){
+    if(user.$valid && $scope.passMatch){
       $ionicLoading.show({
         template: 'Loading...'
       })
-      Users.register($scope.user,function(data){
+      Users.register($scope.user, function(data){
         Users.login($scope.user.username, $scope.user.password, function(data){
           Elders.setAll(data.token, function(data){
             $ionicLoading.hide();
@@ -214,7 +214,7 @@ angular.module('starter.controllers', [])
     if(!Users.cekLogin())
       $state.go('login')
   })
-  
+
   $scope.user = {
     fullname:"",
     birthday:"",
@@ -260,8 +260,8 @@ angular.module('starter.controllers', [])
         text = tgl.getFullYear()+'-'+(tgl.getMonth()+1)+'-'+tgl.getDate();
         // console.log('Return value from the datepicker popup is : ' + val);
         $scope.user.birthday = text;
-      },        
-      
+      },
+
       from: new Date(1930, 1, 1), //Optional
       to: new Date(1990, 1, 1), //Optional
       inputDate: $scope.subsYear(new Date(), 40),
@@ -272,7 +272,7 @@ angular.module('starter.controllers', [])
     };
     ionicDatePicker.openDatePicker(ipObj1);
   };
-  
+
 })
 
 .controller('ParentCtrl', function($scope, $ionicLoading, $state, Elders, Users, $stateParams, ionicDatePicker) {
@@ -282,6 +282,7 @@ angular.module('starter.controllers', [])
       $scope.elder = elder.elder;
       $scope.tracker = elder.tracker;
       $scope.user = {
+        id: $scope.elder.id,
         fullname: $scope.elder.user.first_name+" "+$scope.elder.user.last_name,
         birthday: $scope.elder.birthday,
         phone: $scope.elder.phone,
@@ -306,9 +307,36 @@ angular.module('starter.controllers', [])
          template: msg
         });
       });
-    }
+    };
+
+    $scope.update = function(user){
+      if(user.$valid){
+        console.log("user valid");
+        $ionicLoading.show({
+          template: 'Loading...'
+        })
+
+        Elders.update($scope.user, Users.getToken(), function(data){
+          $ionicLoading.hide();
+          $state.go('app.parent');
+        },function(response){
+          $ionicLoading.hide();
+          var msg = "";
+          if(response.status==400){
+            console.log(response);
+            msg = "Edit data orang tua gagal";
+          }else{
+            msg="Koneksi gagal";
+          }
+          $ionicPopup.alert({
+           title: 'Error',
+           template: msg
+          });
+        });
+      }
+    };
   });
-  
+
   $scope.$on('$ionicView.beforeLeave', function(){
     $scope.$parent.refreshData=function(){
       $ionicLoading.show({
@@ -342,9 +370,9 @@ angular.module('starter.controllers', [])
         }
       })
     }
-  });  
-  
-  $scope.datePick = function(){    
+  });
+
+  $scope.datePick = function(){
     var ipObj1 = {
       callback: function (val) {  //Mandatory
         tgl = new Date(val);
@@ -352,9 +380,9 @@ angular.module('starter.controllers', [])
         // console.log('Return value from the datepicker popup is : ' + val);
         $scope.user.birthday = text;
       },
-      
+
       from: new Date(1930, 1, 1), //Optional
-      to: new Date(1990, 1, 1), //Optional        
+      to: new Date(1990, 1, 1), //Optional
       mondayFirst: true,
       inputDate: new Date($scope.user.birthday),
       disableWeekdays: [0],
@@ -364,7 +392,7 @@ angular.module('starter.controllers', [])
     ionicDatePicker.openDatePicker(ipObj1);
     console.log();
   };
-  
+
   $scope.convertCondition=function(cond){
     return Elders.convertCondition(cond);
   }
