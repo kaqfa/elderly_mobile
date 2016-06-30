@@ -275,9 +275,10 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ParentCtrl', function($scope, $ionicLoading, $state, Elders, Users, $stateParams, ionicDatePicker) {
+.controller('ParentCtrl', function($scope, $ionicLoading, $state, $stateParams,
+                                   ionicDatePicker, Elders, Users) {
   $scope.$on('$ionicView.beforeEnter', function(){
-    elder = Elders.get($stateParams.parentId);
+    elder = Elders.get($stateParams.parentId);    
     if(elder!=null){
       $scope.elder = elder.elder;
       $scope.tracker = elder.tracker;
@@ -287,11 +288,26 @@ angular.module('starter.controllers', [])
         birthday: $scope.elder.birthday,
         phone: $scope.elder.phone,
         gender: $scope.elder.gender
-      };
+      };      
     } else {
       $scope.elder = {};
       $scope.tracker = {};
+    }    
+    $scope.sehat = 0;
+    $scope.sakit = 0;
+    $scope.kangen = 0;
+    for (i = 0; i < $scope.tracker.length; i++) {
+      if($scope.tracker[i].condition == 'ba')
+        $scope.sehat += 1;
+      else if($scope.tracker[i].condition == 'bi')
+        $scope.kangen += 1;
+      else
+        $scope.sakit += 1;
     }
+    $scope.labels = ["Sehat", "Sakit", "Kangen"];
+    $scope.data = [$scope.sehat, $scope.sakit, $scope.kangen];
+    $scope.options = { colors : [ '#33cd5f', '#ef473a', '#ffc900', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] };
+
     $scope.$parent.refreshData = function(){
       $ionicLoading.show({
         template: 'Loading...'

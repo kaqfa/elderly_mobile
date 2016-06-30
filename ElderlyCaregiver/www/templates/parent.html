@@ -1,7 +1,7 @@
 <ion-view view-title="Profil Orang Tua">
   <ion-content class="has-header">
 
-    <div class="hero has-mask bg-header" style="background-image:url(img/soft-bokeh.jpg);">
+    <div class="hero has-mask bg-header" style="background-image:url(img/background.jpg);">
         <img src="img/karakter-circle-shadow.png" alt="" style="width: 30%; margin-top: 20px;">
         <h3 class="">
           {{elder.user.first_name}} {{elder.user.last_name}}
@@ -9,21 +9,47 @@
     </div>
 
     <ion-tabs class="tabs-positive tabs-icon-top">
-        <ion-tab title="Kondisi" icon="ion-ios-pulse-strong">
-
+        <ion-tab title="Kondisi" icon="ion-happy">
             <div class="list padding">
-                <div class="item item-divider positive-bg light">Kondisi Harian</div>
-                <ion-scroll direction="x">
-                <a class="item item-avatar" ng-repeat="t in tracker track by $index" href="#">
-                  <img ng-if="convertCondition(t.condition) == 'baik'" src = "img/hijau.png">
-                  <img ng-if="convertCondition(t.condition) == 'biasa'" src = "img/biasa.png">
-                  <img ng-if="convertCondition(t.condition) != 'biasa' && convertCondition(t.condition) != 'baik' " src = "img/merah.png">
-
+                <div class="item item-divider positive-bg light">Kondisi Harian</div>                
+                <div class="item item-avatar item-button-right" ng-repeat="t in tracker track by $index" href="#">
+                  <img ng-if="convertCondition(t.condition) == 'sehat'" src = "img/hijau.png">
+                  <img ng-if="convertCondition(t.condition) == 'kangen'" src = "img/kangen2.png">
+                  <img ng-if="convertCondition(t.condition) != 'kangen' && convertCondition(t.condition) != 'sehat' " src = "img/merah.png">
                   <h2 style="font-weight:bold; text-transform: capitalize;">{{convertCondition(t.condition)}}</h2>
                   <p>{{datetimeFormat(t.modified)}}</p>
-                </a>
-                </ion-scroll>
+                  <a href="geo:-6.889998,109.6701?q=-6.889998,109.6701(posisi)" ng-click="$event.stopPropagation()"
+        target="_blank" class="button button-positive" style="margin-top: 10px;">
+                    <i class="icon ion-android-map"></i>
+                  </a>
+                </div>                
             </div>
+        </ion-tab>
+        <ion-tab title="Riwayat" icon="ion-ios-pulse-strong">
+        <div class="list append">
+            <div class="list card">                
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Dari Tanggal</span>
+                <input type="text" name="birthday" ng-model="user.birthday" ng-focus="datePick();"
+                        placeholder="Tanggal Lahir" required>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Hingga Tanggal</span>
+                <input type="text" name="birthday" ng-model="user.birthday" ng-focus="datePick();"
+                        placeholder="Tanggal Lahir" required>
+              </label>
+              <div class="item item-divider positive-bg light">Grafik Kondisi Kesehatan</div>
+              <div class="row">
+                <div class="col"><span class="badge badge-balanced">{{sehat}}</span> Sehat</div>
+                <div class="col"><span class="badge badge-assertive">{{sakit}}</span> Sakit</div>
+                <div class="col"><span class="badge badge-energized">{{kangen}}</span> Kangen</div>                  
+              </div>
+              <div>
+                <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-options="options"
+                  chart-labels="labels"></canvas>
+              </div>
+            </div>
+          </div>
         </ion-tab>
         <ion-tab title="Profil" icon="ion-android-person">
             <div class="list padding" >

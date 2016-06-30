@@ -4,34 +4,38 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-datepicker'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
+                           'ionic-datepicker', 'chart.js', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
+    var notificationOpenedCallback = function(jsonData) {
+      alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+    };
+
+    // OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.DEBUG);
+
+    window.plugins.OneSignal.init("6ddddad0-6453-498e-9f3e-b307b5a681b8",
+                                   {googleProjectNumber: "564672218112"},
+                                   notificationOpenedCallback);
+
+    window.plugins.OneSignal.enableInAppAlertNotification(true);
   });
 })
 
 .constant('ApiEndpoint', {
     // url: 'http://localhost:8100/api'
-    url: 'http://elderlyapps.net/api' 
-    // url: 'http://localhost:8000/api' 
+    url: 'http://elderlyapps.net/api'
+    // url: 'http://localhost:8000/api'
 })
 
-.config(function($stateProvider, $urlRouterProvider,  $ionicConfigProvider, ionicDatePickerProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, ionicDatePickerProvider, $compileProvider) {
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(geo):/)
+
   $ionicConfigProvider.backButton.text('&nbsp;').icon('ion-ios-arrow-back')
   $ionicConfigProvider.navBar.alignTitle('center')
-  $ionicConfigProvider.tabs.position('top')
+  $ionicConfigProvider.tabs.position('top')  
 
   $stateProvider
     .state('login', {
@@ -39,13 +43,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
   })
-  
+
     .state('register', {
     url: '/register',
     templateUrl: 'templates/register.html',
     controller: 'RegCtrl'
   })
-  
+
     .state('app', {
     url: '/app',
     abstract: true,
@@ -72,7 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-    
+
   .state('app.parent', {
     url: '/parent/:parentId',
     views: {
@@ -82,7 +86,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-    
+
   .state('app.editParent', {
     url: '/parent/:parentId/edit',
     views: {

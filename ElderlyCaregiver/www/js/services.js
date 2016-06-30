@@ -198,10 +198,10 @@ angular.module('starter.services', [])
     convertCondition: function(cond){
       switch(cond){
         case "ba":
-          return "baik";
+          return "sehat";
           break;
         case "bi":
-          return "biasa";
+          return "kangen";
           break;
         case "tb":
           return "tidak baik";

@@ -32,7 +32,7 @@
   padding-bottom: 15px;
   text-transform: capitalize;
   font-weight: bold;
-  color: #fff;
+  color: #387ef5;
 }
 
 #pane-tabs{
@@ -42,7 +42,7 @@
 
 #login-content{
     text-align: center;
-    background-image: url(../img/background.png);
+    background-image: url(../img/berbakti-1.jpg);
     background-position: bottom center;
     background-size:cover;
 }
