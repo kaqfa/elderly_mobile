@@ -3,11 +3,27 @@ angular.module('starter.services', [])
 .factory('Elders', function($http, ApiEndpoint) {
   var data = null;
   var token = null;
+  var location = "-6.889836,109.674592";
+  var watchId = null;
   var trackers = [];
   var caregivers = [];
   var localId=0;
 
   return {
+    startWatch: function(){
+        onSuccess=function(position){
+            location=position.coords.latitude+","+position.coords.longitude;
+            console.log(location);
+        }
+        watchId=navigator.geolocation.watchPosition(onSuccess, function(){}, { timeout: 30000, enableHighAccuracy: true });
+    },
+    clearWatch: function(){
+        navigator.geolocation.clearWatch(watchId);
+        watchId=null;
+    },
+    getLocation: function(){
+        return location;
+    },
     login: function(phone, callback, error) {
       $http.post(ApiEndpoint.url + '/login/elder/', {phone: phone}).then(function(response){
         token = response.data.token;

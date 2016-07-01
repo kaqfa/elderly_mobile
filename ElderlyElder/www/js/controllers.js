@@ -18,6 +18,7 @@ angular.module('starter.controllers', [])
         $ionicHistory.nextViewOptions({
           disableAnimate: true
         });
+        Elders.startWatch();
         $state.go('dashboard');
       }, function(response){
         Elders.logout();
@@ -52,6 +53,7 @@ angular.module('starter.controllers', [])
         $ionicHistory.nextViewOptions({
           disableAnimate: true
         });
+        Elders.startWatch();
         $state.go('dashboard');
       },function(response){
         $ionicLoading.hide();
@@ -97,6 +99,7 @@ angular.module('starter.controllers', [])
       $ionicHistory.clearHistory();
   })
   $scope.logout = function(){
+    Elders.clearWatch();
     Elders.logout();
     $state.go('login');
   }
@@ -128,7 +131,8 @@ angular.module('starter.controllers', [])
       elder: elder.id,
       type: "dc",
       created: new Date(),
-      condition: cond
+      condition: cond,
+      location: Elders.getLocation()
     }
     Elders.addTrack(track);
     $state.go('dashboard');
@@ -176,8 +180,10 @@ angular.module('starter.controllers', [])
       elder: elder.id,
       type: "dc",
       created: new Date(),
-      condition: cond
+      condition: cond,
+      location: Elders.getLocation()
     }
+    console.log(track);
     Elders.addTrack(track);
     $state.go('dashboard');
   }
