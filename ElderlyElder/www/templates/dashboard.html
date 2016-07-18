@@ -1,23 +1,36 @@
-
 <ion-view view-title="Dashboard">
+    <ion-header-bar align-title="center" class="bar-positive">        
+      <h1 class="title"> Dashboard 
+        <!-- <img src="../img/2c-text.png" height="60%" style="padding-top:10px;"> -->
+        </h1>
+    </ion-header-bar>
     <ion-content>
-      <div class="padding">
-        <a ui-sref="kondisi" class="button button-block button-calm">
-          Cek Kondisi
-        </a>
-        <button ng-disabled="true" class="button button-block button-balanced">
-          Telepon Anak
-        </button>
+      <div class="row">
+        <div class="col">
+          <a ui-sref="kondisi" class=""> <img src="img/cek-btn.png" width="100%" alt=""> </a>
+        </div>
+        <div class="col">
+          <a href="tel:{{caregivers[0].phone}}" class=""> <img src="img/sapa_btn.png" width="100%" alt=""> </a>
+        </div>
       </div>
-      <ion-list>
-        <ion-item class="item-divider">
-          <h2>Kondisi</h2>
-        </ion-item>
-        <ion-item ng-class="{'stable-bg':isLocal(t)}" ng-repeat="t in trackers track by $index">
-            <h2>{{convertCondition(t.condition)}}</h2>
+      <div class="row">
+        <div class="col">
+          <a href="tel:{{caregivers[0].phone}}" class=""> <img src="img/panik_btn.png" width="100%" alt=""> </a>
+        </div>        
+      </div>
+
+      <div class="list padding">
+          <div class="item item-divider positive-bg light">Kondisi Harian</div>
+          <a class="item item-avatar" ng-repeat="t in trackers track by $index" href="#">
+            <img ng-if="convertCondition(t.condition) == 'baik'" src="img/hijau.png">
+            <img ng-if="convertCondition(t.condition) == 'kangen'" src="img/kangen2.png">
+            <img ng-if="convertCondition(t.condition) != 'kangen' && convertCondition(t.condition) != 'baik' " src="img/merah.png">
+            
+            <h2 style="font-weight:bold; text-transform: capitalize;">{{convertCondition(t.condition)}}</h2>
             <p>{{datetimeFormat(t.modified)}} <i ng-show="isLocal(t)" class="energized icon ion-checkmark-round"></i></p>
-        </ion-item>
-      </ion-list>
+          </a>
+      </div>
+
       <a ng-click="logout()" class="button button-block button-assertive">
         Keluar
       </a>

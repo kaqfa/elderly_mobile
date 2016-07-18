@@ -3,9 +3,11 @@
       <a ui-sref="kondisi"><h1 class="title">&lt; Kembali</h1></a>
     </div>
     <ion-content class="has-header fixed-height" scroll="false">
-      <div class="image">
-        <img ng-repeat-start="img in imgs" ng-show="img.show" src="img/{{ img.name }}.png" alt="image"  />
-        <a ng-repeat-end ng-if="img.location" on-touch="changeImg(img.name)" on-release="confirm(img.code)" style="{{img.location}}"></a>
+      <div class="image" style="padding-top: 10px; padding-bottom: 10px;">
+        <img ng-repeat-start="img in imgs" ng-show="img.show" src="img/human.png" alt="image"  />
+        <a ng-repeat-end ng-if="img.location" on-touch="changeImg(img.name)" 
+        	on-release="confirm(img.code)" ng-mouseout="changeImg('human')" 
+        	style="{{img.location}}"></a>
       </div>
     </ion-content>
 </ion-view>

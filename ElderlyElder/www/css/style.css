@@ -1,4 +1,130 @@
 /* Empty. Add your own CSS if you like */
+/* Empty. Add your own CSS if you like */
+
+#register-image{
+    height: 300px;
+    background: blue;
+}
+
+.placeholder-icon{
+    color: #555;
+    margin-right: 10px;
+}
+
+.bg-header{
+  background-size:cover; 
+  background-repeat:no-repeat; 
+  background-position:center center; 
+  min-height: 150px; 
+  text-align:center;
+}
+
+.bg-header h3{
+  margin-top: 5px;  
+  padding-bottom: 15px;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: #fff;
+}
+
+#pane-tabs{
+  margin-top: 180px;
+
+}
+
+#login-content{
+    text-align: center;
+    background-image: url(../img/berbakti-1.jpg);
+    background-position: bottom center;
+    background-size:cover;
+}
+
+#login-content .item-input{
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+#login-content .input-label{  
+  color: #444;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.bar.bar-header .button+.title {
+    text-align: center !important;
+}
+
+.item-input{
+    margin-bottom: 10px;
+}
+
+#login-content .item{
+    border: none;
+}
+
+#login-content input{
+    display: block;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 95%;
+    color: aqua;
+    padding: 5px 10px;
+}
+
+.nopadding {
+  padding: 0;
+}
+
+.contentarea{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: 100%;
+}
+
+.fillheight{
+    height: 100%;
+}
+ion-list ion-item.active a {
+    background: #ddd !important;
+}
+
+/** Styling for the username field **/
+label.item.has-error {  
+  border-bottom: 2px solid red;
+}
+
+/** Styling for the password field when an error exists**/
+label.item.has-error-lr {  
+  border-left: 2px solid red;
+  border-right: 2px solid red;
+}
+
+/** Styling for the password field when an error has been resolved**/
+label.item.valid-lr {  
+  border-left: 2px solid green;
+  border-right: 2px solid green;
+}
+
+/** Styling for the error text and container **/
+.form-errors {
+  border: 0;
+}
+.form-error {
+  padding: 2px 0 2px 16px;
+  color: red;
+}
+
+input::-webkit-input-placeholder {
+ color: #ccc;
+}
+
+input:-moz-input-placeholder {
+ color: #ccc;
+}
+
+
 .image{
   position: relative;
   height: 100%;

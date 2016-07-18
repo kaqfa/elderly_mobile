@@ -99,7 +99,7 @@ angular.module('starter.controllers', [])
       $ionicHistory.clearHistory();
   })
   $scope.logout = function(){
-    Elders.clearWatch();
+    Elders.startWatch();
     Elders.logout();
     $state.go('login');
   }
@@ -115,22 +115,22 @@ angular.module('starter.controllers', [])
 })
 
 .controller('KondisiCtrl', function($scope, $ionicHistory, Elders, $state) {
-  $scope.$on('$ionicView.beforeEnter', function(){
+  $scope.$on('$ionicView.beforeEnter', function(){    
     if(!Elders.cekLogin()){
       $ionicHistory.nextViewOptions({
         disableAnimate: true
       });
-      $state.go('login')
+      $state.go('login');      
     }
     else
       $ionicHistory.clearHistory();
   })
-  $scope.addTrack=function(cond){
-    elder=Elders.getProfile();
-    track={
+  $scope.addTrack = function(cond){
+    elder = Elders.getProfile();    
+    track = {
       elder: elder.id,
       type: "dc",
-      created: new Date(),
+      created: new Date(),      
       condition: cond,
       location: Elders.getLocation()
     }

@@ -1,5 +1,8 @@
 
 <ion-view view-title="Cek Kondisi">
+    <ion-header-bar align-title="center" class="bar-positive">
+      <h1 class="title"> Cek Kondisi </h1>
+    </ion-header-bar>
     <ion-content>
       <div class="list card">
         <div class="item item-divider">
@@ -7,10 +10,16 @@
         </div>
         <div class="item item-body">
           <div>
-            <div class="button-bar">
-              <a ng-click="addTrack('ba')" class="button button-balanced">Sehat</a>
-              <a ng-click="addTrack('bi')" class="button button-positive">Biasa</a>
-              <a ui-sref="anatomi" class="button button-assertive">Sakit</a>
+            <div class="">
+              <a ng-click="addTrack('ba')" class="">
+                <img src="img/sehat_elder.png" width="100%" alt="">
+              </a>
+              <a ng-click="addTrack('bi')" class="">
+                <img src="img/kangen2_btn.png" width="100%" alt="">
+              </a>
+              <a ui-sref="anatomi" class="">
+                <img src="img/kurang_sehat_elder.png" width="100%" alt="">
+              </a>
             </div>
           </div>
         </div>
