@@ -14,7 +14,8 @@ Care Giver:
 - Redesign tampilan aplikasi
 
 Elder:
-- Tombol panik, otomatis panggil anak di urutan pertama
+- Tombol panik, otomatis panggil anak di urutan pertama 
+	(pake plugin https://github.com/Rohfosho/CordovaCallNumberPlugin)
 - Tombol panik mengirimkan pesan panik ke anak lain
 - Menu dan tampilan list  artikel
 - ganti foto profil
