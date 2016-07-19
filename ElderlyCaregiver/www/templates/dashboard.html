@@ -1,17 +1,36 @@
-<ion-view view-title="Dashboard">
-  <ion-content>
-    <div class="list card">
-      <div class="item item-divider">Orang Tua</div>
-      <div class="item item-body">
-        <div>
-          Saat ini anda memiliki {{ elders.length }} orang tua terdaftar. Anda dapat melihat kondisi orang tua dari menu. 
+<ion-view title="Dashboard">  
+  <ion-content class="has-header">
+    <div ng-if="elders.length < 1">
+      <div class="list card">      
+        <div class="item item-divider">Orang Tua</div>
+        <div class="item item-body">
+          <div>
+            Anda belum memiliki orang tua terdaftar di aplikasi ini. Tambahkan orang tua anda dengan menekan tombol di bawah ini atau melalui menu samping.
+          </div>
         </div>
       </div>
+      <div class="padding">
+          <a href="#/app/parents/add" class="button button-block button-positive">
+            <i class="icon ion-plus-circled"></i> Tambah Orang Tua
+          </a>
+      </div>
     </div>
-    <div class="padding">
-        <a href="#/app/parents/add" class="button button-block button-positive">
-          <i class="icon ion-plus-circled"></i> Tambah Orang Tua
-        </a>
+    <div ng-if="elders.length > 0"> 
+      <div class="">
+        <div ng-repeat="elder in elders track by $index" class="card in">
+          <div class="item item-avatar">
+            <img src="img/karakter-circle.png">
+            <h2>{{elder.user.first_name}} {{elder.user.last_name}}</h2>
+            <p>{{dateFormat(elder.birthday)}}</p>
+          </div>
+          <div class="item item-body button-bar">
+            <a href="tel:{{elder.phone}}" class="button button-balanced icon-left ion-android-call">Panggil</a>&nbsp;
+            <button class="button button-positive icon-right ion-android-list" ui-sref="app.parent({parentId:elder.id})" ui-sref-active="active">Detail</button>
+          </div>
+        </div>
+      </div>
+
     </div>
+    
   </ion-content>
 </ion-view>

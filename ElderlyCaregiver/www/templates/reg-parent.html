@@ -1,32 +1,36 @@
 <ion-view view-title="Tambah Orang Tua">
     <ion-content>
-      <form name="regForm" ng-submit="register(regForm)">
-        <div class="list">
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Nama Lengkap</span>
-                <input type="text" name="fullname" ng-model="user.fullname" placeholder="Nama Lengkap" required>
-            </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Tanggal Lahir</span>
-                <input type="date" name="birthday" ng-model="user.birthday" placeholder="Tanggal Lahir" required>
-            </label>
-            <label class="item item-input item-select">
-                <span class="input-label">Gender</span>
-                <select ng-model="user.gender">
-                    <option value="l" selected>Laki-Laki</option>
-                    <option value="p">Perempuan</option>
-                </select>
-            </label>
-            <label class="item item-input item-floating-label">
-                <span class="input-label">No. Handphone</span>
-                <input type="text" name="phone" ng-model="user.phone" placeholder="No. Handphone" required>
-            </label>
+        <div style="background-image:url(img/background.jpg); background-size:cover; background-repeat:no-repeat; background-position:center center; min-height: 150px; text-align:center">
+            <img src="img/karakter-circle.png" alt="" style="width: 30%; margin-top: 20px;">
         </div>
-        <div class="padding">
-            <button type="submit" class="button button-block button-positive">
-              Tambah
-            </button>
-        </div>
-      <form name="regForm" ng-submit="register(regForm)">
+        <form name="regForm" ng-submit="register(regForm)">
+            <div class="list list-inset">
+                <div class="item item-input">                    
+                    <label for=""><i class="icon ion-android-person placeholder-icon"></i></label>
+                    <input type="text" name="fullname" ng-model="user.fullname" placeholder="Nama Lengkap" required>
+                </div>
+                <div class="item item-input">                    
+                    <i class="icon ion-android-calendar placeholder-icon"></i>
+                    <input type="text" id="birthday" name="birthday" ng-model="user.birthday" 
+                        placeholder="dd/mm/yyyy" ng-focus="datePick()" required>
+                    <!-- <input type="text" id="birthday" name="birthday" ng-model="user.birthday" 
+                                        ng-focus="datePick();" placeholder="Tanggal Lahir"> -->
+                </div>                
+                <label class="item item-input item-select">                    
+                    <i class="icon ion-transgender placeholder-icon"></i>
+                    <select ng-model="user.gender">
+                        <option value="l" selected>Laki-Laki</option>
+                        <option value="p">Perempuan</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-android-phone-portrait placeholder-icon"></i>
+                    <input type="text" name="phone" ng-model="user.phone" placeholder="No. Handphone" required>
+                </label>
+            </div>
+            <div class="padding">                
+                <button type="submit" class="button button-block button-positive">Tambah</button>
+            </div>
+        </form>
     </ion-content>
 </ion-view>

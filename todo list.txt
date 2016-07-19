@@ -1,0 +1,30 @@
+Care Giver:
+- update library datepicker (support Android Jelly Bean)
+- Format tampilan tanggal di input dd/mm/yyyy
+- Tampilkan lokasi orang tua di GoogleMap
+- Menu & halaman tampilan daftar RS rekanan di aplikasi
+- Form join rawat ortu dengan memasukkan nomor handphone ortu
+- Tampilan list artikel
+- Ganti foto profil
+- Upload foto profil
+- Reminder setiap jam 8 pagi untuk menelpon / menghubungi orang tua
+- Ketika ada pesan panic, tampilkan popup (modal) berisi gambar 
+  dan tombol panggil rumah sakit rekanan
+- Panic popup tampil di HP meskipun aplikasi mati
+- Redesign tampilan aplikasi
+
+Elder:
+- Tombol panik, otomatis panggil anak di urutan pertama
+- Tombol panik mengirimkan pesan panik ke anak lain
+- Menu dan tampilan list  artikel
+- ganti foto profil
+- upload foto profil
+- Redesign tampilan aplikasi
+
+Server:
+- input artikel
+- service artikel
+- input list rumah sakit rekanan
+- service list rumah sakit rekanan
+- service upload foto profil
+- statistik pengguna aplikasi di dashboard aplikasi

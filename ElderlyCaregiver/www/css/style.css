@@ -1,4 +1,83 @@
 /* Empty. Add your own CSS if you like */
+
+.tab-nav{
+  position: relative;
+  margin-top: -55px;  
+}
+
+.tab-content{
+  margin-top: 50px;
+}
+
+#register-image{
+    height: 300px;
+    background: blue;
+}
+
+.placeholder-icon{
+    color: #555;
+    margin-right: 10px;
+}
+
+.bg-header{
+  background-size:cover; 
+  background-repeat:no-repeat; 
+  background-position:center center; 
+  min-height: 150px; 
+  text-align:center;
+}
+
+.bg-header h3{
+  margin-top: 5px;  
+  padding-bottom: 15px;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: #387ef5;
+}
+
+#pane-tabs{
+  margin-top: 180px;
+
+}
+
+#login-content{
+    text-align: center;
+    background-image: url(../img/berbakti-1.jpg);
+    background-position: bottom center;
+    background-size:cover;
+}
+
+#login-content .item-input{
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+#login-content .input-label{  
+  color: #444;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.bar.bar-header .button+.title {
+    text-align: center !important;
+}
+
+.item-input{
+    margin-bottom: 10px;
+}
+
+#login-content .item{
+    border: none;
+}
+
+#login-content input{
+    display: block;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 95%;
+    color: aqua;
+    padding: 5px 10px;
+}
+
 .nopadding {
   padding: 0;
 }
@@ -43,4 +122,12 @@ label.item.valid-lr {
 .form-error {
   padding: 2px 0 2px 16px;
   color: red;
+}
+
+input::-webkit-input-placeholder {
+ color: #ccc;
+}
+
+input:-moz-input-placeholder {
+ color: #ccc;
 }
