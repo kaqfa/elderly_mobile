@@ -10,10 +10,10 @@ angular.module('starter.controllers', [])
 	})
 	$scope.elders = Elders.all();
 	$scope.dateFormat = function(date){
-		return moment(date).locale('id').format('DD MMMM YYYY');
+		return moment(date, 'DD/MM/YYYY').locale('id').format('DD MMMM YYYY');
 	};
 	$scope.datetimeFormat = function(date){
-		return moment(date).locale('id').format('DD MMMM YYYY HH:mm');
+		return moment(date, 'DD/MM/YYYY').locale('id').format('DD MMMM YYYY HH:mm');
 	};
 	$scope.logout = function(){
 		Users.logout();
@@ -242,7 +242,7 @@ angular.module('starter.controllers', [])
 			var ipObj1 = {
 				callback: function (val) { 
 					tgl = new Date(val);
-					text = tgl.getFullYear()+'-'+(tgl.getMonth()+1)+'-'+tgl.getDate();
+					text = moment(tgl).format("DD/MM/YYYY");
 					// console.log('Return value from the datepicker popup is : ' + val);
 					$scope.user.birthday = text;
 				},
@@ -250,7 +250,7 @@ angular.module('starter.controllers', [])
 				to: new Date(1990, 1, 1), 
 				inputDate: $scope.subsYear(new Date(), 40),
 				mondayFirst: true,
-				dateFormat: 'dd/mm/yy',
+				dateFormat: 'dd/MM/yyyy',
 				disableWeekdays: [0],
 				closeOnSelect: false,
 				templateType: 'popup'
@@ -260,8 +260,8 @@ angular.module('starter.controllers', [])
 	}])
 
 .controller('ParentCtrl', 
-	['$scope', '$ionicLoading', '$state', '$stateParams', 'ionicDatePicker', 'Elders', 'Users', 
-	function($scope, $ionicLoading, $state, $stateParams, ionicDatePicker, Elders, Users) {
+	['$scope', '$ionicLoading', '$state', '$stateParams', '$ionicPopup', 'ionicDatePicker', 'Elders', 'Users', 
+	function($scope, $ionicLoading, $state, $stateParams, $ionicPopup, ionicDatePicker, Elders, Users) {
 		$scope.$on('$ionicView.beforeEnter', function(){
 			elder = Elders.get($stateParams.parentId);    
 			if(elder!=null){
@@ -324,7 +324,10 @@ angular.module('starter.controllers', [])
 						var msg = "";
 						if(response.status==400){
 							console.log(response);
-							msg = "Edit data orang tua gagal";
+                            if(typeof response.data.phone === "undefined")
+                                msg = "Edit data orang tua gagal";
+                            else
+                                msg = "Nomor Telepon sudah terdaftar";
 						}else{
 							msg="Koneksi gagal";
 						}
@@ -375,16 +378,16 @@ angular.module('starter.controllers', [])
 		$scope.datePick = function(){
 			var ipObj1 = {
 				callback: function (val) {  //Mandatory
-				  	//tgl = new Date(val);
-				  	//text = tgl.getFullYear()+'-'+(tgl.getMonth()+1)+'-'+tgl.getDate();
+                    tgl = new Date(val);
+				  	text = moment(tgl).format("DD/MM/YYYY");
 					// console.log('Return value from the datepicker popup is : ' + val);
 					$scope.user.birthday = text;
 				},
 				from: new Date(1930, 1, 1), //Optional
 				to: new Date(1990, 1, 1), //Optional
 				mondayFirst: true,
-				inputDate: new Date($scope.user.birthday),
-				dateFormat: 'dd/mm/yy',
+				inputDate: moment($scope.user.birthday, 'DD/MM/YYYY').toDate(),
+				dateFormat: 'dd/MM/yyyy',
 				disableWeekdays: [0],
 				closeOnSelect: false,
 				templateType: 'popup'
