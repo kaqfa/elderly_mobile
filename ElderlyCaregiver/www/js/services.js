@@ -107,11 +107,25 @@ angular.module('starter.services', [])
                 error(response);
         });
     };
+    
+    var joinElder = function(phone, token, callback, error){ 
+        $http.post(ApiEndpoint.url + '/elders/join/', phone, {
+            headers: { Authorization: "Token "+token }
+        }).then(function(response){
+            data.push(response.data);
+            if(callback!=null)
+                callback(response.data);
+        }, function(response){
+            if(error!=null)
+                error(response);
+        });
+    };
 
     return {
         all: getAllElders,
         setAll: setAllElders,
         add: addElder,
+        join: joinElder,
         update: function(elder, token, callback, error){
             postelder = JSON.parse(JSON.stringify(elder));
             console.log(postelder);

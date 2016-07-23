@@ -1,13 +1,57 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', ['$scope', '$ionicModal', '$ionicLoading', 'Users', 'Elders', '$timeout', '$state', 
-	function($scope, $ionicModal, $ionicLoading, Users, Elders, $timeout, $state){
+.controller('AppCtrl', ['$scope', '$ionicModal', '$ionicLoading', '$ionicPopup', 'Users', 'Elders', '$timeout', '$state', 
+	function($scope, $ionicModal, $ionicLoading, $ionicPopup, Users, Elders, $timeout, $state){
 	// Form data for the login modal
-	$scope.loginData = {};
+	$scope.join = {phone:""};
 	$scope.$on('$ionicView.beforeEnter', function(){
 		if(!Users.cekLogin())
 			$state.go('login')
 	})
+    $ionicModal.fromTemplateUrl('templates/join-parent.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modalJoin = modal;
+    });
+    $scope.closeJoin = function() {
+        $scope.modalJoin.hide();
+    };
+
+    // Open the login modal
+    $scope.joinParent = function() {
+        $scope.modalJoin.show();
+    };
+        
+    $scope.regJoin=function(user){
+        if(user.$valid){
+            console.log("user valid");
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            Elders.join($scope.join, Users.getToken(), function(data){
+                $ionicLoading.hide();
+                $scope.modalJoin.hide();
+            },function(response){
+                console.log(response);
+                $ionicLoading.hide();
+                var msg="";
+                if(response.status==400){
+                    if(typeof response.data.phone != "undefined")
+                        msg="Nomor handphone tidak terdaftar";
+                    else if(typeof response.data.duplicate != "undefined")
+                        msg="Orang tua sudah terdaftar";
+                    else
+                        msg="Gagal menambahkan orang tua";
+                }else{
+                    msg="Koneksi gagal";
+                }
+                $ionicPopup.alert({
+                    title: 'Error',
+                    template: msg
+                });
+            });
+        }
+    }
 	$scope.elders = Elders.all();
 	$scope.dateFormat = function(date){
 		return moment(date, 'DD/MM/YYYY').locale('id').format('DD MMMM YYYY');
@@ -56,18 +100,20 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('LoginCtrl', [ '$scope', 'Users', 'Elders', '$state', '$ionicPopup', '$ionicLoading', 
-	function($scope, Users, Elders, $state, $ionicPopup, $ionicLoading) {
+.controller('LoginCtrl', [ '$scope', 'Users', 'Elders', '$state', '$ionicPopup', '$ionicHistory', '$ionicLoading', 
+	function($scope, Users, Elders, $state, $ionicPopup, $ionicHistory, $ionicLoading) {
 		$scope.$on('$ionicView.beforeEnter', function(){
 
-			if(Users.cekLogin())
+			if(Users.cekLogin()){
+                $ionicHistory.nextViewOptions({disableBack: true});
 				$state.go('app.dashboard');
-			else if(localStorage.getItem("token") !== null){
+            }else if(localStorage.getItem("token") !== null){
 				$scope.noToken=false;
 				$ionicLoading.show({ template: 'Loading...' })
 				Users.getData(localStorage.token, function(data){
 					Elders.setAll(localStorage.token, function(data){
 						$ionicLoading.hide();
+                        $ionicHistory.nextViewOptions({disableBack: true});
 						$state.go('app.dashboard');
 					}, function(response){
 						$ionicLoading.hide();
@@ -109,6 +155,7 @@ angular.module('starter.controllers', [])
 		  //Users.setData(data.token);
 		  Elders.setAll(data.token, function(data){
 		  	$ionicLoading.hide();
+              $ionicHistory.nextViewOptions({disableBack: true});
 		  	$state.go('app.dashboard');
 		  }, function(response){
 		  	$ionicLoading.hide();
@@ -135,8 +182,8 @@ angular.module('starter.controllers', [])
 		};
 	}])
 
-.controller('RegCtrl', ['$scope', '$state', '$ionicPopup', '$ionicLoading', 'Users', 'Elders', 
-	function($scope, $state, $ionicPopup, $ionicLoading, Users, Elders) {
+.controller('RegCtrl', ['$scope', '$state', '$ionicPopup', '$ionicLoading', '$ionicHistory', 'Users', 'Elders', 
+	function($scope, $state, $ionicPopup, $ionicLoading, $ionicHistory, Users, Elders) {
 		$scope.$on('$ionicView.beforeEnter', function(){
 			if(Users.cekLogin())
 				$state.go('app.dashboard')
@@ -171,6 +218,7 @@ angular.module('starter.controllers', [])
 					Users.login($scope.user.username, $scope.user.password, function(data){
 						Elders.setAll(data.token, function(data){
 							$ionicLoading.hide();
+                            $ionicHistory.nextViewOptions({disableBack: true});
 							$state.go('app.dashboard');
 						}, function(response){
 							$ionicLoading.hide();
@@ -197,8 +245,8 @@ angular.module('starter.controllers', [])
 	}])
 
 .controller('regParentCtrl', 
-	['$scope', '$state', '$ionicPopup', '$ionicLoading', 'ionicDatePicker', 'Users', 'Elders',
-	function($scope, $state, $ionicPopup, $ionicLoading, ionicDatePicker, Users, Elders) {
+	['$scope', '$state', '$ionicPopup', '$ionicLoading', '$ionicHistory', 'ionicDatePicker', 'Users', 'Elders',
+	function($scope, $state, $ionicPopup, $ionicLoading, $ionicHistory, ionicDatePicker, Users, Elders) {
 		$scope.$on('$ionicView.beforeEnter', function(){
 			if(!Users.cekLogin())
 				$state.go('login')
@@ -215,6 +263,7 @@ angular.module('starter.controllers', [])
 
 				Elders.add($scope.user, Users.getToken(), function(data){
 					$ionicLoading.hide();
+                    $ionicHistory.nextViewOptions({disableBack: true});
 					$state.go('app.dashboard');
 				},function(response){
 					$ionicLoading.hide();
@@ -402,9 +451,9 @@ angular.module('starter.controllers', [])
 }])
 
 .controller('dashCtrl', 
-	['$scope', '$ionicHistory', '$ionicLoading', 'Elders',
-	function($scope, $ionicHistory, $ionicLoading, Elders) {
+	['$scope', '$ionicLoading', '$ionicHistory', 'Elders', '$ionicNavBarDelegate',
+	function($scope, $ionicLoading, $ionicHistory, Elders, $ionicNavBarDelegate) {
 		$scope.$on('$ionicView.beforeEnter', function(){
-			$ionicHistory.clearHistory();
+            $ionicHistory.nextViewOptions({disableBack: true});
 		});
 	}]);
