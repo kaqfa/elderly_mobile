@@ -80,7 +80,27 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
 					controller: 'ParentCtrl'
 				}
 			}
-		});
+		})
+        
+        .state('app.articles', {
+          url: '/articles',
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/articleList.html',
+              controller: 'ArticlesCtrl'
+            }
+          }
+        })
+        
+        .state('app.article', {
+            url: '/articles/:articleId',
+            views: {
+              'menuContent': {
+                templateUrl: 'templates/article.html',
+                controller: 'ArticleCtrl'
+            }
+          }
+        })
 
 		$urlRouterProvider.otherwise('/login');
 
