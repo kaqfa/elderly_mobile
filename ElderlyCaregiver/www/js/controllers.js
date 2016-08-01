@@ -59,7 +59,7 @@ angular.module('starter.controllers', [])
             return moment(date, 'DD/MM/YYYY').locale('id').format('DD MMMM YYYY');
         };
         $scope.datetimeFormat = function (date) {
-            return moment(date, 'DD/MM/YYYY').locale('id').format('DD MMMM YYYY HH:mm');
+            return moment(date).locale('id').format('DD MMMM YYYY HH:mm');
         };
         $scope.logout = function () {
             Users.logout();
@@ -101,11 +101,11 @@ angular.module('starter.controllers', [])
                 }
             })
         }
-        
+
         $scope.trustAsHtml = function (html) {
             return $sce.trustAsHtml(html);
         }
-        $scope.dateArticle = function(date){
+        $scope.dateArticle = function (date) {
             return moment(date).locale('id').format('dddd, DD MMMM YYYY, HH.mm');
         };
 
@@ -374,7 +374,13 @@ angular.module('starter.controllers', [])
             $scope.labels = ["Sehat", "Sakit", "Kangen"];
             $scope.data = [$scope.sehat, $scope.sakit, $scope.kangen];
             $scope.colors = ['#33cd5f', '#803690', '#ffc900', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'];
-
+            $scope.showLocation = function () {
+                console.log(ionic.Platform.isAndroid());
+                if (ionic.Platform.isAndroid()) {
+                    var url = 'geo:'+locationString+'?q='+locationString;
+                    window.open(url, '_system', 'location=yes')
+                }
+            }
             $scope.$parent.refreshData = function () {
                 $ionicLoading.show({
                     template: 'Loading...'
@@ -501,9 +507,9 @@ angular.module('starter.controllers', [])
 	function ($scope, Articles, Users, $ionicPopup, $state) {
         $scope.title = "Artikel Terbaru";
         $scope.isNextAvailable = false;
-        $scope.articleList=Articles.getAll();
+        $scope.articleList = Articles.getAll();
 
-        $scope.doRefresh = function(){
+        $scope.doRefresh = function () {
             Articles.refresh(Users.getToken(), function (data) {
                 if (data.next != null)
                     $scope.isNextAvailable = true;
@@ -520,7 +526,7 @@ angular.module('starter.controllers', [])
             });
         }
 
-        $scope.loadMore = function(){
+        $scope.loadMore = function () {
             Articles.getLatest(Users.getToken(), function (data) {
                 if (data.next != null)
                     $scope.isNextAvailable = true;
@@ -536,8 +542,8 @@ angular.module('starter.controllers', [])
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             });
         }
-        
-        $scope.$on('$ionicView.beforeEnter', function() {
+
+        $scope.$on('$ionicView.beforeEnter', function () {
             Articles.loadFirst(Users.getToken(), function (data) {
                 if (data.next != null)
                     $scope.isNextAvailable = true;
@@ -557,7 +563,7 @@ angular.module('starter.controllers', [])
 
 .controller('ArticleCtrl', ['$scope', 'Articles', '$stateParams',
 	function ($scope, Articles, $stateParams) {
-        $scope.$on('$ionicView.beforeEnter', function() {
-            $scope.article=Articles.get($stateParams.articleId);
+        $scope.$on('$ionicView.beforeEnter', function () {
+            $scope.article = Articles.get($stateParams.articleId);
         });
 	}]);

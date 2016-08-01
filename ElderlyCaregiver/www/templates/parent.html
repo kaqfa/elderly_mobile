@@ -18,7 +18,7 @@
                   <img ng-if="convertCondition(t.condition) != 'kangen' && convertCondition(t.condition) != 'sehat' " src = "img/merah.png">
                   <h2 style="font-weight:bold; text-transform: capitalize;">{{convertCondition(t.condition)}}</h2>
                   <p>{{datetimeFormat(t.modified)}}</p>
-                  <a href="geo:{{t.location}}" class="button button-positive" style="margin-top: 10px;">
+                  <a href="geo:{{t.location}}?q={{t.location}}" class="button button-positive" style="margin-top: 10px;" ng-click="$event.stopPropagation()" target="_blank">
                     <i class="icon ion-android-map"></i>
                   </a>
                 </div>                
