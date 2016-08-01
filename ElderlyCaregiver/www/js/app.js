@@ -44,6 +44,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
 			templateUrl: 'templates/menu.html',
 			controller: 'AppCtrl'
 		})
+		
 		.state('app.dashboard', {
 			url: '/dashboard',
 			views: {
@@ -53,6 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
 				}
 			}
 		})
+
 		.state('app.addParent', {
 			url: '/parents/add',
 			views: {
@@ -81,26 +83,36 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
 				}
 			}
 		})
+
+		.state('app.hospitals', {
+      url: '/hospitals',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/hospitals.html',
+          controller: 'HospitalCtrl'
+        }
+      }
+    })
         
-        .state('app.articles', {
-          url: '/articles',
-          views: {
-            'menuContent': {
-              templateUrl: 'templates/articleList.html',
-              controller: 'ArticlesCtrl'
-            }
-          }
-        })
-        
-        .state('app.article', {
-            url: '/articles/:articleId',
-            views: {
-              'menuContent': {
-                templateUrl: 'templates/article.html',
-                controller: 'ArticleCtrl'
-            }
-          }
-        })
+    .state('app.articles', {
+      url: '/articles',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/articleList.html',
+          controller: 'ArticlesCtrl'
+        }
+      }
+    })        
+    
+    .state('app.article', {
+        url: '/articles/:articleId',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/article.html',
+            controller: 'ArticleCtrl'
+        }
+      }
+    })
 
 		$urlRouterProvider.otherwise('/login');
 
