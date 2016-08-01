@@ -488,14 +488,20 @@ angular.module('starter.controllers', [])
         }
 }])
 
+.controller('HospitalCtrl', ['$scope', function ($scope) {
+        $scope.$on('$ionicView.beforeEnter', function () {
+            
+        });
+	}])
+
 .controller('dashCtrl', ['$scope', '$ionicLoading', '$ionicHistory', 'Elders', '$ionicNavBarDelegate',
-	function ($scope, $ionicLoading, $ionicHistory, Elders, $ionicNavBarDelegate) {
+    function ($scope, $ionicLoading, $ionicHistory, Elders, $ionicNavBarDelegate) {
         $scope.$on('$ionicView.beforeEnter', function () {
             $ionicHistory.nextViewOptions({
                 disableBack: true
             });
         });
-	}])
+    }])
 
 .controller('ArticlesCtrl', ['$scope', 'Articles', 'Users', '$ionicPopup', '$state',
 	function ($scope, Articles, Users, $ionicPopup, $state) {
