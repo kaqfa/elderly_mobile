@@ -1,0 +1,7 @@
+{
+    "jscodehints.detectedExclusions": [
+        "D:/Ridwan/ionic/elderly/ElderlyElder/www/js/services.js",
+        "D:/Ridwan/ionic/elderly/ElderlyElder/platforms/android/cordova/Api.js",
+        "D:/Ridwan/ionic/elderly/ElderlyElder/platforms/android/platform_www/cordova-js-src/android/nativeapiprovider.js"
+    ]
+}

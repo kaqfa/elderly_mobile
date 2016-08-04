@@ -1,0 +1,24 @@
+<ion-view view-title="{{article.title}}">
+    <ion-nav-bar align-title="center" class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+        <ion-nav-title>{{article.title}}</ion-nav-title>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="list card">
+            <div class="item item-text-wrap">
+                <h2>{{article.title}}</h2>
+                <p>{{dateArticle(article.created)}} WIB</p>
+            </div>
+            <div class="item item-image">
+                <img ng-if="article.photo!=null" src="{{article.photo}}">
+            </div>
+            <div class="item item-body">
+                <p>
+                    <span ng-repeat="kat in article.category" style="margin-right:5px" class="label balanced-bg light">{{kat.name}}</span>
+                </p>
+                <p ng-bind-html="trustAsHtml(article.content)"></p>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

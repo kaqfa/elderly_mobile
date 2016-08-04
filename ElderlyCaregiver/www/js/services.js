@@ -80,7 +80,7 @@ angular.module('starter.services', [])
                 $http.get(ApiEndpoint.url + '/article/?page='+1+'&page_size='+((page-1)*perpage), {
                     headers: { Authorization: "Token "+inputToken }
                 }).then(function(response){
-                    articles = articles.splice(0, articles.length)
+                    articles.splice(0, articles.length)
                     for(i=0;i<response.data.results.length;i++){
                         articles.push(response.data.results[i]);
                     }
@@ -107,7 +107,7 @@ angular.module('starter.services', [])
     }
     
     var reset=function(pp){
-        articles = articles.splice(0, articles.length);
+        articles.splice(0, articles.length);
         page = 1;
         count = 0;
         perpage=pp;

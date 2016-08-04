@@ -1,5 +1,131 @@
 angular.module('starter.services', [])
 
+.factory('Articles', ['$http', 'ApiEndpoint', function($http, ApiEndpoint) {
+    var perpage=10
+    var articles=[]
+    var page=1
+    var count=0
+    var getnum=function(inputToken, callback, error){
+        $http.get(ApiEndpoint.url + '/article/?page='+1+'&page_size='+1, {
+            headers: { Authorization: "Token "+inputToken }
+        }).then(function(response){
+            if(callback != null)
+                callback(response.data);
+        }, function(response){
+            if(error != null)
+                error(response);
+        });
+    }
+    
+    var getLatest=function(inputToken, callback, error) {
+        getnum(inputToken, function(data){
+            if(data.count!=count){
+                $http.get(ApiEndpoint.url + '/article/?page='+1+'&page_size='+(page*perpage), {
+                    headers: { Authorization: "Token "+inputToken }
+                }).then(function(response){
+                    articles.splice(0, articles.length)
+                    for(i=0;i<response.data.results.length;i++){
+                        articles.push(response.data.results[i]);
+                    }
+                    num=response.data.count
+                    if(callback != null)
+                        callback(response.data);
+                    page=page+1;
+                }, function(response){
+                    if(error != null)
+                        error(response);
+                });
+            }else if(data.count!=0){
+                $http.get(ApiEndpoint.url + '/article/?page='+page+'&page_size='+perpage, {
+                    headers: { Authorization: "Token "+inputToken }
+                }).then(function(response){
+                    for(i=0;i<response.data.results.length;i++){
+                        articles.push(response.data.results[i]);
+                    }
+                    num=response.data.count
+                    if(callback != null)
+                        callback(response.data);
+                    page=page+1;
+                }, function(response){
+                    if(error != null)
+                        error(response);
+                });
+            }else{
+                if(callback != null)
+                    callback(data);
+            }
+        }, function(response){
+            if(error != null)
+                error(response);
+        });
+        
+    }
+    
+    var getAllArticles=function(){
+        return articles;
+    }
+    
+    var get=function(articleId) {
+        for (var i = 0; i < articles.length; i++) {
+            if (articles[i].id === parseInt(articleId)) {
+                return articles[i];
+            }
+        }
+        return null;
+    }
+    
+    var refresh=function(inputToken, callback, error) {
+        getnum(inputToken, function(data){
+            if(data.count!=count){
+                $http.get(ApiEndpoint.url + '/article/?page='+1+'&page_size='+((page-1)*perpage), {
+                    headers: { Authorization: "Token "+inputToken }
+                }).then(function(response){
+                    articles.splice(0, articles.length)
+                    for(i=0;i<response.data.results.length;i++){
+                        articles.push(response.data.results[i]);
+                    }
+                    num=response.data.count
+                    if(callback != null)
+                        callback(response.data);
+                }, function(response){
+                    if(error != null)
+                        error(response);
+                });
+            }else{
+                if(callback != null)
+                    callback(data);
+            }
+        }, function(response){
+            if(error != null)
+                error(response);
+        });
+        
+    }
+    var loadFirst=function(inputToken, callback, error){
+        if(page==1&&count==0)
+            getLatest(inputToken, callback, error);
+    }
+    
+    var reset=function(pp){
+        articles.splice(0, articles.length);
+        page = 1;
+        count = 0;
+        perpage=pp;
+    }
+    var setPerPage=function(pp){
+        perpage=pp
+    }
+    
+    return {
+    reset: reset,
+    setPerPage: setPerPage,
+    getAll: getAllArticles,
+    getLatest: getLatest,
+    loadFirst: loadFirst,
+    refresh: refresh,
+    get: get
+  };
+}])
 .factory('Elders', function($http, ApiEndpoint) {
   var data = null;
   var token = null;

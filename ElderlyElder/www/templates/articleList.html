@@ -1,0 +1,19 @@
+<ion-view view-title="{{title}}">
+    <ion-nav-bar align-title="center" class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+        <ion-nav-title>{{title}}</ion-nav-title>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+        </ion-refresher>
+        <ion-list>
+            <ion-item ng-repeat="a in articleList" class="item-text-wrap item-thumbnail-left" ui-sref="article({articleId:a.id})">
+                <img ng-if="a.photo!=null" src="{{a.photo}}" />
+                <h2>{{a.title}}</h2>
+                <p><span class="label balanced-bg light">{{a.category[0].name}}</span> <i class="icon ion-clock"></i> {{dateArticle(a.created)}} WIB</p>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll ng-if="isNextAvailable" distance="5%" on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>
