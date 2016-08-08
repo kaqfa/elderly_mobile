@@ -347,6 +347,7 @@ angular.module('starter.controllers', [])
         $scope.$on('$ionicView.beforeEnter', function () {
             elder = Elders.get($stateParams.parentId);
             if (elder != null) {
+                $scope.photo = elder.elder.photo;
                 $scope.elder = elder.elder;
                 $scope.tracker = elder.tracker;
                 $scope.user = {
@@ -359,6 +360,52 @@ angular.module('starter.controllers', [])
             } else {
                 $scope.elder = {};
                 $scope.tracker = {};
+            }
+            $scope.getPict = function(){
+//                window.imagePicker.getPictures(
+//                    function(results) {
+//                        for (var i = 0; i < results.length; i++) {
+//                            $ionicPopup.alert({
+//                                title: 'Image URI',
+//                                template: results[i]
+//                            });
+//                        }
+//                    }, function (error) {
+//                        $ionicPopup.alert({
+//                            title: 'Error',
+//                            template: "error"
+//                        });
+//                    }, {
+//                        maximumImagesCount: 1
+//                    }
+//                );
+                navigator.camera.getPicture(
+                    function(URI) {
+                        $ionicLoading.show({
+                            template: 'Loading...'
+                        })
+                        Elders.uploadPhoto($scope.elder, Users.getToken(), URI, function(data){
+                            $scope.elder.photo=data.photo;
+                            $scope.$apply();
+                            $ionicLoading.hide();
+                        }, function(r){
+                            $ionicLoading.hide();
+                            if(r.http_status==400)
+                                var error="Ada kerusakan/kesalahan pada file gambar"
+                            else
+                                var error="Koneksi error"
+                            $ionicPopup.alert({
+                                title: 'Error',
+                                template: error
+                            });
+                        })
+                    }, function (error) {
+                        
+                    }, {
+                        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                        destinationType: Camera.DestinationType.NATIVE_URI
+                    }
+                );
             }
             $scope.sehat = 0;
             $scope.sakit = 0;
@@ -409,7 +456,9 @@ angular.module('starter.controllers', [])
 
                     Elders.update($scope.user, Users.getToken(), function (data) {
                         $ionicLoading.hide();
-                        $state.go('app.parent');
+                        $scope.elder=data;
+                        $scope.$apply();
+                        console.log($scope.elder)
                     }, function (response) {
                         $ionicLoading.hide();
                         var msg = "";

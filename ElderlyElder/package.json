@@ -25,7 +25,9 @@
     {
       "locator": "https://github.com/Rohfosho/CordovaCallNumberPlugin.git",
       "id": "mx.ferreyra.callnumber"
-    }
+    },
+    "cordova-plugin-file-transfer",
+    "cordova-plugin-camera"
   ],
   "cordovaPlatforms": [
     "android"
