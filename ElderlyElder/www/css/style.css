@@ -1,11 +1,6 @@
 /* Empty. Add your own CSS if you like */
 /* Empty. Add your own CSS if you like */
 
-#register-image{
-    height: 300px;
-    background: blue;
-}
-
 .placeholder-icon{
     color: #555;
     margin-right: 10px;
@@ -28,26 +23,51 @@
 }
 
 #pane-tabs{
-  margin-top: 180px;
-
+  margin-top: 150px;
 }
 
 #login-content{
     text-align: center;
-    background-image: url(../img/berbakti-1.jpg);
-    background-position: bottom center;
-    background-size:cover;
+    background-color: #0763A2;
+    padding-top: 110px;
 }
 
 #login-content .item-input{
     margin-bottom: 0px;
     margin-top: 0px;
+    padding-left: 0px;
 }
 
 #login-content .input-label{  
-  color: #444;
+  color: #fff;
   text-align: left;
-  padding-left: 10px;
+  padding-left: 20px;
+  font-weight: bold;
+}
+
+#login-content input{
+    display: block;
+    background-color: #88B3D3;
+    width: 85%;
+    color: #fff;
+    padding: 15px 30px;
+    height: 50px;
+    border-radius: 50px;
+    font-size: 18px;    
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login-content button{
+    height: 50px;
+    border-radius: 50px;
+    background-color: #fff;
+    color: #0763A2;
+    font-weight: bolder;
+    font-size: 20px;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .bar.bar-header .button+.title {
@@ -62,14 +82,6 @@
     border: none;
 }
 
-#login-content input{
-    display: block;
-    background-color: rgba(0, 0, 0, 0.6);
-    width: 95%;
-    color: aqua;
-    padding: 5px 10px;
-}
-
 .nopadding {
   padding: 0;
 }
@@ -81,6 +93,41 @@
     left: 0;
     width: auto;
     height: 100%;
+}
+
+.row{
+  margin-top: 30px;
+}
+
+.row + .row{
+  margin-top: 0px;
+}
+
+.menu-button{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;  
+}
+
+.menu-button a{
+  text-decoration: none;
+  text-align: center;
+  color: #000;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.button.button-positive{
+  background-color: #0763A2;
+  font-weight: bold;
+  height: 60px;
+  border-radius: 70px;
+  padding-top: 10px;  
+  font-size: 18px;
+}
+
+.menu-button img{
+  width: 75%;
 }
 
 .fillheight{
@@ -117,11 +164,11 @@ label.item.valid-lr {
 }
 
 input::-webkit-input-placeholder {
- color: #ccc;
+ color: #fff; 
 }
 
 input:-moz-input-placeholder {
- color: #ccc;
+ color: #fff;
 }
 
 
