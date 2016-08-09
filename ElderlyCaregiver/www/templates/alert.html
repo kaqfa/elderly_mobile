@@ -1,0 +1,19 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-calm">
+    <h1 class="title">Kondisi Darurat</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeAlert()"><i class="icon ion-close-round "></i></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="hero has-mask bg-header" style="background-image:url(img/background.jpg);">
+        <img ng-src="{{elder.photo==null?'img/karakter-circle-shadow.png':elder.photo}}" ng-click="getPict()" alt="" style="width: 30%; margin-top: 20px;">
+        <h3 class="">
+          {{elder.user.first_name}} {{elder.user.last_name}}
+        </h3>
+    </div>
+      <div class="padding">                
+        <button type="submit" class="button button-block button-positive">Tombol</button>
+      </div>
+  </ion-content>
+</ion-modal-view>

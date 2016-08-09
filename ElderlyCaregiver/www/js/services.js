@@ -158,12 +158,20 @@ angular.module('starter.services', [])
             token = null;
             data = null;
             localStorage.removeItem("token");
+            window.plugins.OneSignal.getTags(function(tags) {
+                var unsub=[];
+                for(keys in tags){
+                    unsub.push(keys);
+                }
+                window.plugins.OneSignal.deleteTags(unsub);
+            });
         },
         cekLogin: function(){
-            if(token == null)
+            if(token == null){
                 return false;
-            else
+            }else{
                 return true;
+            }
         },
         getData: function(inputToken, callback, error){
             $http.get(ApiEndpoint.url + '/profile/', {
@@ -200,13 +208,25 @@ angular.module('starter.services', [])
             headers: { Authorization: "Token "+token }
         }).then(function(response){
             data.splice(0, data.length);
+            subscription={}
             for(i=0;i<response.data.length;i++){
                 data.push(response.data[i]);
                 tracker[response.data[i].id]=[];
+                subscription[response.data[i].id]=true;
             }
+            window.plugins.OneSignal.getTags(function(tags) {
+                var unsub=[];
+                for(keys in tags)
+                    unsub.push(keys);
+                window.plugins.OneSignal.deleteTags(unsub);
+                setTimeout(function(){
+                    window.plugins.OneSignal.sendTags(subscription);
+                },5000); 
+            });
             $http.get(ApiEndpoint.url + '/trackers/', {
                 headers: { Authorization: "Token "+token }
             }).then(function(response){
+                console.log(response.data);
                 for(i=0;i<response.data.length;i++){
                     tracker[response.data[i].elder].push(response.data[i]);
                 }
@@ -226,6 +246,9 @@ angular.module('starter.services', [])
             headers: { Authorization: "Token "+token }
         }).then(function(response){
             data.push(response.data);
+            subscription={}
+            subscription[response.data.id]=true;
+            window.plugins.OneSignal.sendTags(subscription);
             if(callback!=null)
                 callback(response.data);
         }, function(response){
@@ -239,6 +262,9 @@ angular.module('starter.services', [])
             headers: { Authorization: "Token "+token }
         }).then(function(response){
             data.push(response.data);
+            subscription={}
+            subscription[response.data.id]=true;
+            window.plugins.OneSignal.sendTags(subscription);
             if(callback!=null)
                 callback(response.data);
         }, function(response){
@@ -310,6 +336,21 @@ angular.module('starter.services', [])
             });
         },
         refreshTrackElder: function(elderId, token, callback, error){
+            $http.get(ApiEndpoint.url + '/trackers/?elder='+elderId, {
+                headers: { Authorization: "Token "+token }
+            }).then(function(response){
+                tracker[elderId]=[]
+                for(i=0;i<response.data.length;i++){
+                    tracker[response.data[i].elder].push(response.data[i]);
+                }
+                if(callback!=null)
+                    callback(response.data);
+            }, function(response){
+                if(error!=null)
+                    error(response);
+            });
+        },
+        addTrackElder: function(elderId, token, callback, error){
             $http.get(ApiEndpoint.url + '/trackers/?elder='+elderId, {
                 headers: { Authorization: "Token "+token }
             }).then(function(response){

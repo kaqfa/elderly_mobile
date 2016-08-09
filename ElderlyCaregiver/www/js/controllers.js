@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', ['$scope', '$ionicModal', '$ionicLoading', '$ionicPopup', '$sce', 'Users', 'Elders', '$timeout', '$state',
-	function ($scope, $ionicModal, $ionicLoading, $ionicPopup, $sce, Users, Elders, $timeout, $state) {
+.controller('AppCtrl', ['$scope', '$ionicModal', '$ionicLoading', '$rootScope', '$ionicPopup', '$sce', 'Users', 'Elders', '$timeout', '$state',
+	function ($scope, $ionicModal, $ionicLoading, $rootScope, $ionicPopup, $sce, Users, Elders, $timeout, $state) {
         // Form data for the login modal
         $scope.join = {
             phone: ""
@@ -10,6 +10,28 @@ angular.module('starter.controllers', [])
             if (!Users.cekLogin())
                 $state.go('login')
         })
+        
+        $ionicModal.fromTemplateUrl('templates/alert.html', {
+            scope: $scope
+        }).then(function (modal) {
+            $scope.modalAlert = modal;
+        });
+        $scope.closeAlert = function () {
+            $scope.modalAlert.hide();
+        };
+        $scope.joinAlert = function () {
+            $scope.modalAlert.show();
+        };
+        $rootScope.oneSignalCallback = function(jsonData) {
+            if (jsonData.additionalData && jsonData.additionalData.track && jsonData.additionalData.track.condition=='tb') {
+                var elder=Elders.get(jsonData.additionalData.track.elder);
+                $scope.alert=elder;
+                $scope.modalAlert.show();
+            }else{
+                alert(jsonData.message);
+            }
+        };
+        
         $ionicModal.fromTemplateUrl('templates/join-parent.html', {
             scope: $scope
         }).then(function (modal) {
@@ -157,6 +179,12 @@ angular.module('starter.controllers', [])
                 })
             } else {
                 $scope.noToken = true;
+                window.plugins.OneSignal.getTags(function(tags) {
+                    var unsub=[];
+                    for(keys in tags)
+                        unsub.push(keys);
+                    window.plugins.OneSignal.deleteTags(unsub);
+                });
             }
         })
         $scope.user = {

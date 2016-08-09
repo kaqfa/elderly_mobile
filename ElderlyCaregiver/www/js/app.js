@@ -3,15 +3,20 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 
 	'ionic-datepicker', 'chart.js'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope) {
 	$ionicPlatform.ready(function() {
-		// var notificationOpenedCallback = function(jsonData) {
-		//   alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
-		// };    
-		// window.plugins.OneSignal.init("6ddddad0-6453-498e-9f3e-b307b5a681b8",
-		//       {googleProjectNumber: "564672218112"},
-		//       notificationOpenedCallback);
-		// window.plugins.OneSignal.enableInAppAlertNotification(true);
+        $rootScope.oneSignalCallback = function(jsonData) {
+            alert(jsonData.message)
+        };
+        var notificationOpenedCallback = function(jsonData) {
+            $rootScope.oneSignalCallback(jsonData);
+        };    
+        window.plugins.OneSignal.init("a9b5cfe4-e554-40ab-a804-ee63364a96c9",
+                                      {googleProjectNumber: "703436402607"},
+                                      notificationOpenedCallback);
+        window.plugins.OneSignal.enableInAppAlertNotification(false);
+        window.plugins.OneSignal.enableNotificationsWhenActive(false);
+        window.plugins.OneSignal.sendTags({5:true});
 	});
 })
 
