@@ -7,10 +7,10 @@ Care Giver:
 - Tampilan list artikel
 - Ganti foto profil
 - Upload foto profil
-- Reminder setiap jam 8 pagi untuk menelpon / menghubungi orang tua
+- Reminder setiap jam 8 pagi untuk menelpon / menghubungi orang tua (local notification)
 - Ketika ada pesan panic, tampilkan popup (modal) berisi gambar 
   dan tombol panggil rumah sakit rekanan
-- Panic popup tampil di HP meskipun aplikasi mati
+- Panic popup tampil di HP meskipun aplikasi mati (push nnotification)
 - Redesign tampilan aplikasi
 
 Elder:

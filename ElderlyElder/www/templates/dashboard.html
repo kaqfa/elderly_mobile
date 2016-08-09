@@ -6,25 +6,44 @@
     </ion-header-bar>
     <ion-content>
       <div class="row">
-        <div class="col">
-          <a ui-sref="kondisi" class=""> <img src="img/cek-btn.png" width="100%" alt=""> </a>
+        <div class="col menu-button">
+          <a ui-sref="kondisi" class=""> 
+            <img src="img/btn_cekkondisi.png" alt=""> 
+            <br />Cek Kondisi
+          </a>
         </div>
-        <div class="col">
-          <a href="tel:{{caregivers[0].phone}}" class=""> <img src="img/sapa_btn.png" width="100%" alt=""> </a>
+        <div class="col menu-button">
+          <a href="tel:{{caregivers[0].phone}}" class=""> 
+            <img src="img/btn_sapa.png" alt=""> 
+            <br />Sapa Anak
+          </a>
         </div>
       </div>
       <div class="row">
-        <div class="col">
-          <a ng-click="panicBtn(caregivers[0].phone)" class=""> <img src="img/panik_btn.png" width="100%" alt=""> </a>
+        <div class="col menu-button">
+          <a ui-sref="articles" class=""> 
+            <img src="img/btn_notif.png" alt=""> 
+            <br />Notifikasi
+          </a>
         </div>        
-      </div>
-      <div class="row">
-        <div class="col">
-          <a ui-sref="articles" class=""> <img src="img/panik_btn.png" width="100%" alt=""> </a>
+        <div class="col menu-button">
+          <a ui-sref="articles" class=""> 
+            <img src="img/btn_info.png" alt=""> 
+            <br />Informasi
+          </a>
         </div>        
       </div>
 
-      <div class="list padding">
+      <div class="row">
+        <div class="col menu-button">
+          <a ng-click="panicBtn(caregivers[0].phone)" class="" > 
+          <img src="img/btn_panik.png" style="width: 45%" alt=""> 
+            <br />Tombol Panik
+          </a>
+        </div>                
+      </div>
+
+      <!-- <div class="list padding">
           <div class="item item-divider positive-bg light">Kondisi Harian</div>
           <a class="item item-avatar" ng-repeat="t in trackers track by $index" href="#">
             <img ng-if="convertCondition(t.condition) == 'baik'" src="img/hijau.png">
@@ -34,10 +53,8 @@
             <h2 style="font-weight:bold; text-transform: capitalize;">{{convertCondition(t.condition)}}</h2>
             <p>{{datetimeFormat(t.modified)}} <i ng-show="isLocal(t)" class="energized icon ion-checkmark-round"></i></p>
           </a>
-      </div>
+      </div> -->
 
-      <a ng-click="logout()" class="button button-block button-assertive">
-        Keluar
-      </a>
+      <a ng-click="logout()" class="button button-block button-assertive"> Keluar </a>
     </ion-content>
 </ion-view>
