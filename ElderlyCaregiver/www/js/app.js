@@ -15,7 +15,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
 	});
 })
 
-.constant('ApiEndpoint', { url: 'http://elderlyapps.net/api' })
+.constant('ApiEndpoint', { url: 'http://app.berbakti.id/api' })
 
 .config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider', 
 		 'ChartJsProvider', 'ionicDatePickerProvider', '$compileProvider',

@@ -324,6 +324,45 @@ angular.module('starter.services', [])
                     error(response);
             });
         },
+        uploadPhoto: function(elder, token, photo, callback, error){
+            var ft=new FileTransfer();
+            var params={
+                elder: elder.id
+            }
+            var headers={
+                Authorization: "Token "+token
+            }
+            var options = new FileUploadOptions();
+            var filename=photo.substr(photo.lastIndexOf('/') + 1);
+            var re = /(?:\.([^.]+))?$/;
+            ext=re.exec(filename)[1];
+            if(ext==undefined)
+                ext="jpg"
+            var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+            var string_length = 3;
+            var randomstring = '';
+            for (var i=0; i<string_length; i++) {
+                var rnum = Math.floor(Math.random() * chars.length);
+                randomstring += chars.substring(rnum,rnum+1);
+            }
+            options.fileKey = "upload";
+            options.fileName = "elder"+randomstring+"."+ext;
+            options.params = params;
+            options.headers = headers;
+            ft.upload(photo, encodeURI(ApiEndpoint.url + '/elders/photo/'), function(r){
+                newElder=JSON.parse(r.response);
+                for(i=0;i<data.length;i++){
+                    if(newElder.id==data[i].id)
+                        data[i].photo=newElder.photo
+                    break;
+                }
+                if(callback!=null)
+                    callback(data[i]);
+            }, function(r){
+                if(error!=null)
+                    error(r);
+            }, options);
+        },
         convertCondition: function(cond){
             switch(cond){
                 case "ba":

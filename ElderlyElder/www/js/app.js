@@ -18,7 +18,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 })
 
 .constant('ApiEndpoint', {
-    url: 'http://elderlyapps.net/api'
+    url: 'app.berbakti.id'
         // url: 'http://localhost:8000/api' 
 })
 
