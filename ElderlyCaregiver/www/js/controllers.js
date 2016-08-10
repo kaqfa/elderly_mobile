@@ -19,22 +19,23 @@ angular.module('starter.controllers', [])
         $scope.closeAlert = function () {
             $scope.modalAlert.hide();
         };
-        $rootScope.oneSignalCallback = function(jsonData) {
-            if (jsonData.additionalData && jsonData.additionalData.track) {
-                Elders.addTrackElder(jsonData.additionalData.track)
-                $scope.$apply();
-                if(jsonData.additionalData.track.condition=='tb'){
-                    var elder=Elders.get(jsonData.additionalData.track.elder);
-                    $scope.alert=elder;
-                    $scope.modalAlert.show();
+        if (ionic.Platform.isWebView()) {
+            $rootScope.oneSignalCallback = function(jsonData) {
+                if (jsonData.additionalData && jsonData.additionalData.track) {
+                    Elders.addTrackElder(jsonData.additionalData.track)
+                    $scope.$apply();
+                    if(jsonData.additionalData.track.condition=='tb'){
+                        var elder=Elders.get(jsonData.additionalData.track.elder);
+                        $scope.alert=elder;
+                        $scope.modalAlert.show();
+                    }else{
+                        alert(jsonData.message);
+                    }
                 }else{
                     alert(jsonData.message);
                 }
-            }else{
-                alert(jsonData.message);
-            }
-        };
-        
+            };
+        }
         $ionicModal.fromTemplateUrl('templates/join-parent.html', {
             scope: $scope
         }).then(function (modal) {

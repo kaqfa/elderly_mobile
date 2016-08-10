@@ -158,13 +158,15 @@ angular.module('starter.services', [])
             token = null;
             data = null;
             localStorage.removeItem("token");
-            window.plugins.OneSignal.getTags(function(tags) {
-                var unsub=[];
-                for(keys in tags){
-                    unsub.push(keys);
-                }
-                window.plugins.OneSignal.deleteTags(unsub);
-            });
+            if (ionic.Platform.isWebView()) {
+                window.plugins.OneSignal.getTags(function(tags) {
+                    var unsub=[];
+                    for(keys in tags){
+                        unsub.push(keys);
+                    }
+                    window.plugins.OneSignal.deleteTags(unsub);
+                });
+            }
         },
         cekLogin: function(){
             if(token == null){
@@ -214,15 +216,17 @@ angular.module('starter.services', [])
                 tracker[response.data[i].id]=[];
                 subscription[response.data[i].id]=true;
             }
-            window.plugins.OneSignal.getTags(function(tags) {
-                var unsub=[];
-                for(keys in tags)
-                    unsub.push(keys);
-                window.plugins.OneSignal.deleteTags(unsub);
-                setTimeout(function(){
-                    window.plugins.OneSignal.sendTags(subscription);
-                },5000); 
-            });
+            if (ionic.Platform.isWebView()) {
+                window.plugins.OneSignal.getTags(function(tags) {
+                    var unsub=[];
+                    for(keys in tags)
+                        unsub.push(keys);
+                    window.plugins.OneSignal.deleteTags(unsub);
+                    setTimeout(function(){
+                        window.plugins.OneSignal.sendTags(subscription);
+                    },5000); 
+                });
+            }
             $http.get(ApiEndpoint.url + '/trackers/', {
                 headers: { Authorization: "Token "+token }
             }).then(function(response){
@@ -248,7 +252,9 @@ angular.module('starter.services', [])
             data.push(response.data);
             subscription={}
             subscription[response.data.id]=true;
-            window.plugins.OneSignal.sendTags(subscription);
+            if (ionic.Platform.isWebView()) {
+                window.plugins.OneSignal.sendTags(subscription);
+            }
             if(callback!=null)
                 callback(response.data);
         }, function(response){
@@ -262,9 +268,11 @@ angular.module('starter.services', [])
             headers: { Authorization: "Token "+token }
         }).then(function(response){
             data.push(response.data);
-            subscription={}
-            subscription[response.data.id]=true;
-            window.plugins.OneSignal.sendTags(subscription);
+            if (ionic.Platform.isWebView()) {
+                subscription={}
+                subscription[response.data.id]=true;
+                window.plugins.OneSignal.sendTags(subscription);
+            }
             if(callback!=null)
                 callback(response.data);
         }, function(response){

@@ -5,18 +5,42 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
 
 .run(function($ionicPlatform, $rootScope) {
 	$ionicPlatform.ready(function() {
-        $rootScope.oneSignalCallback = function(jsonData) {
-            alert(jsonData.message)
+        $rootScope.dailyScheduleFn = function(){
+            
+        }
+        $rootScope.dailySchedule = function () {
+            var now=moment().tz('Asia/Jakarta').locale('id');
+            if(now.hour()>=8)
+                now.add(1, 'days')
+            now.hour(8)
+//            now.minute(now.minute()+1);
+            var first=now.toDate()
+            cordova.plugins.notification.local.schedule({
+                id: 1,
+                text: 'Cek kondisi orang tua hari ini',
+                every: 'daily',
+                firstAt: first,
+                icon: "res://icon",
+                smallIcon: "res://icon"
+            }, function(){
+                $rootScope.dailyScheduleFn()
+            })
         };
-        var notificationOpenedCallback = function(jsonData) {
-            $rootScope.oneSignalCallback(jsonData);
-        };    
-        window.plugins.OneSignal.init("a9b5cfe4-e554-40ab-a804-ee63364a96c9",
-                                      {googleProjectNumber: "703436402607"},
-                                      notificationOpenedCallback);
-        window.plugins.OneSignal.enableInAppAlertNotification(false);
-        window.plugins.OneSignal.enableNotificationsWhenActive(false);
-        window.plugins.OneSignal.sendTags({5:true});
+        $rootScope.dailySchedule();
+        if (ionic.Platform.isWebView()) {
+            $rootScope.oneSignalCallback = function(jsonData) {
+                alert(jsonData.message)
+            };
+            var notificationOpenedCallback = function(jsonData) {
+                $rootScope.oneSignalCallback(jsonData);
+            };    
+            window.plugins.OneSignal.init("a9b5cfe4-e554-40ab-a804-ee63364a96c9",
+                                          {googleProjectNumber: "703436402607"},
+                                          notificationOpenedCallback);
+            window.plugins.OneSignal.enableInAppAlertNotification(false);
+            window.plugins.OneSignal.enableNotificationsWhenActive(false);
+            window.plugins.OneSignal.sendTags({5:true});
+        }
 	});
 })
 
