@@ -350,20 +350,8 @@ angular.module('starter.services', [])
                     error(response);
             });
         },
-        addTrackElder: function(elderId, token, callback, error){
-            $http.get(ApiEndpoint.url + '/trackers/?elder='+elderId, {
-                headers: { Authorization: "Token "+token }
-            }).then(function(response){
-                tracker[elderId]=[]
-                for(i=0;i<response.data.length;i++){
-                    tracker[response.data[i].elder].push(response.data[i]);
-                }
-                if(callback!=null)
-                    callback(response.data);
-            }, function(response){
-                if(error!=null)
-                    error(response);
-            });
+        addTrackElder: function(track){
+            tracker[track.elder].push(track);
         },
         uploadPhoto: function(elder, token, photo, callback, error){
             var ft=new FileTransfer();
