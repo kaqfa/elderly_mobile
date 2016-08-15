@@ -267,4 +267,16 @@ angular.module('starter.controllers', [])
         $scope.$on('$ionicView.beforeEnter', function () {
             $scope.article = Articles.get($stateParams.articleId);
         });
+	}])
+
+.controller('GreetCtrl', ['$scope', 'Elders',
+	function ($scope, Elders) {
+        $scope.caregivers = Elders.getCaregivers();
+        $scope.call = function(number){
+            window.plugins.CallNumber.callNumber(function (result) {
+                console.log("Success:" + result);
+            }, function (result) {
+                console.log("Error:" + result);
+            }, number, false);
+        }
 	}]);

@@ -18,7 +18,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 })
 
 .constant('ApiEndpoint', {
-    url: 'app.berbakti.id'
+    url: 'http://app.berbakti.id/api'
         // url: 'http://localhost:8000/api' 
 })
 
@@ -59,6 +59,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         url: '/articles/:articleId',
         templateUrl: 'templates/article.html',
         controller: 'ArticleCtrl'
+    })
+    
+    .state('greet', {
+        url: '/greet',
+        templateUrl: 'templates/caregivers.html',
+        controller: 'GreetCtrl'
     })
 
     // if none of the above states are matched, use this as the fallback
