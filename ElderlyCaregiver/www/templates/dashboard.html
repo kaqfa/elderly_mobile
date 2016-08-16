@@ -19,15 +19,13 @@
       <div class="">
         <div ng-repeat="elder in elders track by $index" class="card in">
           <div class="item item-thumbnail-right">
-            <img src="img/karakter-circle.png">
+            <img src="img/wajah.jpg" class="elder_pict">
             <h2>{{elder.user.first_name}} {{elder.user.last_name}}</h2>
-            <p>
-              {{dateFormat(elder.birthday)}}
-              <div class="button-bar">
-              <a href="tel:{{elder.phone}}" class="button button-balanced icon-left ion-android-call">Panggil</a>&nbsp;
-              <button class="button button-positive icon-right ion-android-list" ui-sref="app.parent({parentId:elder.id})" ui-sref-active="active">Detail</button>
+            <h3>{{dateFormat(elder.birthday)}}</h3>
+            <div>
+              <a href="tel:{{elder.phone}}" class="button button-small button-block button-balanced icon-left ion-android-call">Panggil</a>
+              <a class="button button-small button-positive button-block icon-left ion-android-list" ui-sref="app.parent({parentId:elder.id})" ui-sref-active="active">Detail</a>
             </div>
-            </p>
           </div>          
         </div>
       </div>

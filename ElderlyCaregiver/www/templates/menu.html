@@ -7,7 +7,7 @@
             </ion-nav-buttons>
             <ion-nav-buttons side="right">
               <button class="button" ng-click="refreshData()">
-                <i class="icon ion-loop"></i>
+                <img src="./img/logo_kecil.png" alt="">
               </button>
             </ion-nav-buttons>
         </ion-nav-bar>
@@ -19,7 +19,7 @@
             <h1 class="title">Menu</h1>            
         </ion-header-bar>
         <ion-content>
-            <div class="item item-avatar" class="side-header">
+            <div class="item item-avatar side-header">
                 <img src="//ionicframework.com/img/docs/spengler.jpg">
                 <h2>Andika Siapa</h2>
                 <p>elfaatta@gmail.com</p>
@@ -31,22 +31,22 @@
             </ion-list>
             <ion-list>
                 <ion-item menu-close ui-sref="app.articles" ui-sref-active="active">
-                    <i class="icon ion-list"></i> Artikel-Artikel
+                    <i class="icon ion-clipboard"></i> Artikel-Artikel
                 </ion-item>
                 <ion-item menu-close ui-sref="app.hospitals" ui-sref-active="active">
-                    <i class="icon ion-list"></i> List Rumah Sakit
+                    <i class="icon ion-medkit"></i> List Rumah Sakit
                 </ion-item>
                 <ion-item menu-close ui-sref="app.addParent" ui-sref-active="active">
-                    <i class="icon ion-plus-circled"></i> Tambah Orang Tua
+                    <i class="icon ion-person-add"></i> Tambah Orang Tua
                 </ion-item>
                 <ion-item menu-close ng-click="joinParent()">
-                    <i class="icon ion-plus-circled"></i> Join Rawat
+                    <i class="icon ion-person-stalker"></i> Join Rawat
                 </ion-item>
             </ion-list>
             <div>&nbsp;</div>
             <ion-list ng-show="elders">
                 <ion-item class="item-divider">
-                    <i class="icon ion-people"></i> Daftar Orang Tua
+                    <i class="icon ion-people"></i> <b>Daftar Orang Tua</b>
                 </ion-item>
                 <ion-item style="text-transform: capitalize;" menu-close ng-repeat="elder in elders track by $index"
                     ui-sref="app.parent({parentId:elder.id})" ui-sref-active="active">
