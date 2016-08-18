@@ -92,23 +92,41 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
 					controller: 'regParentCtrl'
 				}
 			}
-		})
+		})		
         
 		.state('app.parent', {
 			url: '/parent/:parentId',
 			views: {
 				'menuContent': {
-					templateUrl: 'templates/parent.html',
+					templateUrl: 'templates/parentMenu.html',
 					controller: 'ParentCtrl'
 				}
 			}
 		})
-		.state('app.editParent', {
-			url: '/parent/:parentId/edit',
+		.state('app.parentCondition', {
+			url: '/parent/:parentId/condition',
 			views: {
 				'menuContent': {
-					templateUrl: 'templates/edit.html',
-					controller: 'ParentCtrl'
+					templateUrl: 'templates/parentCondition.html',
+					controller: 'ParentConditionCtrl'
+				}
+			}
+		})
+		.state('app.parentGraphic', {
+			url: '/parent/:parentId/graphic',
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/parentGraphic.html',
+					controller: 'ParentGraphicCtrl'
+				}
+			}
+		})
+		.state('app.parentProfile', {
+			url: '/parent/:parentId/profile',
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/parentProfile.html',
+					controller: 'ParentProfileCtrl'
 				}
 			}
 		})

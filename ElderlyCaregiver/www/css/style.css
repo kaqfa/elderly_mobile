@@ -1,6 +1,6 @@
 /* Empty. Add your own CSS if you like */
 .bar-positive .button{
-  background-color: #46919C;
+  background-color: transparent;
 }
 
 .bar-positive .button img{
@@ -8,17 +8,20 @@
   height: 100%;
 }
 
-.bar.bar-positive{
-  background-color: #46919C;
+.bar.bar-positive{    
+  background: -webkit-linear-gradient(top, #57b0bc 0%,#46919c 100%);
+  background: linear-gradient(to bottom, #57b0bc 0%,#46919c 100%);
   border-color: #46919C;
 }
 
 .button.button-positive{
-  background-color: #46919C;
+  background: -webkit-linear-gradient(top, #57b0bc 0%,#46919c 100%);
+  background: linear-gradient(to bottom, #57b0bc 0%,#46919c 100%);
 }
 
 .menu .item-divider{
-  background-color: #46919C;
+  background: -webkit-linear-gradient(top, #57b0bc 0%,#46919c 100%);
+  background: linear-gradient(to bottom, #57b0bc 0%,#46919c 100%);
 }
 
 .tab-nav{
@@ -44,16 +47,22 @@
   background-size:cover; 
   background-repeat:no-repeat; 
   background-position:center center; 
-  /*min-height: 100px; */
-  text-align:center;
+  height: 200px;   
 }
 
-.bg-header h3{
-  margin-top: 5px;  
-  padding-bottom: 15px;
+.bg-header .img-text{        
+  display: block;
+  height: 35px;
+  position: relative;
+  top: 165px;
   text-transform: capitalize;
+  font-size: 24px;
+  padding-top: 5px;
   font-weight: bold;
-  color: #387ef5;
+  color: #46919C;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-right: 0px;
+  text-align: center;
 }
 
 #pane-tabs{
@@ -221,6 +230,49 @@ input:-moz-input-placeholder {
   margin: 0 0 2px 15px;
 }
 
+#condition .item{
+  border: none;
+}
+#condition .item-avatar{
+  background: -webkit-linear-gradient(top, #57b0bc 0%,#46919c 100%);
+  background: linear-gradient(to bottom, #57b0bc 0%,#46919c 100%);
+}
+#condition .item-avatar img{
+  border-radius: 0% !important;
+  top: 12px !important;
+  left: 12px !important;
+  max-width: 50px !important;
+  max-height: 50px !important;
+}
+#condition .item-avatar h2{  
+  margin: 0 0 2px 0px;
+  font-weight: bold;
+}
+#condition .item-avatar p{  
+  margin: 0 0 2px 0px;
+}
+#condition .item-avatar .button{
+  margin-top: 0px !important;
+}
+
+#graph-condition h3{
+  text-align: center;
+  margin: 10px 0px !important;
+  color: #888;
+}
+
+#graph-condition div{
+  text-align: center;
+  color: #666;
+}
+
+.img-camera {
+  display: block;
+  margin: auto;
+  padding-top: 50px;  
+  width: 25%;
+}
+
 .item.active{
   /*background-color: #276bb0;*/
   color: #276bb0;
@@ -228,6 +280,7 @@ input:-moz-input-placeholder {
 }
 
 .item-divider{
-  background-color: #276bb0;
+  background: -webkit-linear-gradient(top, #57b0bc 0%,#46919c 100%);
+  background: linear-gradient(to bottom, #57b0bc 0%,#46919c 100%);
   color: #fff; 
 }

@@ -1,0 +1,22 @@
+<ion-view view-title="Kondisi Orang Tua">
+  <ion-content class="has-header">
+
+    <div class="has-mask bg-header" style="background-image:url(img/wajah.jpg);">
+      <div class="img-text">{{elder.user.first_name}} {{elder.user.last_name}}</div>                
+    </div>
+      <div class="list" id="condition">
+          <ion-scroll zooming="false" direction="y" style="height: 500px">
+              <div class="item item-avatar item-button-right" ng-repeat="t in tracker | orderBy:'-id' track by $index" href="#">
+                <img ng-if="convertCondition(t.condition) == 'sehat'" src = "img/icon_sehat.png">
+                <img ng-if="convertCondition(t.condition) == 'kangen'" src = "img/icon_kangen.png">
+                <img ng-if="convertCondition(t.condition) != 'kangen' && convertCondition(t.condition) != 'sehat' " src = "img/icon_sakit.png">
+                <h2 style="font-weight:bold; text-transform: capitalize;">{{convertCondition(t.condition)}}</h2>
+                <p>{{datetimeFormat(t.modified)}}</p>
+                <a href="geo:{{t.location}}?q={{t.location}}" class="button button-positive" style="margin-top: 10px;" ng-click="$event.stopPropagation()" target="_blank">
+                  <img class="loc_icon" src="img/lokasi.png" alt="">
+                </a>
+              </div>                
+          </ion-scroll>
+      </div>
+  </ion-content>
+</ion-view>

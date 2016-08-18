@@ -1,0 +1,13 @@
+<ion-view view-title="Profil Orang Tua">
+  <ion-content class="has-header">
+
+    <div class="has-mask bg-header" style="background-image:url(img/wajah.jpg);">        
+        <div class="img-text">{{elder.user.first_name}} {{elder.user.last_name}}</div>
+    </div>
+
+    <a ui-sref="app.parentCondition({parentId:elder.id})"><img src="./img/btn_kondisi.png" alt="" style="width:100%"></a>
+    <a ui-sref="app.parentGraphic({parentId:elder.id})"><img src="./img/btn_riwayat.png" alt="" style="width:100%"></a>
+    <a ui-sref="app.parentProfile({parentId:elder.id})"><img src="./img/btn_profil.png" alt="" style="width:100%"></a>
+
+  </ion-content>
+</ion-view>

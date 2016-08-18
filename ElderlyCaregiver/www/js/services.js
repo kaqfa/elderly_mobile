@@ -1,11 +1,11 @@
 angular.module('starter.services', [])
 
 .factory('Articles', ['$http', 'ApiEndpoint', function($http, ApiEndpoint) {
-    var perpage=10
-    var articles=[]
-    var page=1
-    var count=0
-    var getnum=function(inputToken, callback, error){
+    var perpage = 10
+    var articles = []
+    var page = 1
+    var count = 0
+    var getnum = function(inputToken, callback, error){
         $http.get(ApiEndpoint.url + '/article/?page='+1+'&page_size='+1, {
             headers: { Authorization: "Token "+inputToken }
         }).then(function(response){
@@ -17,7 +17,7 @@ angular.module('starter.services', [])
         });
     }
     
-    var getLatest=function(inputToken, callback, error) {
+    var getLatest = function(inputToken, callback, error) {
         getnum(inputToken, function(data){
             if(data.count!=count){
                 $http.get(ApiEndpoint.url + '/article/?page='+1+'&page_size='+(page*perpage), {
@@ -65,7 +65,7 @@ angular.module('starter.services', [])
         return articles;
     }
     
-    var get=function(articleId) {
+    var get = function(articleId) {
         for (var i = 0; i < articles.length; i++) {
             if (articles[i].id === parseInt(articleId)) {
                 return articles[i];
@@ -74,7 +74,7 @@ angular.module('starter.services', [])
         return null;
     }
     
-    var refresh=function(inputToken, callback, error) {
+    var refresh = function(inputToken, callback, error) {
         getnum(inputToken, function(data){
             if(data.count!=count){
                 $http.get(ApiEndpoint.url + '/article/?page='+1+'&page_size='+((page-1)*perpage), {
@@ -101,18 +101,18 @@ angular.module('starter.services', [])
         });
         
     }
-    var loadFirst=function(inputToken, callback, error){
+    var loadFirst = function(inputToken, callback, error){
         if(page==1&&count==0)
             getLatest(inputToken, callback, error);
     }
     
-    var reset=function(pp){
+    var reset = function(pp){
         articles.splice(0, articles.length);
         page = 1;
         count = 0;
         perpage=pp;
     }
-    var setPerPage=function(pp){
+    var setPerPage = function(pp){
         perpage=pp
     }
     
@@ -230,7 +230,7 @@ angular.module('starter.services', [])
             $http.get(ApiEndpoint.url + '/trackers/', {
                 headers: { Authorization: "Token "+token }
             }).then(function(response){
-                console.log(response.data);
+                // console.log(response.data);
                 for(i=0;i<response.data.length;i++){
                     tracker[response.data[i].elder].push(response.data[i]);
                 }
@@ -370,15 +370,15 @@ angular.module('starter.services', [])
                 Authorization: "Token "+token
             }
             var options = new FileUploadOptions();
-            var filename=photo.substr(photo.lastIndexOf('/') + 1);
+            var filename = photo.substr(photo.lastIndexOf('/') + 1);
             var re = /(?:\.([^.]+))?$/;
-            ext=re.exec(filename)[1];
-            if(ext==undefined)
+            ext = re.exec(filename)[1];
+            if(ext == undefined)
                 ext="jpg"
             var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
             var string_length = 3;
             var randomstring = '';
-            for (var i=0; i<string_length; i++) {
+            for (var i = 0; i < string_length; i++) {
                 var rnum = Math.floor(Math.random() * chars.length);
                 randomstring += chars.substring(rnum,rnum+1);
             }

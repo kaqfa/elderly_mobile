@@ -3,9 +3,7 @@ angular.module('starter.controllers', [])
 .controller('AppCtrl', ['$scope', '$ionicModal', '$ionicLoading', '$rootScope', '$ionicPopup', '$sce', 'Users', 'Elders', '$timeout', '$state',
 	function ($scope, $ionicModal, $ionicLoading, $rootScope, $ionicPopup, $sce, Users, Elders, $timeout, $state) {
         // Form data for the login modal
-        $scope.join = {
-            phone: ""
-        };
+        $scope.join = { phone: "" };
         $scope.$on('$ionicView.beforeEnter', function () {
             if (!Users.cekLogin())
                 $state.go('login')
@@ -374,8 +372,14 @@ angular.module('starter.controllers', [])
         };
 	}])
 
-.controller('ParentCtrl', ['$scope', '$ionicLoading', '$state', '$stateParams', '$ionicPopup', 'ionicDatePicker', 'Elders', 'Users',
-	function ($scope, $ionicLoading, $state, $stateParams, $ionicPopup, ionicDatePicker, Elders, Users) {
+.controller('ParentCtrl', ['$scope', 'Elders', '$stateParams', function ($scope, Elders, $stateParams) {
+    elder = Elders.get($stateParams.parentId);
+    $scope.elder = elder.elder;
+}])
+
+.controller('ParentConditionCtrl', 
+    ['$scope', '$state', '$stateParams', 'Elders', '$ionicLoading', '$ionicPopup', 'Users', 
+    function ($scope, $state, $stateParams, Elders, $ionicLoading, $ionicPopup, Users) {
         $scope.$on('$ionicView.beforeEnter', function () {
             elder = Elders.get($stateParams.parentId);
             if (elder != null) {
@@ -393,51 +397,59 @@ angular.module('starter.controllers', [])
                 $scope.elder = {};
                 $scope.tracker = {};
             }
-            $scope.getPict = function(){
-//                window.imagePicker.getPictures(
-//                    function(results) {
-//                        for (var i = 0; i < results.length; i++) {
-//                            $ionicPopup.alert({
-//                                title: 'Image URI',
-//                                template: results[i]
-//                            });
-//                        }
-//                    }, function (error) {
-//                        $ionicPopup.alert({
-//                            title: 'Error',
-//                            template: "error"
-//                        });
-//                    }, {
-//                        maximumImagesCount: 1
-//                    }
-//                );
-                navigator.camera.getPicture(
-                    function(URI) {
-                        $ionicLoading.show({
-                            template: 'Loading...'
-                        })
-                        Elders.uploadPhoto($scope.elder, Users.getToken(), URI, function(data){
-                            $scope.elder.photo=data.photo;
-                            $scope.$apply();
-                            $ionicLoading.hide();
-                        }, function(r){
-                            $ionicLoading.hide();
-                            if(r.http_status==400)
-                                var error="Ada kerusakan/kesalahan pada file gambar"
-                            else
-                                var error="Koneksi error"
-                            $ionicPopup.alert({
-                                title: 'Error',
-                                template: error
-                            });
-                        })
-                    }, function (error) {
-                        
-                    }, {
-                        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                        destinationType: Camera.DestinationType.NATIVE_URI
-                    }
-                );
+            
+            $scope.$parent.refreshData = function () {
+                    $ionicLoading.show({
+                        template: 'Loading...'
+                    })
+                    Elders.refreshTrackElder($scope.elder.id, localStorage.token, function (data) {
+                        $ionicLoading.hide();
+                        $state.go($state.current, {}, {
+                            reload: true
+                        });
+                    }, function (callback) {
+                        $ionicLoading.hide();
+                        var msg = "Koneksi gagal";
+                        $ionicPopup.alert({
+                            title: 'Error',
+                            template: msg
+                        });
+                    });
+                }; 
+        });        
+
+        $scope.showLocation = function () {
+            console.log(ionic.Platform.isAndroid());
+            if (ionic.Platform.isAndroid()) {
+                var url = 'geo:'+locationString+'?q='+locationString;
+                window.open(url, '_system', 'location=yes')
+            }
+        };
+
+        $scope.convertCondition = function (cond) {
+            return Elders.convertCondition(cond);
+        };
+    }])
+
+.controller('ParentGraphicCtrl', 
+    ['$scope', '$state', '$stateParams', 'Elders', '$ionicLoading', '$ionicPopup', 'Users', 
+    function ($scope, $state, $stateParams, Elders, $ionicLoading, $ionicPopup, Users) {
+        $scope.$on('$ionicView.beforeEnter', function () {
+            elder = Elders.get($stateParams.parentId);
+            if (elder != null) {
+                $scope.photo = elder.elder.photo;
+                $scope.elder = elder.elder;
+                $scope.tracker = elder.tracker;
+                $scope.user = {
+                    id: $scope.elder.id,
+                    fullname: $scope.elder.user.first_name + " " + $scope.elder.user.last_name,
+                    birthday: $scope.elder.birthday,
+                    phone: $scope.elder.phone,
+                    gender: $scope.elder.gender
+                };
+            } else {
+                $scope.elder = {};
+                $scope.tracker = [];
             }
             $scope.sehat = 0;
             $scope.sakit = 0;
@@ -450,68 +462,36 @@ angular.module('starter.controllers', [])
                 else
                     $scope.sakit += 1;
             }
-            $scope.labels = ["Sehat", "Sakit", "Kangen"];
-            $scope.data = [$scope.sehat, $scope.sakit, $scope.kangen];
-            $scope.colors = ['#33cd5f', '#803690', '#ffc900', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'];
-            $scope.showLocation = function () {
-                console.log(ionic.Platform.isAndroid());
-                if (ionic.Platform.isAndroid()) {
-                    var url = 'geo:'+locationString+'?q='+locationString;
-                    window.open(url, '_system', 'location=yes')
-                }
-            }
+            $scope.labels = ["Mbuh", "lah", "Sakit",  "Sehat",  "Kangen"];
+            $scope.data = [0, 0, $scope.sakit, $scope.sehat, $scope.kangen];
+            $scope.colors = ['#33cd5f', '#803690', '#ffc900'];
+            $scope.options = {responsive: true, maintainAspectRatio: false};
             $scope.$parent.refreshData = function () {
-                $ionicLoading.show({
-                    template: 'Loading...'
-                })
-                Elders.refreshTrackElder($scope.elder.id, localStorage.token, function (data) {
-                    $ionicLoading.hide();
-                    $state.go($state.current, {}, {
-                        reload: true
-                    });
-                }, function (callback) {
-                    $ionicLoading.hide();
-                    var msg = "Koneksi gagal";
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: msg
-                    });
-                });
-            };
-
-            $scope.update = function (user) {
-                if (user.$valid) {
-                    console.log("user valid");
                     $ionicLoading.show({
                         template: 'Loading...'
                     })
-
-                    Elders.update($scope.user, Users.getToken(), function (data) {
+                    Elders.refreshTrackElder($scope.elder.id, localStorage.token, function (data) {
                         $ionicLoading.hide();
-                        $scope.elder=data;
-                        $scope.$apply();
-                        console.log($scope.elder)
-                    }, function (response) {
+                        $state.go($state.current, {}, {
+                            reload: true
+                        });
+                    }, function (callback) {
                         $ionicLoading.hide();
-                        var msg = "";
-                        if (response.status == 400) {
-                            console.log(response);
-                            if (typeof response.data.phone === "undefined")
-                                msg = "Edit data orang tua gagal";
-                            else
-                                msg = "Nomor Telepon sudah terdaftar";
-                        } else {
-                            msg = "Koneksi gagal";
-                        }
+                        var msg = "Koneksi gagal";
                         $ionicPopup.alert({
                             title: 'Error',
                             template: msg
                         });
                     });
-                }
-            };
-        });
+                }; 
+        });          
+    }])
 
+.controller('ParentProfileCtrl', 
+    ['$scope', '$state', '$stateParams', 'Elders', '$ionicLoading', '$ionicPopup', 'Users', 'ionicDatePicker',
+    function ($scope, $state, $stateParams, Elders, $ionicLoading, $ionicPopup, Users, ionicDatePicker) {
+        elder = Elders.get($stateParams.parentId);
+        $scope.elder = elder.elder;
         $scope.$on('$ionicView.beforeLeave', function () {
             $scope.$parent.refreshData = function () {
                 $ionicLoading.show({
@@ -549,6 +529,68 @@ angular.module('starter.controllers', [])
             }
         });
 
+        $scope.getPict = function(){
+            navigator.camera.getPicture(
+                function(URI) {
+                    $ionicLoading.show({
+                        template: 'Loading...'
+                    })
+                    Elders.uploadPhoto($scope.elder, Users.getToken(), URI, function(data){
+                        $scope.elder.photo=data.photo;
+                        $scope.$apply();
+                        $ionicLoading.hide();
+                    }, function(r){
+                        $ionicLoading.hide();
+                        if(r.http_status==400)
+                            var error="Ada kerusakan/kesalahan pada file gambar"
+                        else
+                            var error="Koneksi error"
+                        $ionicPopup.alert({
+                            title: 'Error',
+                            template: error
+                        });
+                    })
+                }, function (error) {
+                    
+                }, {
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    destinationType: Camera.DestinationType.NATIVE_URI
+                }
+            );
+        }
+
+        $scope.update = function (user) {
+            if (user.$valid) {
+                console.log("user valid");
+                $ionicLoading.show({
+                    template: 'Loading...'
+                })
+
+                Elders.update($scope.user, Users.getToken(), function (data) {
+                    $ionicLoading.hide();
+                    $scope.elder=data;
+                    $scope.$apply();
+                    console.log($scope.elder)
+                }, function (response) {
+                    $ionicLoading.hide();
+                    var msg = "";
+                    if (response.status == 400) {
+                        console.log(response);
+                        if (typeof response.data.phone === "undefined")
+                            msg = "Edit data orang tua gagal";
+                        else
+                            msg = "Nomor Telepon sudah terdaftar";
+                    } else {
+                        msg = "Koneksi gagal";
+                    }
+                    $ionicPopup.alert({
+                        title: 'Error',
+                        template: msg
+                    });
+                });
+            }
+        };
+        
         $scope.datePick = function () {
             var ipObj1 = {
                 callback: function (val) { //Mandatory
@@ -569,11 +611,7 @@ angular.module('starter.controllers', [])
             ionicDatePicker.openDatePicker(ipObj1);
             console.log();
         };
-
-        $scope.convertCondition = function (cond) {
-            return Elders.convertCondition(cond);
-        }
-}])
+    }])
 
 .controller('HospitalCtrl', ['$scope', function ($scope) {
         $scope.$on('$ionicView.beforeEnter', function () {
