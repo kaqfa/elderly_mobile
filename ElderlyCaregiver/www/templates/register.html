@@ -1,13 +1,10 @@
-<ion-view view-title="Registrasi Anak">
-    <!-- <ion-header-bar align-title="center" class="bar-dark">        
-      <h1 class="title"> <img src="img/2c-logo.png" height="60%" style="padding-top:10px;"> Registrasi Anak</h1>
-    </ion-header-bar> -->
+<ion-view view-title="Registrasi Pengguna">    
     <ion-nav-bar class="bar-positive" align-title="center">
         <ion-nav-back-button></ion-nav-back-button>
     </ion-nav-bar>
-    <ion-content class="has-header">
-        <div class="bg-header">
-            <img src="img/foto.png" alt="" style="width: 30%; margin-top:20px;">
+    <ion-content>
+        <div class="has-mask bg-header" style="background-image:url(img/profile_boy.png);">
+          <img ng-src="{{'img/camera.png'}}" ng-click="getPict()" class="img-camera">
         </div>
         
         <form name="regForm" ng-submit="register(regForm)">

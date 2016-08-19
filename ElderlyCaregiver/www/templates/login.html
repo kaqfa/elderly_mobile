@@ -3,20 +3,21 @@
       <h1 class="title"> Aplikasi Berbakti [Anak]</h1>
     </ion-header-bar> -->
     <ion-content id="login-content">   
-      <img src="img/logo.png" alt="" style="width: 60%; margin-top: 20px;">
+      <img src="img/logo.png" alt="" style="width: 60%; margin-top: 60px;">
     <!-- </div>      -->
       <form name="userForm" ng-submit="login(userForm)">
-        <div class="list">
-          <label class="item item-input item-floating-label" 
-                 ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$error.required }">
-            <span class="input-label">Username</span>
-            <input type="text" name="username" placeholder="Username" ng-model="user.username" required />
+        <div class="list list-inset padding">
+          <label class="item item-input" 
+            ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$error.required }">
+              <i class="icon ion-android-person placeholder-icon"></i>
+              <input type="text" name="username" placeholder="Username" ng-model="user.username" required />
           </label>
-          <label class="item item-input item-floating-label"
-                 ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$error.required }">
-            <span class="input-label">Password</span>
-            <input type="password" name="password" placeholder="Password" ng-model="user.password" required />
-          </label>
+          <label class="item item-input" 
+            ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$error.required }">
+              <i class="icon ion-android-lock placeholder-icon"></i>
+              <input type="password" name="password" placeholder="Password" ng-model="user.password" required />
+          </label>          
+          <br>
           <div class="padding">
             <button type="submit" class="button button-block button-positive">Login</button>
             <a class="button button-block button-positive" href="#/register">Daftar Akun Baru</a>

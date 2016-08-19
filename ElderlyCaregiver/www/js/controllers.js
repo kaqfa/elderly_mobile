@@ -1,22 +1,19 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', ['$scope', '$ionicModal', '$ionicLoading', '$rootScope', '$ionicPopup', '$sce', 'Users', 'Elders', '$timeout', '$state',
-	function ($scope, $ionicModal, $ionicLoading, $rootScope, $ionicPopup, $sce, Users, Elders, $timeout, $state) {
-        // Form data for the login modal
+.controller('AppCtrl', 
+    ['$scope', '$ionicModal', '$ionicLoading', '$rootScope', '$ionicPopup', '$sce', 'Users', 'Elders', '$timeout', '$state',
+	function ($scope, $ionicModal, $ionicLoading, $rootScope, $ionicPopup, $sce, Users, Elders, $timeout, $state) {        
         $scope.join = { phone: "" };
         $scope.$on('$ionicView.beforeEnter', function () {
             if (!Users.cekLogin())
                 $state.go('login')
         })
         
-        $ionicModal.fromTemplateUrl('templates/alert.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modalAlert = modal;
-        });
-        $scope.closeAlert = function () {
-            $scope.modalAlert.hide();
-        };
+        $ionicModal.fromTemplateUrl('templates/alert.html', { scope: $scope})
+                   .then(function (modal) { $scope.modalAlert = modal; });
+
+        $scope.closeAlert = function () { $scope.modalAlert.hide(); };
+
         if (ionic.Platform.isWebView()) {
             $rootScope.oneSignalCallback = function(jsonData) {
                 if (jsonData.additionalData && jsonData.additionalData.track) {
@@ -34,33 +31,26 @@ angular.module('starter.controllers', [])
                 }
             };
         }
-        $ionicModal.fromTemplateUrl('templates/join-parent.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modalJoin = modal;
-        });
-        $scope.closeJoin = function () {
-            $scope.modalJoin.hide();
-        };
 
-        // Open the login modal
-        $scope.joinParent = function () {
-            $scope.modalJoin.show();
-        };
+        $ionicModal.fromTemplateUrl('templates/join-parent.html', { scope: $scope })
+                   .then(function (modal) { $scope.modalJoin = modal; });
+        
+        $scope.closeJoin = function () { $scope.modalJoin.hide(); };
+        
+        $scope.joinParent = function () { $scope.modalJoin.show(); };
 
         $scope.regJoin = function (user) {
             if (user.$valid) {
                 console.log("user valid");
-                $ionicLoading.show({
-                    template: 'Loading...'
-                });
+                $ionicLoading.show({ template: 'Loading...' });
                 Elders.join($scope.join, Users.getToken(), function (data) {
                     $ionicLoading.hide();
                     $scope.modalJoin.hide();
                 }, function (response) {
-                    console.log(response);
+                    // console.log(response);
                     $ionicLoading.hide();
                     var msg = "";
+                    
                     if (response.status == 400) {
                         if (typeof response.data.phone != "undefined")
                             msg = "Nomor handphone tidak terdaftar";
@@ -71,20 +61,20 @@ angular.module('starter.controllers', [])
                     } else {
                         msg = "Koneksi gagal";
                     }
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: msg
-                    });
+                    
+                    $ionicPopup.alert({ title: 'Error', template: msg });
                 });
             }
-        }
-        $scope.elders = Elders.all();
+        };
+        
         $scope.dateFormat = function (date) {
             return moment(date, 'DD/MM/YYYY').locale('id').format('DD MMMM YYYY');
         };
+        
         $scope.datetimeFormat = function (date) {
             return moment(date).locale('id').format('DD MMMM YYYY HH:mm');
         };
+        
         $scope.logout = function () {
             Users.logout();
             $state.go('login');
@@ -133,6 +123,9 @@ angular.module('starter.controllers', [])
             return moment(date).locale('id').format('dddd, DD MMMM YYYY, HH.mm');
         };
 
+        $scope.elders = Elders.all();
+        $scope.curuser = Users.getUser();
+        console.log(Users.getUser());
 }])
 
 .controller('LoginCtrl', ['$scope', 'Users', 'Elders', '$state', '$ionicPopup', '$ionicHistory', '$ionicLoading',
@@ -146,9 +139,8 @@ angular.module('starter.controllers', [])
                 $state.go('app.dashboard');
             } else if (localStorage.getItem("token") !== null) {
                 $scope.noToken = false;
-                $ionicLoading.show({
-                    template: 'Loading...'
-                })
+                $ionicLoading.show({ template: 'Loading...' });
+
                 Users.getData(localStorage.token, function (data) {
                     Elders.setAll(localStorage.token, function (data) {
                         $ionicLoading.hide();
@@ -490,13 +482,42 @@ angular.module('starter.controllers', [])
 .controller('ParentProfileCtrl', 
     ['$scope', '$state', '$stateParams', 'Elders', '$ionicLoading', '$ionicPopup', 'Users', 'ionicDatePicker',
     function ($scope, $state, $stateParams, Elders, $ionicLoading, $ionicPopup, Users, ionicDatePicker) {
-        elder = Elders.get($stateParams.parentId);
-        $scope.elder = elder.elder;
+        $scope.$on('$ionicView.beforeEnter', function () {
+            elder = Elders.get($stateParams.parentId);
+            if (elder != null) {
+                $scope.photo = elder.elder.photo;
+                $scope.elder = elder.elder;                
+                $scope.user = {
+                    id: $scope.elder.id,
+                    fullname: $scope.elder.user.first_name + " " + $scope.elder.user.last_name,
+                    birthday: $scope.elder.birthday,
+                    phone: $scope.elder.phone,
+                    gender: $scope.elder.gender
+                };
+            } else {
+                $scope.elder = {};                
+            }
+            
+            $scope.$parent.refreshData = function () {
+                $ionicLoading.show({ template: 'Loading...' });
+                Elders.refreshTrackElder($scope.elder.id, localStorage.token, function (data) {
+                    $ionicLoading.hide();
+                    $state.go($state.current, {}, {
+                        reload: true
+                    });
+                }, function (callback) {
+                    $ionicLoading.hide();
+                    var msg = "Koneksi gagal";
+                    $ionicPopup.alert({
+                        title: 'Error',
+                        template: msg
+                    });
+                });
+            }; 
+        }); 
         $scope.$on('$ionicView.beforeLeave', function () {
             $scope.$parent.refreshData = function () {
-                $ionicLoading.show({
-                    template: 'Loading...'
-                })
+                $ionicLoading.show({ template: 'Loading...' });
                 Users.getData(localStorage.token, function (data) {
                     Elders.setAll(localStorage.token, function (data) {
                         $ionicLoading.hide();
@@ -622,9 +643,7 @@ angular.module('starter.controllers', [])
 .controller('dashCtrl', ['$scope', '$ionicLoading', '$ionicHistory', 'Elders', '$ionicNavBarDelegate',
     function ($scope, $ionicLoading, $ionicHistory, Elders, $ionicNavBarDelegate) {
         $scope.$on('$ionicView.beforeEnter', function () {
-            $ionicHistory.nextViewOptions({
-                disableBack: true
-            });
+            $ionicHistory.nextViewOptions({ disableBack: true });
         });
     }])
 

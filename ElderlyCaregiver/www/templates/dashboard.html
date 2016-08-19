@@ -19,7 +19,7 @@
       <div class="">
         <div ng-repeat="elder in elders track by $index" class="card in">
           <div class="item item-thumbnail-right">
-            <img src="img/wajah.jpg" class="elder_pict">
+            <img ng-src="{{elder.photo==null?'img/profile_girl.png':elder.photo}}" class="elder_pict">
             <h2>{{elder.user.first_name}} {{elder.user.last_name}}</h2>
             <h3>{{dateFormat(elder.birthday)}}</h3>
             <div>

@@ -1,12 +1,12 @@
 <ion-view view-title="Grafik Kesehatan">
   <ion-content class="has-header">
 
-    <div class="has-mask bg-header" style="background-image:url(img/wajah.jpg);">
+    <div class="has-mask bg-header" style="background-image:url(img/profile_girl.png);">
       <div class="img-text">{{elder.user.first_name}} {{elder.user.last_name}}</div>                
     </div>
 
     <div class="list append">
-      <div class="list append" id="graph-condition">        
+      <div class="list append" id="graph-condition">
         <div class="row" style="background-color: #eaeaea;">          
           <div class="col">            
             <div class="row">              
@@ -23,16 +23,20 @@
         <div class="row">
           <div class="col">
             <h3>Periode</h3>
-            <label class="item item-input">              
-              <input type="text" name="datefrom" ng-focus="datePick();" placeholder="dari tanggal">
-            </label>
-            <label class="item item-input">              
-              <input type="text" name="dateuntill" ng-focus="datePick();" placeholder="hingga tanggal">
-            </label>
+            <div class="item item-input">
+                <label><i class="icon ion-android-calendar placeholder-icon"></i></label>
+                <input type="text" name="date_from" ng-focus="datePick();"
+                        placeholder="Tgl Mulai" required>
+            </div>
+            <div class="item item-input">
+                <label><i class="icon ion-android-calendar placeholder-icon"></i></label>
+                <input type="text" name="date_until" ng-focus="datePick();"
+                        placeholder="Tgl Hingga" required>
+            </div>
           </div>
           <div class="col">
             <h3>Hari Ini</h3>
-            <img src="img/icon_sehat.png" alt="">
+            <img src="img/icon_sehat.png" alt="" style="width: 40%;">
             <div style="font-weight:bold;">SEHAT</div>
             <div>12 Juni 2015 08:33</div>
           </div>

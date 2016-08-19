@@ -137,6 +137,7 @@ angular.module('starter.services', [])
                 token = response.data.token;
                 localStorage.token = token;
                 data = response.data.profile;
+                localStorage.userdata = JSON.stringify(data);                
                 if(callback != null)
                   callback(response.data);
             }, function(response){
@@ -158,6 +159,7 @@ angular.module('starter.services', [])
             token = null;
             data = null;
             localStorage.removeItem("token");
+            localStorage.removeItem("userdata");
             if (ionic.Platform.isWebView()) {
                 window.plugins.OneSignal.getTags(function(tags) {
                     var unsub=[];
@@ -176,23 +178,30 @@ angular.module('starter.services', [])
             }
         },
         getData: function(inputToken, callback, error){
-            $http.get(ApiEndpoint.url + '/profile/', {
-                headers: { Authorization: "Token "+inputToken }
-            }).then(function(response){
-                token = inputToken;
-                data = response.data;
-                if(callback != null)
-                    callback(response.data);
-            }, function(response){
-                if(error != null)
-                    error(response);
-            });
+            $http.get(ApiEndpoint.url + '/profile/', 
+                      { headers: { Authorization: "Token " + inputToken } })
+                .then(function(response){
+                    token = inputToken;
+                    data = response.data;
+                    console.log(JSON.stringify(response.data));
+                    if(callback != null)
+                        callback(response.data);
+                }, function(response){
+                    if(error != null)
+                        error(response);
+                });
         },
         getToken: function(){
             if(data != null && token != null)
                 return token;
             else
                 return null;
+        }, 
+        getUser: function(){
+           if(localStorage.userdata != null)
+                return JSON.parse(localStorage.userdata);
+            else
+                return null; 
         }
     };
 }])

@@ -7,7 +7,7 @@
             </ion-nav-buttons>
             <ion-nav-buttons side="right">
               <button class="button" ng-click="refreshData()">
-                <img src="./img/logo_kecil.png" alt="">
+                <img src="./img/logo_kecil.png" alt="" style="width: 50%;">
               </button>
             </ion-nav-buttons>
         </ion-nav-bar>
@@ -20,9 +20,9 @@
         </ion-header-bar>
         <ion-content>
             <div class="item item-avatar side-header">
-                <img src="//ionicframework.com/img/docs/spengler.jpg">
-                <h2>Andika Siapa</h2>
-                <p>elfaatta@gmail.com</p>
+                <img ng-src="{{curuser.photo==null?'img/profile_boy.png':curuser.photo}}">
+                <h2>{{curuser.user.first_name}} {{curuser.user.last_name}}</h2>
+                <p>{{curuser.user.email}}</p>
             </div>
             <ion-list>
                 <ion-item menu-close ui-sref="app.dashboard" ui-sref-active="active">
