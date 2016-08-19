@@ -248,16 +248,14 @@ angular.module('starter.controllers', [])
             return moment(date).locale('id').format('dddd, DD MMMM YYYY');
         };
 
-        $scope.$on('$ionicView.beforeEnter', function () {
-            $ionicLoading.show({ template: 'Loading...' });
+        $scope.$on('$ionicView.beforeEnter', function () {            
             Articles.loadFirst(Elders.getToken(), function (data) {
                 if (data.next != null)
                     $scope.isNextAvailable = true;
                 else
                     $scope.isNextAvailable = false;
                 console.log($scope.ArticleList);
-                $scope.$broadcast('scroll.infiniteScrollComplete');
-                $ionicLoading.hide();
+                $scope.$broadcast('scroll.infiniteScrollComplete');                
             }, function (response) {
                 $ionicPopup.alert({
                     title: 'Error',
