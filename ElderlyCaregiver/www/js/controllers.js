@@ -120,7 +120,7 @@ angular.module('starter.controllers', [])
             return $sce.trustAsHtml(html);
         }
         $scope.dateArticle = function (date) {
-            return moment(date).locale('id').format('dddd, DD MMMM YYYY, HH.mm');
+            return moment(date).locale('id').format('dddd, DD MMMM YYYY');
         };
 
         $scope.elders = Elders.all();
@@ -454,9 +454,9 @@ angular.module('starter.controllers', [])
                 else
                     $scope.sakit += 1;
             }
-            $scope.labels = ["Mbuh", "lah", "Sakit",  "Sehat",  "Kangen"];
-            $scope.data = [0, 0, $scope.sakit, $scope.sehat, $scope.kangen];
-            $scope.colors = ['#33cd5f', '#803690', '#ffc900'];
+            $scope.labels = ["Sakit",  "Sehat",  "Kangen"];
+            $scope.data = [$scope.sehat, $scope.kangen, $scope.sakit];
+            $scope.colors = ['#33cd5f', '#ffc900', '#ef473a'];
             $scope.options = {responsive: true, maintainAspectRatio: false};
             $scope.$parent.refreshData = function () {
                     $ionicLoading.show({
