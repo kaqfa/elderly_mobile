@@ -702,8 +702,8 @@ angular.module('starter.controllers', [])
         });
     }])
 
-.controller('ArticlesCtrl', ['$scope', 'Articles', 'Users', '$ionicPopup', '$state',
-	function ($scope, Articles, Users, $ionicPopup, $state) {
+.controller('ArticlesCtrl', ['$scope', '$ionicLoading', 'Articles', 'Users', '$ionicPopup', '$state',
+	function ($scope, $ionicLoading, Articles, Users, $ionicPopup, $state) {
         $scope.title = "Artikel Terbaru";
         $scope.isNextAvailable = false;
         $scope.articleList = Articles.getAll();
@@ -742,14 +742,16 @@ angular.module('starter.controllers', [])
             });
         }
 
-        $scope.$on('$ionicView.beforeEnter', function () {
-            Articles.loadFirst(Users.getToken(), function (data) {
+        $scope.$on('$ionicView.beforeEnter', function () {            
+            $ionicLoading.show({template: 'Loading ...'});
+            Articles.loadFirst(Users.getToken(), function (data) {                
                 if (data.next != null)
                     $scope.isNextAvailable = true;
                 else
                     $scope.isNextAvailable = false;
                 console.log($scope.ArticleList);
-                $scope.$broadcast('scroll.infiniteScrollComplete');
+                $scope.$broadcast('scroll.infiniteScrollComplete');   
+                $ionicLoading.hide();             
             }, function (response) {
                 $ionicPopup.alert({
                     title: 'Error',
@@ -757,6 +759,7 @@ angular.module('starter.controllers', [])
                 });
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             });
+            // $ionicLoading.hide();
         });
 	}])
 
