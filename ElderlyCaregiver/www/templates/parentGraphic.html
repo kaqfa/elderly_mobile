@@ -25,20 +25,21 @@
             <h3>Periode</h3>
             <div class="item item-input">
                 <label><i class="icon ion-android-calendar placeholder-icon"></i></label>
-                <input type="text" name="date_from" ng-focus="datePick();"
-                        placeholder="Tgl Mulai" required>
+                <input type="text" name="date_from" ng-focus="datePick(fromDate, 0);"
+                        placeholder="Tgl Mulai" ng-model="fromDate" required>
             </div>
             <div class="item item-input">
                 <label><i class="icon ion-android-calendar placeholder-icon"></i></label>
-                <input type="text" name="date_until" ng-focus="datePick();"
+                <input type="text" name="date_until" ng-model="toDate" ng-focus="datePick(toDate, 1);"
                         placeholder="Tgl Hingga" required>
             </div>
           </div>
           <div class="col">
             <h3>Hari Ini</h3>
-            <img ng-click="testing()" src="img/icon_sehat.png" alt="" style="width: 40%;">
-            <div style="font-weight:bold;">SEHAT</div>
-            <div>12 Juni 2015 08:33</div>
+            <img ng-if="latest!=null" ng-src="img/icon_{{latest.condition=='ba'?'sehat':(latest.condition=='bi'?'kangen':'sakit')}}.png" alt="" style="width: 40%;">
+              <img ng-if="latest==null" ng-src="img/quest_mark.png" alt="" style="width: 40%;">
+            <div style="font-weight:bold;">{{(latest!=null?convertCondition(latest.condition):'Belum Ada') | uppercase}}</div>
+            <div>{{latest!=null?dateTimeFormat(latest.modified):""}}</div>
           </div>
         </div>
       </div>

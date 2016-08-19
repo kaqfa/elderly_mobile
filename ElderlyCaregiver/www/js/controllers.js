@@ -424,9 +424,24 @@ angular.module('starter.controllers', [])
     }])
 
 .controller('ParentGraphicCtrl', 
-    ['$scope', '$state', '$stateParams', 'Elders', '$ionicLoading', '$ionicPopup', 'Users', 
-    function ($scope, $state, $stateParams, Elders, $ionicLoading, $ionicPopup, Users) {
+    ['$scope', '$state', '$stateParams', 'Elders', '$ionicLoading', '$ionicPopup', 'ionicDatePicker', 'Users', 
+    function ($scope, $state, $stateParams, Elders, $ionicLoading, $ionicPopup, ionicDatePicker, Users) {
         $scope.$on('$ionicView.beforeEnter', function () {
+            var fromDate;
+            var toDate;
+            if(localStorage.getItem("graphFrom") !== null&&localStorage.getItem("graphTo") !== null){
+                $scope.fromDate=localStorage.getItem("graphFrom");
+                $scope.toDate=localStorage.getItem("graphTo");
+                fromDate=moment($scope.fromDate, "DD/MM/YYYY");
+                toDate=moment($scope.toDate, "DD/MM/YYYY");
+                localStorage.removeItem("graphFrom");
+                localStorage.removeItem("graphTo");
+            }else{
+                fromDate=moment().subtract(30, 'days');
+                toDate=moment();
+                $scope.fromDate=fromDate.format("DD/MM/YYYY");
+                $scope.toDate=toDate.format("DD/MM/YYYY");
+            }
             elder = Elders.get($stateParams.parentId);
             if (elder != null) {
                 $scope.photo = elder.elder.photo;
@@ -446,13 +461,19 @@ angular.module('starter.controllers', [])
             $scope.sehat = 0;
             $scope.sakit = 0;
             $scope.kangen = 0;
+            $scope.latest = null;
             for (i = 0; i < $scope.tracker.length; i++) {
-                if ($scope.tracker[i].condition == 'ba')
-                    $scope.sehat += 1;
-                else if ($scope.tracker[i].condition == 'bi')
-                    $scope.kangen += 1;
-                else
-                    $scope.sakit += 1;
+                current=moment($scope.tracker[i].modified);
+                if(current.diff(fromDate,"days")>=0&&current.diff(toDate,"days")<=0){
+                    if ($scope.tracker[i].condition == 'ba')
+                        $scope.sehat += 1;
+                    else if ($scope.tracker[i].condition == 'bi')
+                        $scope.kangen += 1;
+                    else
+                        $scope.sakit += 1;
+                    if (current.diff(toDate,"days")==0)
+                        $scope.latest=$scope.tracker[i]
+                }
             }
             $scope.labels = ["Sehat",  "Kangen", "Sakit"];
             $scope.data = [$scope.sehat, $scope.kangen, $scope.sakit];
@@ -476,7 +497,41 @@ angular.module('starter.controllers', [])
                         });
                     });
                 }; 
-        });          
+        }); 
+        $scope.convertCondition = function (cond) {
+            return Elders.convertCondition(cond);
+        };
+        $scope.datePick = function (dt, type) {
+            var ipObj1 = {
+                callback: function (val) {
+                    tgl = new Date(val);
+                    text = moment(tgl).format("DD/MM/YYYY");
+                    // console.log('Return value from the datepicker popup is : ' + val);
+                    if(type==0) //from
+                        $scope.fromDate = text;
+                    else //to
+                        $scope.toDate = text;
+                    localStorage.graphFrom = $scope.fromDate;
+                    localStorage.graphTo = $scope.toDate;
+                    $state.go($state.current, {}, {
+                        reload: true
+                    });
+                },
+                
+                
+                inputDate: moment(dt, 'DD/MM/YYYY').toDate(),
+                mondayFirst: true,
+                dateFormat: 'dd/MM/yyyy',
+                disableWeekdays: [0],
+                closeOnSelect: false,
+                templateType: 'popup'
+            };
+            if(type==1)
+                ipObj1.from=moment($scope.fromDate, 'DD/MM/YYYY').toDate();
+            else
+                ipObj1.to= moment($scope.toDate, 'DD/MM/YYYY').toDate();
+            ionicDatePicker.openDatePicker(ipObj1);
+        };
     }])
 
 .controller('ParentProfileCtrl', 
