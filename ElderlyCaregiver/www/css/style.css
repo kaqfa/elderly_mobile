@@ -15,8 +15,18 @@
 }
 
 .button.button-positive{
+  background: -webkit-linear-gradient(top, #B4D18C 0%,#99C261 100%);
+  background: linear-gradient(to bottom, #B4D18C 0%,#99C261 100%);
+}
+
+.button.button-balanced{
   background: -webkit-linear-gradient(top, #57b0bc 0%,#46919c 100%);
   background: linear-gradient(to bottom, #57b0bc 0%,#46919c 100%);
+}
+
+.button.button-energized{
+  background: -webkit-linear-gradient(top, #F8C446 0%,#FFBB4F 100%);
+  background: linear-gradient(to bottom, #F8C446 0%,#FFBB4F 100%);
 }
 
 .menu .item-divider{
