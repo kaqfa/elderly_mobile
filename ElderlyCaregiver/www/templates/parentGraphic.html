@@ -1,7 +1,7 @@
 <ion-view view-title="Grafik Kesehatan">
   <ion-content class="has-header">
 
-    <div class="has-mask bg-header" style="background-image:url(img/profile_girl.png);">
+    <div class="has-mask bg-header" style="background-image:url({{elder.photo==null?'img/profile_girl.png':elder.photo}});">
       <div class="img-text">{{elder.user.first_name}} {{elder.user.last_name}}</div>                
     </div>
 
@@ -36,7 +36,7 @@
           </div>
           <div class="col">
             <h3>Hari Ini</h3>
-            <img src="img/icon_sehat.png" alt="" style="width: 40%;">
+            <img ng-click="testing()" src="img/icon_sehat.png" alt="" style="width: 40%;">
             <div style="font-weight:bold;">SEHAT</div>
             <div>12 Juni 2015 08:33</div>
           </div>

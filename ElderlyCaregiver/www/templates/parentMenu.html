@@ -1,7 +1,7 @@
 <ion-view view-title="Profil Orang Tua">
   <ion-content class="has-header">
 
-    <div class="has-mask bg-header" style="background-image:url(img/profile_girl.png);">        
+    <div class="has-mask bg-header" style="background-image:url({{elder.photo==null?'img/profile_girl.png':elder.photo}});">        
         <div class="img-text">{{elder.user.first_name}} {{elder.user.last_name}}</div>
     </div>
 

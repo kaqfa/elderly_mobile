@@ -454,9 +454,9 @@ angular.module('starter.controllers', [])
                 else
                     $scope.sakit += 1;
             }
-            $scope.labels = ["Mbuh", "lah", "Sakit",  "Sehat",  "Kangen"];
-            $scope.data = [0, 0, $scope.sakit, $scope.sehat, $scope.kangen];
-            $scope.colors = ['#33cd5f', '#803690', '#ffc900'];
+            $scope.labels = ["Sakit",  "Sehat",  "Kangen"];
+            $scope.data = [$scope.sakit, $scope.sehat, $scope.kangen];
+            Chart.defaults.global.colours = ['#33cd5f', '#803690', '#ffc900'];
             $scope.options = {responsive: true, maintainAspectRatio: false};
             $scope.$parent.refreshData = function () {
                     $ionicLoading.show({
