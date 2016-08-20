@@ -204,8 +204,8 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('ArticlesCtrl', ['$scope', 'Articles', 'Elders', '$ionicPopup', '$state',
-	function ($scope, Articles, Elders, $ionicPopup, $state) {
+.controller('ArticlesCtrl', ['$scope', '$ionicLoading', 'Articles', 'Elders', '$ionicPopup', '$state',
+	function ($scope, $ionicLoading, Articles, Elders, $ionicPopup, $state) {
         $scope.title = "Artikel Terbaru";
         $scope.isNextAvailable = false;
         $scope.articleList = Articles.getAll();
@@ -244,14 +244,18 @@ angular.module('starter.controllers', [])
             });
         }
 
-        $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.dateArticle = function (date) {
+            return moment(date).locale('id').format('dddd, DD MMMM YYYY');
+        };
+
+        $scope.$on('$ionicView.beforeEnter', function () {            
             Articles.loadFirst(Elders.getToken(), function (data) {
                 if (data.next != null)
                     $scope.isNextAvailable = true;
                 else
                     $scope.isNextAvailable = false;
                 console.log($scope.ArticleList);
-                $scope.$broadcast('scroll.infiniteScrollComplete');
+                $scope.$broadcast('scroll.infiniteScrollComplete');                
             }, function (response) {
                 $ionicPopup.alert({
                     title: 'Error',
@@ -262,11 +266,18 @@ angular.module('starter.controllers', [])
         });
 	}])
 
-.controller('ArticleCtrl', ['$scope', 'Articles', '$stateParams',
-	function ($scope, Articles, $stateParams) {
+.controller('ArticleCtrl', ['$scope', '$sce', 'Articles', '$stateParams',
+	function ($scope, $sce, Articles, $stateParams) {
         $scope.$on('$ionicView.beforeEnter', function () {
             $scope.article = Articles.get($stateParams.articleId);
         });
+
+        $scope.dateArticle = function (date) {
+            return moment(date).locale('id').format('dddd, DD MMMM YYYY');
+        };
+        $scope.trustAsHtml = function (html) {
+            return $sce.trustAsHtml(html);
+        }
 	}])
 
 .controller('GreetCtrl', ['$scope', 'Elders',

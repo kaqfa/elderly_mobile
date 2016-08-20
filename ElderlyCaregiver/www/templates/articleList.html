@@ -6,7 +6,7 @@
     </ion-refresher>
     <ion-list>
       <ion-item ng-repeat="a in articleList" class="item-text-wrap article-list" 
-        style="background-image:url(img/sky-home.jpg);" ui-sref="app.article({articleId:a.id})">
+        style="background-image:url({{a.photo==null?'img/sky-home.jpg':a.photo}}); background-size: cover; background-repeat:no-repeat; background-position:center center;" ui-sref="app.article({articleId:a.id})">
         <!-- <img ng-if="a.photo!=null" src="{{a.photo}}" /> -->
         <p>
             <span class="label balanced-bg light">{{a.category[0].name}}</span> 

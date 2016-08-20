@@ -4,21 +4,21 @@
         <ion-nav-title>{{article.title}}</ion-nav-title>
     </ion-nav-bar>
     <ion-content>
-        <div class="list card">
-            <div class="item item-text-wrap">
-                <h2>{{article.title}}</h2>
-                <p>{{dateArticle(article.created)}} WIB</p>
-            </div>
-            <div class="item item-image">
-                <img ng-if="article.photo!=null" src="{{article.photo}}">
-            </div>
-            <div class="item item-body">
-                <p>
-                    <span ng-repeat="kat in article.category" style="margin-right:5px" class="label balanced-bg light">{{kat.name}}</span>
-                </p>
-                <p ng-bind-html="trustAsHtml(article.content)"></p>
-            </div>
-
-        </div>
-    </ion-content>
+  <div class="list card">
+    <div class="item item-text-wrap article-title">
+        <h2>{{article.title}}</h2>
+      <p>{{dateArticle(article.created)}} WIB</p>
+      <p class="cat-list">
+        <span ng-repeat="kat in article.category" style="margin-right:5px" class="label calm-bg light">{{kat.name}}</span>
+      </p>
+    </div>
+    <div class="item item-image">
+      <img ng-if="article.photo != null" src="{{article.photo}}">
+      <img ng-if="article.photo == null" src="img/sky-home.jpg">
+    </div>
+    <div class="item item-body">
+        <p ng-bind-html="trustAsHtml(article.content)"></p>
+    </div>
+  </div>
+  </ion-content>
 </ion-view>

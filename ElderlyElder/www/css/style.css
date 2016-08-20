@@ -1,5 +1,7 @@
-/* Empty. Add your own CSS if you like */
-/* Empty. Add your own CSS if you like */
+.bar.bar-positive{
+  background-color: #0763A2;
+  border-color: #0763A2;
+}
 
 .placeholder-icon{
     color: #555;
@@ -203,4 +205,50 @@ input:-moz-input-placeholder {
   height: 10px;
   overflow:hidden; 
   z-index:-1;
+}
+
+.article-list.item-complex .item-content{
+  background-color: transparent;
+  padding: 0px;  
+  height: 150px;
+}
+
+.article-list{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.article-list div{
+  position: absolute;
+  bottom: 0;  
+}
+
+.article-list h2{
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, .5);
+  text-align: center;
+  color: #fff;
+  padding: 10px 10px;  
+  width: 100%;
+}
+
+.article-list p{
+  color: #000;
+  background-color: rgba(255, 255, 255, .4);
+  font-weight: bold;  
+  text-align: right;
+  padding: 5px 10px;
+}
+
+.article-title h2{
+  font-weight: bold;
+  line-height: 150%;  
+}
+
+.cat-list{
+  background-color: #46919c;
+  margin-right: -15px;
+  margin-left: -15px;
+  padding: 5px 10px;
+  margin-bottom: 0px;
 }

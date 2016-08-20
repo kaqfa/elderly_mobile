@@ -1,16 +1,18 @@
 angular.module('starter.services', [])
 
-.factory('Articles', ['$http', 'ApiEndpoint', function($http, ApiEndpoint) {
+.factory('Articles', ['$http', '$ionicLoading', 'ApiEndpoint', function($http, $ionicLoading, ApiEndpoint) {
     var perpage=10
     var articles=[]
     var page=1
     var count=0
     var getnum=function(inputToken, callback, error){
+        $ionicLoading.show({ template: 'Loading...' });
         $http.get(ApiEndpoint.url + '/article/?page='+1+'&page_size='+1, {
             headers: { Authorization: "Token "+inputToken }
         }).then(function(response){
             if(callback != null)
                 callback(response.data);
+            $ionicLoading.hide();
         }, function(response){
             if(error != null)
                 error(response);
