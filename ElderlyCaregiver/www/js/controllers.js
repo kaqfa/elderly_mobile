@@ -284,7 +284,12 @@ angular.module('starter.controllers', [])
                     $ionicLoading.hide();
                     var msg = "";
                     if (response.status == 400) {
-                        msg = "Username sudah terpakai";
+                        if(typeof response.data.username != undefined)
+                            msg = "Username sudah terpakai";
+                        else if(typeof response.data.phone != undefined)
+                            msg = "Nomor handphone sudah terpakai/Format nomor handphone salah";
+                        else
+                            msg = "Koneksi gagal";
                     } else {
                         msg = "Koneksi gagal";
                     }
@@ -325,8 +330,7 @@ angular.module('starter.controllers', [])
                     $ionicLoading.hide();
                     var msg = "";
                     if (response.status == 400) {
-                        console.log(response);
-                        msg = "Nomor handphone sudah terdaftar";
+                        msg = "Nomor handphone sudah terpakai/Format nomor handphone salah";
                     } else {
                         msg = "Koneksi gagal";
                     }
@@ -655,7 +659,7 @@ angular.module('starter.controllers', [])
                         if (typeof response.data.phone === "undefined")
                             msg = "Edit data orang tua gagal";
                         else
-                            msg = "Nomor Telepon sudah terdaftar";
+                            msg = "Nomor handphone sudah terdaftar/Format nomor handphone salah";
                     } else {
                         msg = "Koneksi gagal";
                     }

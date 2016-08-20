@@ -32,7 +32,7 @@
                 </label>
                 <label class="item item-input" ng-class="{ 'has-error' : regForm.phone.$invalid && !regForm.phone.$error.required }">
                     <i class="icon ion-android-phone-portrait placeholder-icon"></i>
-                    <input type="number" name="phone" placeholder="Telpon" ng-model="user.phone" required />
+                    <input type="text" pattern="[0-9]*" name="phone" placeholder="Telpon" ng-model="user.phone" required />
                 </label>
                 <label class="item item-input item-select">
                     <i class="icon ion-transgender placeholder-icon"></i>
