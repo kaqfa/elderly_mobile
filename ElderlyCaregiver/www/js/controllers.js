@@ -284,9 +284,9 @@ angular.module('starter.controllers', [])
                     $ionicLoading.hide();
                     var msg = "";
                     if (response.status == 400) {
-                        if(typeof response.data.username != undefined)
+                        if(typeof response.data.username != 'undefined')
                             msg = "Username sudah terpakai";
-                        else if(typeof response.data.phone != undefined)
+                        else if(typeof response.data.phone != 'undefined')
                             msg = "Nomor handphone sudah terpakai/Format nomor handphone salah";
                         else
                             msg = "Koneksi gagal";
