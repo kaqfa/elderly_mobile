@@ -230,6 +230,7 @@ input:-moz-input-placeholder {
   color: #fff;
   padding: 10px 10px;  
   width: 100%;
+  font-size: 14px;
 }
 
 .article-list p{
@@ -238,6 +239,7 @@ input:-moz-input-placeholder {
   font-weight: bold;  
   text-align: right;
   padding: 5px 10px;
+  font-size: 12px;
 }
 
 .article-title h2{
