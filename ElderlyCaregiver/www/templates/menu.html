@@ -25,6 +25,11 @@
                 <p>{{curuser.user.email}}</p>
             </div>
             <ion-list>
+                <ion-item menu-close ng-click="demoModal()">
+                    <i class="icon ion-home"></i> Demo Modal
+                </ion-item>
+            </ion-list>
+            <ion-list>
                 <ion-item menu-close ui-sref="app.dashboard" ui-sref-active="active">
                     <i class="icon ion-home"></i> Dashboard
                 </ion-item>

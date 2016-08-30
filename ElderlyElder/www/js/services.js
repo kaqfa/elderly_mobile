@@ -258,18 +258,18 @@ angular.module('starter.services', [])
       return data;
     },
     addTrack: function(input){
-      input.localId=localId;
+      input.localId = localId;
       localId++;
       trackers.unshift(input);
-      var addLoop=function(track){
+      var addLoop = function(track){
         $http.post(ApiEndpoint.url + '/trackers/', track, {
           headers: {
             Authorization: "Token "+token
           }
         }).then(function(response){
           for(i=0;i<trackers.length;i++)
-            if(trackers[i].localId==input.localId){
-              trackers[i]=response.data;
+            if(trackers[i].localId == input.localId){
+              trackers[i] = response.data;
             }
         }, function(response){
           setTimeout(function(){

@@ -19,9 +19,9 @@ angular.module('starter.controllers', [])
                 if (jsonData.additionalData && jsonData.additionalData.track) {
                     Elders.addTrackElder(jsonData.additionalData.track)
                     $scope.$apply();
-                    if(jsonData.additionalData.track.condition=='tb'){
-                        var elder=Elders.get(jsonData.additionalData.track.elder);
-                        $scope.alert=elder;
+                    if(jsonData.additionalData.track.condition == 'tb'){
+                        var elder = Elders.get(jsonData.additionalData.track.elder);
+                        $scope.alert = elder;
                         $scope.modalAlert.show();
                     }else{
                         alert(jsonData.message);
@@ -38,6 +38,16 @@ angular.module('starter.controllers', [])
         $scope.closeJoin = function () { $scope.modalJoin.hide(); };
         
         $scope.joinParent = function () { $scope.modalJoin.show(); };
+
+        $scope.demoModal = function () { $scope.modalAlert.show(); };
+
+        $scope.call = function(number){
+            window.plugins.CallNumber.callNumber(function (result) {
+                console.log("Success:" + result);
+            }, function (result) {
+                console.log("Error:" + result);
+            }, number, false);
+        }
 
         $scope.regJoin = function (user) {
             if (user.$valid) {

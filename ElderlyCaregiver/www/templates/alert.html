@@ -1,19 +1,26 @@
 <ion-modal-view>
-  <ion-header-bar class="bar-calm">
+  <ion-header-bar class="bar-assertive">
     <h1 class="title">Kondisi Darurat</h1>
     <div class="buttons">
       <button class="button button-clear" ng-click="closeAlert()"><i class="icon ion-close-round "></i></button>
     </div>
   </ion-header-bar>
   <ion-content>
-    <div class="hero has-mask bg-header" style="background-image:url(img/background.jpg);">
-        <img ng-src="{{elder.photo==null?'img/wajah.jpg':elder.photo}}" ng-click="getPict()" alt="" style="width: 30%; margin-top: 20px;">
-        <h3 class="">
-          {{elder.user.first_name}} {{elder.user.last_name}}
-        </h3>
-    </div>
-      <div class="padding">                
-        <button type="submit" class="button button-block button-positive">Tombol</button>
-      </div>
+            
+      <img ng-src="{{elder.photo==null?'img/emergency.png':elder.photo}}" style="width: 100%;" alt="" >
+      <h3 style="text-align: center;">
+        {{elder.user.first_name}} {{elder.user.last_name}} telah menekan tombol panik.
+      </h3>       
+    
+      <div class="padding">
+        <button type="submit" ng-click="" 
+        class="button button-block button-large icon-left ion-android-call button-balanced">
+          RS Rujukan
+        </button>
+        <button type="submit" ng-click=""
+        class="button button-block button-large icon-left ion-android-call button-balanced">          
+           {{elder.user.first_name}} {{elder.user.last_name}}
+        </button>
+      </div>      
   </ion-content>
 </ion-modal-view>
