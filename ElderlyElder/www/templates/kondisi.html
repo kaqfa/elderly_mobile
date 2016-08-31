@@ -1,32 +1,36 @@
-
 <ion-view view-title="Cek Kondisi">
-    <ion-header-bar align-title="center" class="bar-positive">
-      <h1 class="title"> Cek Kondisi </h1>
-    </ion-header-bar>
+    <ion-nav-bar align-title="center" class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+        <ion-nav-title>Cek Kondisi</ion-nav-title>
+    </ion-nav-bar>
     <ion-content>
-      <div class="list card">
-        <div class="item item-divider">
-          Bagaimana Kondisi anda saat ini?
-        </div>
-        <div class="item item-body">
-          <div>
-            <div class="">
-              <a ng-click="addTrack('ba')" class="">
-                <img src="img/kon_sehat.png" width="100%" alt="">
-              </a>
-              <a ng-click="addTrack('bi')" class="">
-                <img src="img/kon_kangen.png" width="100%" alt="">
-              </a>
-              <a ui-sref="anatomi" class="">
-                <img src="img/kon_sakit.png" width="100%" alt="">
-              </a>
-            </div>
+      
+      <h3 class="title">Bagaimana Kondisi anda saat ini?</h3>
+  
+      <div>
+        <div class="row">
+          <div class="col menu-button">
+            <a ng-click="addTrack('ba')" class="">
+              <img src="img/btn_sehat.png" width="100%" alt="">
+              <br />SEHAT </a>
           </div>
+          <div class="col menu-button">
+            <a ng-click="addTrack('bi')" class="">
+              <img src="img/btn_kangen.png" width="100%" alt="">
+              <br />KANGEN </a>
+          </div>                           
         </div>
-      </div>
+        <div class="row">
+          <div class="col menu-button">
+            <a ui-sref="anatomi" class="">
+              <img src="img/btn_sakit.png" style="width: 40%" alt="">
+              <br />SAKIT </a>
+          </div> 
+        </div>
+      </div>              
       <div class="padding">
-        <a ui-sref="dashboard" class="button button-block button-positive">
-          KEMBALI
+        <a ui-sref="dashboard" class="">
+          <img src="img/btn_kembali.png" style="width: 100%" alt="">
         </a>
       </div>
     </ion-content>
