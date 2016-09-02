@@ -198,6 +198,7 @@ input:-moz-input-placeholder {
 }
 .image img{
   max-height: 100%;
+  float: left;
 }
 .image a{
   display: block;      
@@ -270,4 +271,8 @@ input:-moz-input-placeholder {
   margin-left: -15px;
   padding: 5px 10px;
   margin-bottom: 0px;
+}
+
+.clearfix {
+   clear:both;
 }
