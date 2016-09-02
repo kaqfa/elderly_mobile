@@ -244,7 +244,8 @@ angular.module('starter.services', [])
             }).then(function(response){
                 // console.log(response.data);
                 for(i=0;i<response.data.length;i++){
-                    tracker[response.data[i].elder].push(response.data[i]);
+                    if(response.data[i].condition != 'tb')
+                        tracker[response.data[i].elder].push(response.data[i]);
                 }
             });
             if(callback != null)
@@ -346,7 +347,8 @@ angular.module('starter.services', [])
                     tracker[data[i].id]=[]
                 }
                 for(i=0;i<response.data.length;i++){
-                      tracker[response.data[i].elder].push(response.data[i]);
+                      if(response.data[i].condition != 'tb')
+                        tracker[response.data[i].elder].push(response.data[i]);
                 }
                 if(callback!=null)
                     callback(response.data);
@@ -361,7 +363,9 @@ angular.module('starter.services', [])
             }).then(function(response){
                 tracker[elderId]=[]
                 for(i=0;i<response.data.length;i++){
-                    tracker[response.data[i].elder].push(response.data[i]);
+                    if(response.data[i].condition != 'tb'){
+                        tracker[response.data[i].elder].push(response.data[i]);
+                    }
                 }
                 if(callback!=null)
                     callback(response.data);

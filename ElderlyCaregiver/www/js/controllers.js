@@ -391,7 +391,8 @@ angular.module('starter.controllers', [])
             if (elder != null) {
                 $scope.photo = elder.elder.photo;
                 $scope.elder = elder.elder;
-                $scope.tracker = elder.tracker;
+                tracker = elder.tracker;
+                $scope.tracker = tracker.slice(-50);
                 $scope.user = {
                     id: $scope.elder.id,
                     fullname: $scope.elder.user.first_name + " " + $scope.elder.user.last_name,

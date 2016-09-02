@@ -1,5 +1,3 @@
-// Ionic Starter App
-
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 
 	'ionic-datepicker', 'chart.js'])
 
@@ -13,7 +11,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
             if(now.hour()>=8)
                 now.add(1, 'days')
             now.hour(8)
-//            now.minute(now.minute()+1);
+            now.minute(0);
             var first=now.toDate()
             cordova.plugins.notification.local.schedule({
                 id: 1,
