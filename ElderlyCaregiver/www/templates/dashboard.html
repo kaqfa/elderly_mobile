@@ -23,7 +23,7 @@
             <h2>{{elder.user.first_name}} {{elder.user.last_name}}</h2>
             <h3>{{dateFormat(elder.birthday)}}</h3>
             <div>
-              <a href="tel:{{elder.phone}}" class="button button-small button-block button-balanced icon-left ion-android-call">Panggil</a>
+              <a ng-click="call(elder.phone)" class="button button-small button-block button-balanced icon-left ion-android-call">Panggil</a>
               <a class="button button-small button-positive button-block icon-left ion-android-list" ui-sref="app.parent({parentId:elder.id})" ui-sref-active="active">Detail</a>
             </div>
           </div>          

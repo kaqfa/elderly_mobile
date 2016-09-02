@@ -715,6 +715,13 @@ angular.module('starter.controllers', [])
         $scope.$on('$ionicView.beforeEnter', function () {
             $ionicHistory.nextViewOptions({ disableBack: true });
         });
+        $scope.call = function(number){
+            window.plugins.CallNumber.callNumber(function (result) {
+                console.log("Success:" + result);
+            }, function (result) {
+                console.log("Error:" + result);
+            }, number, false);
+        }
     }])
 
 .controller('ArticlesCtrl', ['$scope', '$ionicLoading', 'Articles', 'Users', '$ionicPopup', '$state',
