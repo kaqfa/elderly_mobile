@@ -197,7 +197,6 @@ input:-moz-input-placeholder {
   display: inline-block;
 }
 .image img{
-  max-width: 100%;
   max-height: 100%;
 }
 .image a{
@@ -207,6 +206,7 @@ input:-moz-input-placeholder {
 
 .fixed-height{
   text-align: center;
+  width: 100vw;
 }
 
 .wrapper{
