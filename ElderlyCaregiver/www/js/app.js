@@ -158,6 +158,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
         }
       }
     })
+        
+    .state('app.profile', {
+			url: '/profile',
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/userProfile.html',
+					controller: 'ProfileCtrl'
+				}
+			}
+		})
+    
+    .state('app.password', {
+			url: '/password',
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/userPassword.html',
+					controller: 'PasswordCtrl'
+				}
+			}
+		})
 
 		$urlRouterProvider.otherwise('/login');
 

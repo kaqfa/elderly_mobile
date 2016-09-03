@@ -140,7 +140,7 @@ angular.module('starter.services', [])
                 token = response.data.token;
                 localStorage.token = token;
                 data = response.data.profile;
-                localStorage.userdata = JSON.stringify(data);                
+                //localStorage.userdata = JSON.stringify(data);                
                 if(callback != null)
                   callback(response.data);
             }, function(response){
@@ -182,17 +182,16 @@ angular.module('starter.services', [])
         },
         getData: function(inputToken, callback, error){
             $http.get(ApiEndpoint.url + '/profile/', 
-                      { headers: { Authorization: "Token " + inputToken } })
-                .then(function(response){
-                    token = inputToken;
-                    data = response.data;
-                    console.log(JSON.stringify(response.data));
-                    if(callback != null)
-                        callback(response.data);
-                }, function(response){
-                    if(error != null)
-                        error(response);
-                });
+                  { headers: { Authorization: "Token " + inputToken } })
+            .then(function(response){
+                token = inputToken;
+                data = response.data;
+                if(callback != null)
+                    callback(response.data);
+            }, function(response){
+                if(error != null)
+                    error(response);
+            });
         },
         getToken: function(){
             if(data != null && token != null)
@@ -201,10 +200,53 @@ angular.module('starter.services', [])
                 return null;
         }, 
         getUser: function(){
-           if(localStorage.userdata != null)
-                return JSON.parse(localStorage.userdata);
+            if(data != null)
+                return data;
             else
-                return null; 
+                return null;
+        },
+        update: function(postdata, token, callback, error){
+            $http.patch(ApiEndpoint.url + '/caregivers/' + data.id +'/', postdata, {
+                headers: { Authorization: "Token "+token }
+            }).then(function(response){
+                console.log(response);
+                data = response.data;
+                if(callback!=null)
+                    callback(response.data);
+            }, function(response){
+                if(error!=null)
+                    error(response);
+            });
+        },
+        uploadPhoto: function(token, photo, callback, error){
+            var ft=new FileTransfer();
+            var headers={
+                Authorization: "Token "+token
+            }
+            var options = new FileUploadOptions();
+            var filename = photo.substr(photo.lastIndexOf('/') + 1);
+            var re = /(?:\.([^.]+))?$/;
+            ext = re.exec(filename)[1];
+            if(ext == undefined)
+                ext="jpg"
+            var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+            var string_length = 3;
+            var randomstring = '';
+            for (var i = 0; i < string_length; i++) {
+                var rnum = Math.floor(Math.random() * chars.length);
+                randomstring += chars.substring(rnum,rnum+1);
+            }
+            options.fileKey = "upload";
+            options.fileName = "elder"+randomstring+"."+ext;
+            options.headers = headers;
+            ft.upload(photo, encodeURI(ApiEndpoint.url + '/profile/photo/'), function(r){
+                data=JSON.parse(r.response);
+                if(callback!=null)
+                    callback(data);
+            }, function(r){
+                if(error!=null)
+                    error(r);
+            }, options);
         }
     };
 }])
@@ -399,7 +441,7 @@ angular.module('starter.services', [])
                 randomstring += chars.substring(rnum,rnum+1);
             }
             options.fileKey = "upload";
-            options.fileName = "elder"+randomstring+"."+ext;
+            options.fileName = "caregiver"+randomstring+"."+ext;
             options.params = params;
             options.headers = headers;
             ft.upload(photo, encodeURI(ApiEndpoint.url + '/elders/photo/'), function(r){

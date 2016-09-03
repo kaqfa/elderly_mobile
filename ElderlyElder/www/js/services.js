@@ -352,6 +352,49 @@ angular.module('starter.services', [])
         default:
           return "baik";
       }
+    },
+    update: function(postdata, token, callback, error){
+        $http.patch(ApiEndpoint.url + '/elders/' + data.id +'/', postdata, {
+            headers: { Authorization: "Token "+token }
+        }).then(function(response){
+            console.log(response);
+            data = response.data;
+            if(callback!=null)
+                callback(response.data);
+        }, function(response){
+            if(error!=null)
+                error(response);
+        });
+    },
+    uploadPhoto: function(token, photo, callback, error){
+        var ft=new FileTransfer();
+        var headers={
+            Authorization: "Token "+token
+        }
+        var options = new FileUploadOptions();
+        var filename = photo.substr(photo.lastIndexOf('/') + 1);
+        var re = /(?:\.([^.]+))?$/;
+        ext = re.exec(filename)[1];
+        if(ext == undefined)
+            ext="jpg"
+        var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+        var string_length = 3;
+        var randomstring = '';
+        for (var i = 0; i < string_length; i++) {
+            var rnum = Math.floor(Math.random() * chars.length);
+            randomstring += chars.substring(rnum,rnum+1);
+        }
+        options.fileKey = "upload";
+        options.fileName = "elder"+randomstring+"."+ext;
+        options.headers = headers;
+        ft.upload(photo, encodeURI(ApiEndpoint.url + '/profile/photo/'), function(r){
+            data=JSON.parse(r.response);
+            if(callback!=null)
+                callback(data);
+        }, function(r){
+            if(error!=null)
+                error(r);
+        }, options);
     }
   };
 })

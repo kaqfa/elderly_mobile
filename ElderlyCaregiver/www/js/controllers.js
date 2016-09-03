@@ -5,6 +5,7 @@ angular.module('starter.controllers', [])
 	function ($scope, $ionicModal, $ionicLoading, $rootScope, $ionicPopup, $sce, Users, Elders, $timeout, $state) {        
         $scope.join = { phone: "" };
         $scope.$on('$ionicView.beforeEnter', function () {
+            $scope.curuser = Users.getUser();
             if (!Users.cekLogin())
                 $state.go('login')
         })
@@ -18,7 +19,9 @@ angular.module('starter.controllers', [])
             $rootScope.oneSignalCallback = function(jsonData) {
                 if (jsonData.additionalData && jsonData.additionalData.track) {
                     Elders.addTrackElder(jsonData.additionalData.track)
-                    $scope.$apply();
+                    if(!$scope.$$phase) {
+                        $scope.$apply();
+                    }
                     if(jsonData.additionalData.track.condition == 'tb'){
                         var elder = Elders.get(jsonData.additionalData.track.elder);
                         $scope.alert = elder;
@@ -134,8 +137,6 @@ angular.module('starter.controllers', [])
         };
 
         $scope.elders = Elders.all();
-        $scope.curuser = Users.getUser();
-        console.log(Users.getUser());
 }])
 
 .controller('LoginCtrl', ['$scope', 'Users', 'Elders', '$state', '$ionicPopup', '$ionicHistory', '$ionicLoading',
@@ -379,8 +380,10 @@ angular.module('starter.controllers', [])
 	}])
 
 .controller('ParentCtrl', ['$scope', 'Elders', '$stateParams', function ($scope, Elders, $stateParams) {
-    elder = Elders.get($stateParams.parentId);
-    $scope.elder = elder.elder;
+    $scope.$on('$ionicView.beforeEnter', function () {
+        elder = Elders.get($stateParams.parentId);
+        $scope.elder = elder.elder;
+    })
 }])
 
 .controller('ParentConditionCtrl', 
@@ -628,7 +631,9 @@ angular.module('starter.controllers', [])
                     })
                     Elders.uploadPhoto($scope.elder, Users.getToken(), URI, function(data){
                         $scope.elder.photo=data.photo;
-                        $scope.$apply();
+                        if(!$scope.$$phase) {
+                            $scope.$apply();
+                        }
                         $ionicLoading.hide();
                     }, function(r){
                         $ionicLoading.hide();
@@ -660,7 +665,9 @@ angular.module('starter.controllers', [])
                 Elders.update($scope.user, Users.getToken(), function (data) {
                     $ionicLoading.hide();
                     $scope.elder=data;
-                    $scope.$apply();
+                    if(!$scope.$$phase) {
+                        $scope.$apply();
+                    }
                     console.log($scope.elder)
                 }, function (response) {
                     $ionicLoading.hide();
@@ -781,7 +788,136 @@ angular.module('starter.controllers', [])
             });            
         });
 	}])
+.controller('ProfileCtrl', ['$scope', 'Users', '$ionicPopup', '$ionicLoading',
+	function ($scope, Users, $ionicPopup, $ionicLoading) {
+        $scope.$on('$ionicView.beforeEnter', function () {
+            user = Users.getUser();
+            $scope.cg = user;
+            $scope.user = {
+                fullname: user.user.first_name+" "+user.user.last_name,
+                email: user.user.email,
+                phone: user.phone,
+                gender: user.gender
+            };
+        });
+        $scope.update = function (user) {
+            if (user.$valid) {
+                console.log("user valid");
+                $ionicLoading.show({
+                    template: 'Loading...'
+                })
 
+                Users.update($scope.user, Users.getToken(), function (data) {
+                    $ionicLoading.hide();
+                    $scope.curuser.user.first_name=data.user.first_name;
+                    $scope.curuser.user.last_name=data.user.last_name;
+                    $scope.curuser.user.email=data.user.email;
+                    if(!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                }, function (response) {
+                    $ionicLoading.hide();
+                    var msg = "";
+                    if (response.status == 400) {
+                        console.log(response);
+                        if (typeof response.data.phone === "undefined")
+                            msg = "Edit profil gagal";
+                        else
+                            msg = "Nomor handphone sudah terdaftar/Format nomor handphone salah";
+                    } else {
+                        msg = "Koneksi gagal";
+                    }
+                    $ionicPopup.alert({
+                        title: 'Error',
+                        template: msg
+                    });
+                });
+            }
+        };
+        $scope.getPict = function(){
+            navigator.camera.getPicture(
+                function(URI) {
+                    $ionicLoading.show({
+                        template: 'Loading...'
+                    })
+                    Users.uploadPhoto(Users.getToken(), URI, function(data){
+                        $scope.cg.photo=data.photo;
+                        if(!$scope.$$phase) {
+                            $scope.$apply();
+                        }
+                        $ionicLoading.hide();
+                    }, function(r){
+                        $ionicLoading.hide();
+                        if(r.http_status==400)
+                            var error="Ada kerusakan/kesalahan pada file gambar"
+                        else
+                            var error="Koneksi error"
+                        $ionicPopup.alert({
+                            title: 'Error',
+                            template: error
+                        });
+                    })
+                }, function (error) {
+                    
+                }, {
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    destinationType: Camera.DestinationType.NATIVE_URI
+                }
+            );
+        }
+	}])
+
+.controller('PasswordCtrl', ['$scope', 'Users', '$ionicPopup', '$ionicLoading',
+	function ($scope, Users, $ionicPopup, $ionicLoading) {
+        $scope.$on('$ionicView.beforeEnter', function () {
+            $scope.user = {
+                password: "",
+                repass: ""
+            };
+        });
+        $scope.passMatch = true;
+        $scope.isMatch = function () {
+            if ($scope.user.password == $scope.user.repass) {
+                $scope.passMatch = true;
+            } else {
+                $scope.passMatch = false;
+            }
+        };
+        $scope.update = function (user) {
+            if (user.$valid) {
+                console.log("user valid");
+                $ionicLoading.show({
+                    template: 'Loading...'
+                })
+
+                Users.update($scope.user, Users.getToken(), function (data) {
+                    $ionicLoading.hide();
+                    $scope.curuser.user.first_name=data.user.first_name;
+                    $scope.curuser.user.last_name=data.user.last_name;
+                    console.log(data);
+                    if(!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                }, function (response) {
+                    $ionicLoading.hide();
+                    var msg = "";
+                    if (response.status == 400) {
+                        console.log(response);
+                        if (typeof response.data.phone === "undefined")
+                            msg = "Edit profil gagal";
+                        else
+                            msg = "Nomor handphone sudah terdaftar/Format nomor handphone salah";
+                    } else {
+                        msg = "Koneksi gagal";
+                    }
+                    $ionicPopup.alert({
+                        title: 'Error',
+                        template: msg
+                    });
+                });
+            }
+        };
+	}])
 .controller('ArticleCtrl', ['$scope', 'Articles', '$stateParams',
 	function ($scope, Articles, $stateParams) {
         $scope.$on('$ionicView.beforeEnter', function () {

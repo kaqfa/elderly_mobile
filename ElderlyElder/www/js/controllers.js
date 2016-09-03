@@ -280,6 +280,100 @@ angular.module('starter.controllers', [])
         }
 	}])
 
+.controller('ProfileCtrl', ['$scope', 'Elders', '$ionicPopup', '$ionicLoading', 'ionicDatePicker',
+	function ($scope, Elders, $ionicPopup, $ionicLoading, ionicDatePicker) {
+        $scope.$on('$ionicView.beforeEnter', function () {
+            user = Elders.getProfile();
+            console.log(user);
+            $scope.elder = user;
+            $scope.user = {
+                fullname: user.user.first_name+" "+user.user.last_name,
+                birthday: user.birthday,
+                phone: user.phone,
+                gender: user.gender
+            };
+        });
+        $scope.update = function (user) {
+            if (user.$valid) {
+                console.log("user valid");
+                $ionicLoading.show({
+                    template: 'Loading...'
+                })
+
+                Elders.update($scope.user, Elders.getToken(), function (data) {
+                    $ionicLoading.hide();
+                }, function (response) {
+                    $ionicLoading.hide();
+                    var msg = "";
+                    if (response.status == 400) {
+                        console.log(response);
+                        if (typeof response.data.phone === "undefined")
+                            msg = "Edit profil gagal";
+                        else
+                            msg = "Nomor handphone sudah terdaftar/Format nomor handphone salah";
+                    } else {
+                        msg = "Koneksi gagal";
+                    }
+                    $ionicPopup.alert({
+                        title: 'Error',
+                        template: msg
+                    });
+                });
+            }
+        };
+        $scope.getPict = function(){
+            navigator.camera.getPicture(
+                function(URI) {
+                    $ionicLoading.show({
+                        template: 'Loading...'
+                    })
+                    Elders.uploadPhoto(Elders.getToken(), URI, function(data){
+                        $scope.elder.photo=data.photo;
+                        if(!$scope.$$phase) {
+                            $scope.$apply();
+                        }
+                        $ionicLoading.hide();
+                    }, function(r){
+                        $ionicLoading.hide();
+                        if(r.http_status==400)
+                            var error="Ada kerusakan/kesalahan pada file gambar"
+                        else
+                            var error="Koneksi error"
+                        $ionicPopup.alert({
+                            title: 'Error',
+                            template: error
+                        });
+                    })
+                }, function (error) {
+                    
+                }, {
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    destinationType: Camera.DestinationType.NATIVE_URI
+                }
+            );
+        }
+        $scope.datePick = function () {
+            var ipObj1 = {
+                callback: function (val) { //Mandatory
+                    tgl = new Date(val);
+                    text = moment(tgl).format("DD/MM/YYYY");
+                    // console.log('Return value from the datepicker popup is : ' + val);
+                    $scope.user.birthday = text;
+                },
+                from: new Date(1930, 1, 1), //Optional
+                to: new Date(1990, 1, 1), //Optional
+                mondayFirst: true,
+                inputDate: moment($scope.user.birthday, 'DD/MM/YYYY').toDate(),
+                dateFormat: 'dd/MM/yyyy',
+                disableWeekdays: [0],
+                closeOnSelect: false,
+                templateType: 'popup'
+            };
+            ionicDatePicker.openDatePicker(ipObj1);
+            console.log();
+        };
+	}])
+
 .controller('GreetCtrl', ['$scope', 'Elders',
 	function ($scope, Elders) {
         $scope.caregivers = Elders.getCaregivers();

@@ -1,0 +1,36 @@
+<ion-view view-title="Profil">
+    <ion-content class="has-header">
+        <div class="has-mask bg-header" style="background-image:url({{cg.photo==null?'img/profile_boy.png':cg.photo}});">
+            <img ng-src="img/camera.png" ng-click="getPict()" class="img-camera">
+        </div>
+        <div class="list padding">
+            <form name="updForm" ng-submit="update(updForm)">
+                <div class="list list-inset">
+                    <label class="item item-input" ng-class="{ 'has-error' : regForm.fullname.$invalid && !regForm.fullname.$error.required }">
+                        <i class="icon ion-android-person placeholder-icon"></i>
+                        <input type="text" name="fullname" placeholder="Nama Lengkap" ng-model="user.fullname" required />
+                    </label>
+                    <label class="item item-input" ng-class="{ 'has-error' : regForm.email.$invalid && !regForm.email.$error.required }">
+                        <i class="icon ion-android-mail placeholder-icon"></i>
+                        <input type="email" name="email" placeholder="Email" ng-model="user.email" required />
+                    </label>
+                    <label class="item item-input item-select">
+                        <i class="icon ion-transgender placeholder-icon"></i>
+                        <select ng-model="user.gender">
+                            <option value="l" selected>Laki-Laki</option>
+                            <option value="p">Perempuan</option>
+                        </select>
+                    </label>
+                    <label class="item item-input">
+                        <i class="icon ion-android-phone-portrait placeholder-icon"></i>
+                        <input type="text" pattern="[0-9]*" name="phone" ng-model="user.phone" placeholder="No. Handphone" required>
+                    </label>
+                    <div class="">
+                        <button type="submit" class="button button-block button-positive">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </ion-content>
+</ion-view>

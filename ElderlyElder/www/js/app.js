@@ -1,6 +1,6 @@
 // Ionic Starter App
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-datepicker'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -65,6 +65,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         url: '/greet',
         templateUrl: 'templates/caregivers.html',
         controller: 'GreetCtrl'
+    })
+    
+    .state('profile', {
+        url: '/profile',
+        templateUrl: 'templates/userProfile.html',
+        controller: 'ProfileCtrl'
     })
 
     // if none of the above states are matched, use this as the fallback
