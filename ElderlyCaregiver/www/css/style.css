@@ -252,10 +252,16 @@ input:-moz-input-placeholder {
   margin-right: 50px !important;  
 }
 
-.item-thumbnail-right img{
+.item-thumbnail-right .elder_pict{
   border-radius: 0% !important;  
-  max-width: 115px !important;
-  max-height: 145px !important;
+  width: 115px !important;
+  height: 145px !important;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-size:cover; 
+  background-repeat:no-repeat; 
+  background-position:center center; 
 }
 
 .item-thumbnail-right h3{
