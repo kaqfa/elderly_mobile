@@ -137,8 +137,7 @@ angular.module('starter.controllers', [])
                 disableAnimate: true
             });
             $state.go('login');
-        } else
-            $ionicHistory.clearHistory();
+        }
     })
     $scope.addTrack = function (cond) {
         elder = Elders.getProfile();
@@ -161,8 +160,7 @@ angular.module('starter.controllers', [])
                 disableAnimate: true
             });
             $state.go('login')
-        } else
-            $ionicHistory.clearHistory();
+        }
     })
     $scope.imgs = Anatomy.getData();
     $scope.condition = "";

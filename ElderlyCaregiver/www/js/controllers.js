@@ -1,15 +1,27 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', 
-    ['$scope', '$ionicModal', '$ionicLoading', '$rootScope', '$ionicPopup', '$sce', 'Users', 'Elders', '$timeout', '$state',
-	function ($scope, $ionicModal, $ionicLoading, $rootScope, $ionicPopup, $sce, Users, Elders, $timeout, $state) {        
+    ['$scope', '$ionicModal', '$ionicLoading', '$rootScope', '$ionicPopup', '$sce', 'Users', 'Elders', '$timeout', '$state', '$ionicSideMenuDelegate', '$ionicHistory',
+	function ($scope, $ionicModal, $ionicLoading, $rootScope, $ionicPopup, $sce, Users, Elders, $timeout, $state, $ionicSideMenuDelegate, $ionicHistory) {        
         $scope.join = { phone: "" };
         $scope.$on('$ionicView.beforeEnter', function () {
             $scope.curuser = Users.getUser();
             if (!Users.cekLogin())
                 $state.go('login')
         })
-        
+        $scope.closeMenu = function(){
+            $ionicSideMenuDelegate.toggleLeft();
+            $ionicHistory.nextViewOptions({
+                disableAnimate: true
+            });
+        }
+        $scope.call = function(number){
+            window.plugins.CallNumber.callNumber(function (result) {
+                console.log("Success:" + result);
+            }, function (result) {
+                console.log("Error:" + result);
+            }, number, false);
+        }
         $ionicModal.fromTemplateUrl('templates/alert.html', { scope: $scope})
                    .then(function (modal) { $scope.modalAlert = modal; });
 
@@ -27,7 +39,9 @@ angular.module('starter.controllers', [])
                         $scope.alert = elder;
                         $scope.modalAlert.show();
                     }else{
-                        alert(jsonData.message);
+                        $state.go('app.parentCondition', {parentId: jsonData.additionalData.track.elder}, {
+                            reload: true
+                        });
                     }
                 }else{
                     alert(jsonData.message);
@@ -717,18 +731,11 @@ angular.module('starter.controllers', [])
         });
 	}])
 
-.controller('dashCtrl', ['$scope', '$ionicLoading', '$ionicHistory', 'Elders', '$ionicNavBarDelegate',
-    function ($scope, $ionicLoading, $ionicHistory, Elders, $ionicNavBarDelegate) {
+.controller('dashCtrl', ['$scope', '$ionicLoading', '$ionicHistory', 'Elders',
+    function ($scope, $ionicLoading, $ionicHistory, Elders) {
         $scope.$on('$ionicView.beforeEnter', function () {
-            $ionicHistory.nextViewOptions({ disableBack: true });
+            //$ionicHistory.nextViewOptions({ disableBack: true });
         });
-        $scope.call = function(number){
-            window.plugins.CallNumber.callNumber(function (result) {
-                console.log("Success:" + result);
-            }, function (result) {
-                console.log("Error:" + result);
-            }, number, false);
-        }
     }])
 
 .controller('ArticlesCtrl', ['$scope', '$ionicLoading', 'Articles', 'Users', '$ionicPopup', '$state',

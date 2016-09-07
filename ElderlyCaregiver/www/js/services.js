@@ -17,6 +17,7 @@ angular.module('starter.services', [])
         }, function(response){
             if(error != null)
                 error(response);
+            $ionicLoading.hide();
         });
     }
     
@@ -305,6 +306,7 @@ angular.module('starter.services', [])
             headers: { Authorization: "Token "+token }
         }).then(function(response){
             data.push(response.data);
+            tracker[response.data.id]=[];
             subscription={}
             subscription[response.data.id]=true;
             if (ionic.Platform.isWebView()) {
@@ -323,6 +325,7 @@ angular.module('starter.services', [])
             headers: { Authorization: "Token "+token }
         }).then(function(response){
             data.push(response.data);
+            tracker[response.data.id]=[];
             if (ionic.Platform.isWebView()) {
                 subscription={}
                 subscription[response.data.id]=true;

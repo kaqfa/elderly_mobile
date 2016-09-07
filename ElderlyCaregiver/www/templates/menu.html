@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus enable-menu-with-back-views="true">
     <ion-side-menu-content>
         <ion-nav-bar class="bar-positive">
             <ion-nav-back-button></ion-nav-back-button>
@@ -30,10 +30,10 @@
                 </ion-item>
             </ion-list>-->
             <ion-list>
-                <ion-item menu-close ui-sref="app.profile" ui-sref-active="active">
+                <ion-item ng-click="closeMenu()" ui-sref="app.profile" ui-sref-active="active">
                     <i class="icon ion-person"></i> Profile
                 </ion-item>
-                <ion-item menu-close ui-sref="app.password" ui-sref-active="active">
+                <ion-item ng-click="closeMenu()" ui-sref="app.password" ui-sref-active="active">
                     <i class="icon ion-person"></i> Ubah Password
                 </ion-item>
                 <ion-item menu-close ui-sref="app.dashboard" ui-sref-active="active">
@@ -41,16 +41,16 @@
                 </ion-item>
             </ion-list>
             <ion-list>
-                <ion-item menu-close ui-sref="app.articles" ui-sref-active="active">
+                <ion-item ng-click="closeMenu()" ui-sref="app.articles" ui-sref-active="active">
                     <i class="icon ion-clipboard"></i> Artikel-Artikel
                 </ion-item>
-                <ion-item menu-close ui-sref="app.hospitals" ui-sref-active="active">
+                <ion-item ng-click="closeMenu()" ui-sref="app.hospitals" ui-sref-active="active">
                     <i class="icon ion-medkit"></i> List Rumah Sakit
                 </ion-item>
-                <ion-item menu-close ui-sref="app.addParent" ui-sref-active="active">
+                <ion-item ng-click="closeMenu()" ui-sref="app.addParent" ui-sref-active="active">
                     <i class="icon ion-person-add"></i> Tambah Orang Tua
                 </ion-item>
-                <ion-item menu-close ng-click="joinParent()">
+                <ion-item ng-click="closeMenu();joinParent();">
                     <i class="icon ion-person-stalker"></i> Gabung Rawat
                 </ion-item>
             </ion-list>
@@ -59,7 +59,7 @@
                 <ion-item class="item-divider">
                     <i class="icon ion-people"></i> <b>Daftar Orang Tua</b>
                 </ion-item>
-                <ion-item style="text-transform: capitalize;" menu-close ng-repeat="elder in elders track by $index"
+                <ion-item style="text-transform: capitalize;" ng-click="closeMenu()" ng-repeat="elder in elders track by $index"
                     ui-sref="app.parent({parentId:elder.id})" ui-sref-active="active">
                     <i class="icon ion-person"></i>
                     {{elder.user.first_name}} {{elder.user.last_name}}

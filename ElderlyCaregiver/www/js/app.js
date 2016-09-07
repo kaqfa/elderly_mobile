@@ -37,7 +37,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
                                           notificationOpenedCallback);
             window.plugins.OneSignal.enableInAppAlertNotification(false);
             window.plugins.OneSignal.enableNotificationsWhenActive(false);
-            window.plugins.OneSignal.sendTags({5:true});
+            //window.plugins.OneSignal.sendTags({5:true});
         }
 	});
 })

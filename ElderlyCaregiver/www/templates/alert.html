@@ -9,7 +9,7 @@
             
       <img ng-src="{{elder.photo==null?'img/emergency.png':elder.photo}}" style="width: 100%;" alt="" >
       <h3 style="text-align: center;">
-        {{elder.user.first_name}} {{elder.user.last_name}} telah menekan tombol panik.
+        {{alert.elder.user.first_name}} {{alert.elder.user.last_name}} telah menekan tombol panik.
       </h3>       
     
       <div class="padding">
@@ -17,9 +17,9 @@
         class="button button-block button-large icon-left ion-android-call button-balanced">
           RS Rujukan
         </a>
-        <button type="submit" ng-click=""
+        <button type="submit" ng-click="call(elder.elder.phone)"
         class="button button-block button-large icon-left ion-android-call button-balanced">          
-           {{elder.user.first_name}} {{elder.user.last_name}}
+           {{alert.elder.user.first_name}} {{alert.elder.user.last_name}}
         </button>
       </div>      
   </ion-content>
