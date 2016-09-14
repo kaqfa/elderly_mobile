@@ -1,6 +1,6 @@
 <ion-view view-title="Dashboard">
     <ion-header-bar align-title="center" class="bar-positive">        
-      <h1 class="title"> Dashboard 
+      <h1 class="title"> Beranda Aplikasi 
         <!-- <img src="../img/2c-text.png" height="60%" style="padding-top:10px;"> -->
         </h1>
     </ion-header-bar>
@@ -31,15 +31,15 @@
           </a>-->
         </div>        
         <div class="col menu-button">
-          <a ng-click="panicBtn(caregivers[0].phone)" class="" > 
-            <img src="img/btn_panik.png"  alt=""> 
-            <br />Tombol Panik
+          <a ui-sref="profile" class="" > 
+            <img src="img/btn_notif.png"  alt=""> 
+            <br />Data Profil
           </a>
         </div>        
       </div>
       <div class="row">
         <div class="col menu-button">
-          <a ui-sref="profile" class="" > 
+          <a ng-click="panicBtn(caregivers[0].phone)" class="" > 
           <img src="img/btn_panik.png" style="width: 45%" alt=""> 
             <br />Tombol Panik
           </a>
@@ -62,8 +62,6 @@
             <h2 style="font-weight:bold; text-transform: capitalize;">{{convertCondition(t.condition)}}</h2>
             <p>{{datetimeFormat(t.modified)}} <i ng-show="isLocal(t)" class="energized icon ion-checkmark-round"></i></p>
           </a>
-      </div> -->
-
-      <a ng-click="logout()" class="button button-block button-assertive"> Keluar </a>
+      </div> -->      
     </ion-content>
 </ion-view>

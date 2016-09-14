@@ -1,0 +1,85 @@
+Halo
+Selamat datang di video ini
+kali ini saya akan menjelaskan cara penggunaan Aplikasi Berbakti 
+untuk mengecek kondisi orang tua melalui smartphone.
+
+Bagi anda yang belum tahu, Aplikasi Berbakti adalah aplikasi Android
+yang digunakan untuk memantau kondisi kesehatan orang tua yang tinggal
+di tempat yang terpisah.
+Jadi misalkan kita sebagai anak bertempat tinggal di luar kota, karena
+harus kuliah atau bekerja, kita tetap dapat memantau kondisi kesehatan
+orang tua kita di kota lain secara mudah dan cepat.
+
+Bagaimana cara penggunaan aplikasi ini, mari kita lanjutkan ke tutorial berikut:
+
+Di sini saya memiliki dua emulator Android untuk memudahkan perekaman video,
+anggap saja ini simulasi handphone android yang kita gunakan sehari-hari.
+
+Anggap saja di sebelah kiri adalah handphone kita, dan sebelah kanan adalah 
+handphone yang digunakan orang tua kita.
+
+Oke seperti yang terlihat pada website aplikasi berbakti yaitu berbakti.id,
+ada 2 jenis aplikasi berbakti yang digunakan, yaitu aplikasi berbakti anak
+yang akan kita install dan gunakan di handphone kita, dan satu lagi adalah
+aplikasi berbakti orang tua yang akan kita install-kan di handphone orang tua
+dan nantinya akan digunakan sehari-hari oleh orang tua kita.
+
+Oke, mari kita install aplikasi berbakti anak di handphone kita terlebih dahulu.
+Caranya sama seperti menginstall aplikasi Android lain, kita hanya perlu 
+menginstall aplikasi melalui Google Play.
+
+Ketikkan "berbakti" pada bagian pencarian, setelah ketemu aplikasi dengan lambang
+seperti huruf B berbentuk Hati, pilih tombol install.
+
+Kabar baiknya adalah, aplikasi ini hanya berukuran 5MB, sehingga kita tidak 
+memerlukan waktu dan kuota yang banyak untuk meng-install-nya. Selain itu,
+aplikasi ini dapat diinstall di smartphone android versi 4.11 atau versi JellyBean.
+Atau lebih mudahnya, jika Android anda bisa diinstall BBM, maka aplikasi Berbakti
+juga dapat diinstall dengan baik di Android anda.
+
+Oke, setelah aplikasi ter-install di Android kita, langkah selanjutnya adalah 
+membuka dan mendaftar sebagai anggota.
+
+Klik tombol daftar dan isikan data anda,
+Nama lengkap,
+Username,
+Password,
+Nomor telepon,
+Jenis kelamin
+dan terakhir klik tombol Daftar.
+
+Tunggu sejenak, aplikasi akan mengupload data kita ke server dan secara otomatis
+membuat kita login ke aplikasi Berbakti Anak.
+
+Oke, ini adalah Beranda aplikasi sebelum kita menambahkan data orang tua.
+
+Selanjutnya tentu saja kita tambahkan data orang tua kita, dengan menekan tombol 
+Tambah data orang tua.
+
+Isikan data-data orang tua kita:
+Nama lengkap,
+nomor telepon,
+tanggal lahir, oke jika tidak hafal secara pasti tanggal lahir orang tua kita,
+masukkan saja tahun lahirnya dan pilih perkiraan tanggal dan bulan lahirnya.
+selanjutnya pilih jenis kelamin,
+dan kemudian klik tombol tambah Orang Tua.
+
+Tunggu sejenak, setelah aplikasi mengupload data orang tua kita, aplikasi
+akan kembali ke bagian beranda. Hanya saja saat ini sudah ada satu data orang tua
+yang baru saja kita daftarkan.
+
+Jika kita lihat ke detail data orang tua, akan ada 3 pilihan yaitu kondisi,
+riwayat, dan profil.
+
+Jika kita lihat pilihan kondisi, isinya masih kosong karena memang belum ada 
+aktivitas apapun dari orang tua yang terekam di sini. Begitu juga jika kita
+menekan pilihan riwayat, datanya masih kosong juga.
+
+Sedangkan di pilihan profil ada data yang kita inputkan sebelumnya, tentu saja
+kita bisa mengubahnya jika diperlukan, termasuk mengganti foto default dari 
+aplikasi dengan foto asli orang tua kita.
+Klik icon kamera pada foto profil, kemudian pilih salah satu gambar pada galeri
+Android kita untuk dijadikan foto profil orang tua. Tunggu sebentar untuk 
+aplikasi berbakti mengupload perubahan yang baru saja kita buat.
+Dan.... ya foto profil orang tua kita sudah berubah.
+
