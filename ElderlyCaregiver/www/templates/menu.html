@@ -24,14 +24,14 @@
                 <h2>{{curuser.user.first_name}} {{curuser.user.last_name}}</h2>
                 <p>{{curuser.user.email}}</p>
             </div>
-            <ion-list>
+            <!--<ion-list>
                 <ion-item menu-close ng-click="demoModal()">
                     <i class="icon ion-home"></i> Demo Modal
                 </ion-item>
-            </ion-list>
+            </ion-list>-->
             <ion-list>                
                 <ion-item menu-close ui-sref="app.dashboard" ui-sref-active="active">
-                    <i class="icon ion-home"></i> Dashboard
+                    <i class="icon ion-home"></i> Beranda
                 </ion-item>
             </ion-list>
             <ion-list>
@@ -62,13 +62,13 @@
             <div>&nbsp;</div>            
             <ion-list>
                 <ion-item ng-click="closeMenu()" ui-sref="app.profile" ui-sref-active="active">
-                    <i class="icon ion-person"></i> Profile
+                    <i class="icon ion-android-contact"></i> Profile
                 </ion-item>
                 <ion-item ng-click="closeMenu()" ui-sref="app.password" ui-sref-active="active">
-                    <i class="icon ion-person"></i> Ubah Password
+                    <i class="icon ion-lock-combination"></i> Ubah Password
                 </ion-item>
                 <ion-item menu-close ng-click="logout()">
-                    Log Out
+                    <i class="icon ion-android-exit"></i> Log Out
                 </ion-item>
             </ion-list>
         </ion-content>

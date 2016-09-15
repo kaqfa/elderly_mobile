@@ -83,3 +83,77 @@ Android kita untuk dijadikan foto profil orang tua. Tunggu sebentar untuk
 aplikasi berbakti mengupload perubahan yang baru saja kita buat.
 Dan.... ya foto profil orang tua kita sudah berubah.
 
+Oke, setelah kita mendaftarkan orang tua melalui aplikasi Berbakti anak,
+saatnya kita melanjutkan tutorial pada penggunaan aplikasi berbakti orang tua.
+
+Nah, sekarang kita berpindah dari Handphone anak ke handphone orang tua.
+Awalnya masih sama yaitu tentu saja kita harus meng-install aplikasi Berbakti di
+smartphone orang tua.
+
+Masuk ke Google Play, kemudian cari aplikasi Berbakti, dan pilih Aplikasi Berbakti
+Orang Tua. Kemudian tekan tombol Install.
+
+Aplikasi berbakti orang tua memiliki ukuran yang kurang lebih sama dengan aplikasi
+berbakti anak, dan juga minimal spesifikasi Android yang digunakan juga sama persis
+dengan aplikasi Berbakti Anak. Jadi kalau orang tua kita memiliki Android yang dapat
+digunakan untuk BBM, berarti smartphonenya sudah bisa diinstall aplikasi berbakti ortu.
+
+Oke, setelah berhasil install dan masuk ke aplikasi Berbakti Orang tua, kita lihat
+di sini tampilannya berbeda dengan aplikasi berbakti anak.
+Pertama, tidak ada tombol registrasi di sini karena sebelumnya orang tua telah didaftarkan
+melalui aplikasi anak, jadi orang tua tidak perlu mendaftar lagi.
+Kedua, untuk loginnya tidak menggunakan username & password, tapi cukup menginputkan
+nomor handphone saja.
+
+Memang desain aplikasi orang tua ini dibuat seminimal mungkin untuk memudahkan orang
+tua menggunakan aplikasi ini.
+
+Langsung saja, mari kita inputkan nomor Handphone orang tua yang telah kita daftarkan
+sebelumnya melalui aplikasi berbakti anak. Kemudian tekan tombol Login.
+
+Ya, sekarang kita sudah masuk di beranda aplikasi berbakti orang tua. Dan ya benar,
+tampilan berandanyapun sama sekali berbeda dengan aplikasi berbakti anak.
+
+Kita lihat di sini ada 5 Tombol iconic yaitu:
+Cek kondisi
+Sapa anak
+Artikel
+Data profil
+dan Tombol panik
+
+Jika orang tua ingin mengabarkan kondisi kesehatannya pada semua anak-anaknya, maka
+menu yang digunakan adalah cek kondisi.
+Setelah kita memilih menu cek kondisi, ada tiga pilihan kondisi yaitu:
+Sehat
+Kangen
+dan Sakit
+
+Misalkan orang tua mengabarkan kondisinya yang sehat, maka pilih icon sehat yang 
+berwarna hijau. Maka secara otomatis, aplikasi berbakti telah mengirimkan notifikasi 
+kondisi tersebut pada anak.
+Lihat, di handphone anak terdapat satu notifikasi dari aplikasi berbakti, yaitu
+update keadaan orang tua dalam kondisi sehat. 
+
+Jadi dari sini sudah terlihat bagaimana aplikasi dapat secara cepat mengabarkan
+kondisi orang tua kepada anak secara instant. Tidak perlu repot mengetik beberapa
+huruf, dan ini akan sangat memudahkan orang tua dalam penggunaan aplikasi.
+
+Oke, kita coba sekali lagi orang tua melakukan cek kondisi.
+Pilih menu cek kondisi, tapi kali ini orang tua sedang mengabarkan kondisi sakit.
+Nah ketika orang tua memilih icon sakit, maka aplikasi akan menampilkan gambar anatomi
+tubuh yang memiliki beberapa bagian dengan warna yang berbeda.
+Misalkan saat ini orang tua sedang sakit kepala, maka akan memencet bagian kepala.
+Sebelum mengabarkan kepada anak aplikasi akan melakukan konfirmasi terlebih dahulu, apakah
+benar yang dimaksud adalah kondisinya sedang sakit kepala.
+Ini untuk memastikan jika bapak atau ibu salah memilih bagian anatomi.
+Jika sudah betul sesuai dengan kondisi yang ingin dikabarkan ke anak, yaitu sakit kepala
+maka kita pilih tombol Iya.
+Dan sekali lagi kita lihat, di Handphone anak ada notifikasi kembali bahwa orang tuanya
+sedang sakit kepala.
+
+Fitur selanjutnya di aplikasi berbakti orang tua adalah sapa anak, dalam menu sapa anak ini
+terdapat kontak-kontak anak yang saat ini sudah terhubung dengan orang tua.
+Dalam tampilan sapa anak ini ada tombol telepon untuk dapat menghubungi anak via telepon.
+
+Selanjutnya ada juga menu artikel yang akan menampilkan artikel, informasi, serta tips dan
+dan trik yang nantinya akan terupdate secara berkala dari server.

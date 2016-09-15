@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
                 console.log("Error:" + result);
             }, number, false);
         }
-        $ionicModal.fromTemplateUrl('templates/alert.html', { scope: $scope})
+        $ionicModal.fromTemplateUrl('templates/alert.html', {scope: $scope})
                    .then(function (modal) { $scope.modalAlert = modal; });
 
         $scope.closeAlert = function () { $scope.modalAlert.hide(); };
@@ -409,7 +409,8 @@ angular.module('starter.controllers', [])
                 $scope.photo = elder.elder.photo;
                 $scope.elder = elder.elder;
                 tracker = elder.tracker;
-                $scope.tracker = tracker.slice(-50);
+                console.log(tracker)
+                $scope.tracker = tracker.slice(0, 50);
                 $scope.user = {
                     id: $scope.elder.id,
                     fullname: $scope.elder.user.first_name + " " + $scope.elder.user.last_name,
@@ -495,18 +496,21 @@ angular.module('starter.controllers', [])
             $scope.kangen = 0;
             $scope.latest = null;
             for (i = 0; i < $scope.tracker.length; i++) {
-                current=moment($scope.tracker[i].modified);
-                if(current.diff(fromDate,"days")>=0&&current.diff(toDate,"days")<=0){
+                current = moment($scope.tracker[i].modified);
+                if(current.diff(fromDate,"days") >= 0 && current.diff(toDate,"days") <= 0){
                     if ($scope.tracker[i].condition == 'ba')
                         $scope.sehat += 1;
                     else if ($scope.tracker[i].condition == 'bi')
                         $scope.kangen += 1;
                     else
-                        $scope.sakit += 1;
-                    if (current.diff(toDate,"days")==0)
-                        $scope.latest=$scope.tracker[i]
+                        $scope.sakit += 1;                    
                 }
             }
+
+            latest = moment($scope.tracker[0].modified);
+            if (latest.diff(toDate,"days") == 0)
+                $scope.latest = $scope.tracker[0];
+
             $scope.labels = ["Sehat",  "Kangen", "Sakit"];
             $scope.data = [$scope.sehat, $scope.kangen, $scope.sakit];
             $scope.colors = ['#33cd5f', '#ffc900', '#ef473a'];

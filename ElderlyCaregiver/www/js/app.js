@@ -27,7 +27,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
         $rootScope.dailySchedule();
         if (ionic.Platform.isWebView()) {
             $rootScope.oneSignalCallback = function(jsonData) {
-                alert(jsonData.message)
+                if (jsonData.additionalData && jsonData.additionalData.track) {
+                    Elders.addTrackElder(jsonData.additionalData.track)
+                    if(!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                    if(jsonData.additionalData.track.condition == 'tb'){
+                        var elder = Elders.get(jsonData.additionalData.track.elder);
+                        $scope.alert = elder;
+                        $scope.modalAlert.show();
+                    }else{
+                        $state.go('app.parentCondition', {parentId: jsonData.additionalData.track.elder}, {
+                            reload: true
+                        });
+                    }
+                }else{
+                    alert(jsonData.message);
+                }
             };
             var notificationOpenedCallback = function(jsonData) {
                 $rootScope.oneSignalCallback(jsonData);
