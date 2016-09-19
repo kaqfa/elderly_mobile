@@ -157,3 +157,24 @@ Dalam tampilan sapa anak ini ada tombol telepon untuk dapat menghubungi anak via
 
 Selanjutnya ada juga menu artikel yang akan menampilkan artikel, informasi, serta tips dan
 dan trik yang nantinya akan terupdate secara berkala dari server.
+
+Fitur profil dapat digunakan untuk melihat profil dari orang tua.
+
+Dan yang terakhir ada satu lagi fitur yang cukup penting yaitu tombol panik.
+Tombol panik ini jika dipilih, akan secara langsung memanggil satu anak yang di daftar paling
+atas dari list anak. Selain itu aplikasi berbakti juga secara otomatis akan mengirimkan sinyal
+panik ke anak-anak lain yang terhubung.
+
+Lihat begitu kita pilih tombol panik ini, aplikasi Berbakti anak akan langsung menampilkan
+tampilan panik, yang diikuti dengan list rumah sakit rujukan dan tombol panggil ke orang tua.
+
+Oke, jadi demikian tutrial singkat cara penggunaan aplikasi berbakti baik orang tua dan anak.
+Sebagaimana kita lihat, struktur dan penggunaan aplikasi berbakti ini cukup simple. Tujuannya
+adalah memudahkan komunikasi antara orang tua dan anak melalui aplikasi.
+
+Meskipun sederhana, namun aplikasi ini memiliki beberapa fitur dan cara penggunaan yang dapat
+mempermudah kita memantau kondisi sekaligus merawat orang tua yang ada di luar kota.
+Untuk tips dan trik penggunaan aplikasi Berbakti, silahkan cek secara berkala tips dan trik
+dari fitur artikel di Aplikasi berbakti, atau kunjungi juga website resmi kami di alamat berbakti.id
+
+Sekian, dan sampai bertemu di tutorial menarik lainnya.
