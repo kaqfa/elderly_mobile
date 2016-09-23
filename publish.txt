@@ -1,0 +1,12 @@
+cordova plugin rm cordova-plugin-console
+cordova build --release android
+
+cd D:\elderly\ElderlyCaregiver\platforms\android\build\outputs\apk
+keytool -genkey -v -keystore berbakti-anak.keystore -alias berbakti-anak -keyalg RSA -keysize 2048 -validity 10000
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore berbakti-anak.keystore android-release-unsigned.apk berbakti_anak
+zipalign -v 4 android-release-unsigned.apk Berbakti-anak.apk
+
+cd D:\elderly\ElderlyElder\platforms\android\build\outputs\aspk
+keytool -genkey -v -keystore berbakti-ortu.keystore -alias berbakti-ortu -keyalg RSA -keysize 2048 -validity 10000
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore berbakti-ortu.keystore android-release-unsigned.apk berbakti_ortu
+zipalign -v 4 android-release-unsigned.apk Berbakti_ortu.apk
