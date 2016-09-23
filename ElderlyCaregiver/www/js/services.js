@@ -470,7 +470,7 @@ angular.module('starter.services', [])
                 return "kangen";
                 break;
                 case "tb":
-                return "tidak baik";
+                return "panggilan darurat";
                 break;
                 case "sk":
                 return "sakit kepala";
