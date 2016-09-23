@@ -8,9 +8,9 @@
         <div ng-repeat="cg in caregivers track by $index" class="card in">
           <div class="item item-thumbnail-right">
             <img src="img/karakter-circle.png">
-            <h2>{{cg.user.first_name}} {{cg.user.last_name}}</h2>
+            <h2 class="name_title">{{cg.user.first_name}} {{cg.user.last_name}}</h2>
             <p>
-              {{cg.phone}}
+              <div class="phone_title">{{cg.phone}}</div>
               <div class="button-bar">
               <a ng-click="call(cg.phone)" class="button button-balanced icon-left ion-android-call">Panggil</a>
             </div>

@@ -5,8 +5,8 @@
     </ion-nav-bar>
   <ion-content class="has-header">
     <div class="has-mask bg-header" style="background-image:url({{elder.photo==null?'img/profile_girl.png':elder.photo}});">
-      <img ng-src="img/camera.png" ng-click="getPict()" class="img-camera">
-      <div class="img-text">{{elder.user.first_name}} {{elder.user.last_name}}</div>                
+      <!--<img ng-src="img/camera.png" ng-click="getPict()" class="img-camera">-->
+      <!--<div class="img-text">{{elder.user.first_name}} {{elder.user.last_name}}</div>                -->
     </div>  
     <div class="list padding" >
       <form name="updForm" ng-submit="update(updForm)">
@@ -14,30 +14,32 @@
             <label class="item item-input">
                 <input type="hidden" name="id" ng-model="user.id">
                 <i class="icon ion-android-person placeholder-icon"></i>
-                <input type="text" name="fullname" ng-model="user.fullname" placeholder="Nama Lengkap" required>
+                <input type="text" name="fullname" ng-model="user.fullname" placeholder="Nama Lengkap" readonly required>
             </label>
             <div class="item item-input">
                 <label><i class="icon ion-android-calendar placeholder-icon"></i></label>
-                <input type="text" name="birthday" ng-model="user.birthday" ng-focus="datePick();"
+                <input type="text" name="birthday" ng-model="user.birthday" readonly ng-focus="datePick();"
                         placeholder="Tanggal Lahir" required>
             </div>
             <label class="item item-input item-select">
                 <i class="icon ion-transgender placeholder-icon"></i>
-                <select ng-model="user.gender">
+                <select ng-model="user.gender" disabled>
                     <option value="l" selected>Laki-Laki</option>
                     <option value="p">Perempuan</option>
                 </select>
             </label>
             <label class="item item-input">
                 <i class="icon ion-android-phone-portrait placeholder-icon"></i>
-                <input type="text" pattern="[0-9]*" name="phone" ng-model="user.phone" placeholder="No. Handphone" required>
+                <input type="text" pattern="[0-9]*" name="phone" ng-model="user.phone" 
+                readonly placeholder="No. Handphone" required>
             </label>
-            <div class="">
+            <!--<div class="">
                 <button type="submit" class="button button-block button-positive">Ubah Data</button>
-            </div>
+            </div>-->
         </div>
       </form>
-      <a ng-click="logout()" class="button button-block button-assertive"> <strong> Logout Aplikasi </strong> </a>
+      <a ng-click="logout()" class="button button-block button-assertive"> 
+          <strong> Logout Aplikasi </strong> </a>
     </div>
 
   </ion-content>

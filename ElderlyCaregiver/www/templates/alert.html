@@ -1,16 +1,17 @@
 <ion-modal-view>
-  <ion-header-bar class="bar-assertive">
-    <h1 class="title">Kondisi Darurat</h1>
+  <ion-header-bar class="bar-positive">
+    <h1 class="title"><img src="img/logo-teks.png" alt="" style="height: 75%; margin-top: 5px; margin-bottom: 10px;"></h1>
     <div class="buttons">
       <button class="button button-clear" ng-click="closeAlert()"><i class="icon ion-close-round "></i></button>
     </div>
   </ion-header-bar>
-  <ion-content>      
-      <img ng-src="{{elder.photo==null?'img/rumah-sakit-rujukan.png':elder.photo}}" 
-          style="margin-left: 15%; margin-top: 20px; width: 70%;" alt="" >
-      <h3 style="text-align: center;">
+  <ion-content>
+      <h3 style="margin-left: 15%; margin-top: 20px; color:#EC6D72; font-size: 24px;">Panggilan Darurat</h3>      
+      <img ng-src="{{'img/rumah-sakit-rujukan.png'}}" 
+          style="margin-left: 15%; margin-top: 0px; width: 70%;" alt="" >
+      <!--<h3 style="text-align: center;">
         {{alert.elder.user.first_name}} {{alert.elder.user.last_name}} telah menekan tombol panik.
-      </h3>       
+      </h3>-->
     
       <div class="padding">
         <a ui-sref="app.hospitals"  ng-click="closeAlert()"
@@ -18,8 +19,9 @@
           RS Rujukan
         </a>
         <button type="submit" ng-click="call(elder.elder.phone)"
-        class="button button-block button-large icon-left ion-android-call button-balanced">          
-           {{alert.elder.user.first_name}} {{alert.elder.user.last_name}}
+        class="button button-block button-large icon-left ion-android-call button-balanced">
+          Panggil Orang Tua
+           <!--{{alert.elder.user.first_name}} {{alert.elder.user.last_name}}-->
         </button>
       </div>      
   </ion-content>

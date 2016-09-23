@@ -5,15 +5,18 @@
         <div class="img-text">{{elder.user.first_name}} {{elder.user.last_name}}</div>
     </div>
 
-    <a ui-sref="app.parentCondition({parentId:elder.id})" class="button button-large button-full button-positive">
+    <a ui-sref="app.parentCondition({parentId:elder.id})" style="width: 90%; margin-left: 5%; margin-top: 20px;" 
+      class="button button-large button-positive">
     	<!-- <img src="./img/btn_kondisi.png" alt="" style="width:100%"> -->
     	<strong>KONDISI</strong>
     </a>
-    <a ui-sref="app.parentGraphic({parentId:elder.id})" class="button button-large button-full button-balanced">
+    <a ui-sref="app.parentGraphic({parentId:elder.id})" style="width: 90%; margin-left: 5%; margin-top: 10px;" 
+      class="button button-large button-balanced">
     	<!-- <img src="./img/btn_riwayat.png" alt="" style="width:100%"> -->
     	<strong>RIWAYAT</strong>
     </a>
-    <a ui-sref="app.parentProfile({parentId:elder.id})" class="button button-large button-full button-energized">
+    <a ui-sref="app.parentProfile({parentId:elder.id})" style="width: 90%; margin-left: 5%; margin-top: 10px;" 
+      class="button button-large button-energized">
     	<!-- <img src="./img/btn_profil.png" alt="" style="width:100%"> -->
     	<strong>PROFIL</strong>
     </a>

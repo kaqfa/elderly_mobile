@@ -12,8 +12,9 @@
                 <img ng-if="convertCondition(t.condition) != 'kangen' && convertCondition(t.condition) != 'sehat' " src = "img/icon_sakit.png">
                 <h2 style="font-weight:bold; text-transform: capitalize;">{{convertCondition(t.condition)}}</h2>
                 <p>{{datetimeFormat(t.modified)}}</p>
-                <a href="geo:{{t.location}}?q={{t.location}}" class="button button-positive" style="margin-top: 10px;" ng-click="$event.stopPropagation()" target="_blank">
-                  <img class="loc_icon" src="img/lokasi.png" alt="">
+                <a href="geo:{{t.location}}?q={{t.location}}" class="button button-positive" 
+                  style="margin-top: 20px; padding: 10px; margin-top: 5px;" ng-click="$event.stopPropagation()" target="_blank">
+                  <img class="loc_icon" style="width: 20px;" src="img/lokasi.png" alt="">
                 </a>
               </div>                
           </ion-scroll>
