@@ -7,15 +7,15 @@
       <div class="">
         <div ng-repeat="cg in caregivers track by $index" class="card in">
           <div class="item item-thumbnail-right">
-            <img src="img/karakter-circle.png">
+            <div class="elder_pict" style="background-image:url({{'img/karakter-circle.png'}});">
+            &nbsp;</div>
             <h2 class="name_title">{{cg.user.first_name}} {{cg.user.last_name}}</h2>
-            <p>
-              <div class="phone_title">{{cg.phone}}</div>
-              <div class="button-bar">
-              <a ng-click="call(cg.phone)" class="button button-balanced icon-left ion-android-call">Panggil</a>
+            <h3>{{cg.phone}}</h3>
+            <div>
+              <a ng-click="call(cg.phone)" 
+              class="button button-small button-block button-balanced icon-left ion-android-call">Panggil</a>              
             </div>
-            </p>
-          </div>          
+          </div>
         </div>
       </div>
     </ion-content>

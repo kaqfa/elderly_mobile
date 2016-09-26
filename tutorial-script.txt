@@ -12,7 +12,7 @@ orang tua kita di kota lain secara mudah dan cepat.
 
 Bagaimana cara penggunaan aplikasi ini, mari kita lanjutkan ke tutorial berikut:
 
-Di sini saya memiliki dua emulator Android untuk memudahkan perekaman video,
+Di sini saya memiliki dua HP Android untuk memudahkan perekaman video,
 anggap saja ini simulasi handphone android yang kita gunakan sehari-hari.
 
 Anggap saja di sebelah kiri adalah handphone kita, dan sebelah kanan adalah 
