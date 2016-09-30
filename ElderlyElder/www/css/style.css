@@ -47,14 +47,23 @@
 }
 
 .bg-header{
+  background-size:contain; 
+  background-repeat:no-repeat; 
+  background-position:center center; 
+  min-height: 200px; 
+  text-align:center;
+  /*margin-top: 10px;*/
+}
+
+.bg-full{
   background-size:cover; 
   background-repeat:no-repeat; 
   background-position:center center; 
-  min-height: 150px; 
+  min-height: 200px; 
   text-align:center;
 }
 
-.bg-header h3{
+.bg-full h3, .bg-header h3{
   margin-top: 5px;  
   padding-bottom: 15px;
   text-transform: capitalize;

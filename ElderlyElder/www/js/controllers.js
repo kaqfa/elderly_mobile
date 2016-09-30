@@ -288,7 +288,8 @@ angular.module('starter.controllers', [])
                 fullname: user.user.first_name+" "+user.user.last_name,
                 birthday: user.birthday,
                 phone: user.phone,
-                gender: user.gender
+                gender: user.gender,
+                photo: user.photo
             };
         });
         $scope.logout = function () {

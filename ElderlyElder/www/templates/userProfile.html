@@ -4,9 +4,8 @@
         <ion-nav-title>Profil</ion-nav-title>
     </ion-nav-bar>
   <ion-content class="has-header">
-    <div class="has-mask bg-header" style="background-image:url({{elder.photo==null?'img/profile_girl.png':elder.photo}});">
-      <!--<img ng-src="img/camera.png" ng-click="getPict()" class="img-camera">-->
-      <!--<div class="img-text">{{elder.user.first_name}} {{elder.user.last_name}}</div>                -->
+    <div class="has-mask {{elder.photo==null?'bg-header':'bg-full'}}" 
+        style="background-image:url({{user.photo==null?'img/profile_girl.png':user.photo}});">      
     </div>  
     <div class="list padding" >
       <form name="updForm" ng-submit="update(updForm)">

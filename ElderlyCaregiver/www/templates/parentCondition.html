@@ -1,8 +1,9 @@
 <ion-view view-title="Kondisi Orang Tua" hide-back-button="true">
   <ion-content class="has-header">
 
-    <div class="has-mask bg-header" style="background-image:url({{elder.photo==null?'img/profile_girl.png':elder.photo}});">
-      <div class="img-text">{{elder.user.first_name}} {{elder.user.last_name}}</div>                
+    <div class="has-mask {{elder.photo==null?'bg-header':'bg-full'}}" 
+         style="background-image:url({{elder.photo==null?'img/profile_girl.png':elder.photo}});">        
+        <div class="img-text">{{elder.user.first_name}} {{elder.user.last_name}}</div>
     </div>
       <div class="list" id="condition">
           <ion-scroll zooming="false" direction="y" style="height: 500px">
