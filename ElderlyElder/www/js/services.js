@@ -349,10 +349,10 @@ angular.module('starter.services', [])
         case "str":
           return "sakit telapak kaki kanan";
           break;
-        case "sltl":
+        case "ltl":
           return "sakit lutut kiri";
           break;
-        case "sltr":
+        case "ltr":
           return "sakit lutut kanan";
           break;
         default:
@@ -488,12 +488,12 @@ angular.module('starter.services', [])
   },{
     name: 'kneeL',
     show: false,
-    code: 'sltl',
+    code: 'ltl',
     location: 'top: 70%;right: 50.8%;width: 16%;height: 6.5%;'
   },{
     name: 'kneeR',
     show: false,
-    code: 'sltr',
+    code: 'ltr',
     location: 'top: 70%;left: 50.8%;width: 16%;height: 6.5%;'
   }];
 

@@ -511,10 +511,10 @@ angular.module('starter.services', [])
                 case "str":
                 return "sakit telapak kaki kanan";
                 break;
-                case "sltl":
+                case "ltl":
                 return "sakit lutut kiri";
                 break;
-                case "sltr":
+                case "ltr":
                 return "sakit lutut kanan";
                 break;
                 default:
