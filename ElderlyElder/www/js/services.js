@@ -349,6 +349,12 @@ angular.module('starter.services', [])
         case "str":
           return "sakit telapak kaki kanan";
           break;
+        case "sltl":
+          return "sakit lutut kiri";
+          break;
+        case "sltr":
+          return "sakit lutut kanan";
+          break;
         default:
           return "baik";
       }
@@ -453,32 +459,42 @@ angular.module('starter.services', [])
     name: 'footL',
     show: false,
     code: 'stl',
-    location: 'top: 93%;right: 50.8%;width: 11%;height: 7%;'
+    location: 'top: 92%;right: 52%;width: 11%;height: 6.2%;'
   },{
     name: 'footR',
     show: false,
     code: 'str',
-    location: 'top: 93%;left: 50.8%;width: 11%;height: 7%;'
+    location: 'top: 92%;left: 52%;width: 11%;height: 6.2%;'
   },{
     name: 'calfL',
     show: false,
     code: 'sbl',
-    location: 'top: 75%;right: 50.8%;width: 12%;height: 18%;'
+    location: 'top: 76.3%;right: 50.8%;width: 12%;height: 15.7%;'
   },{
     name: 'calfR',
     show: false,
     code: 'sbr',
-    location: 'top: 75%;left: 50.8%;width: 12%;height: 18%;'
+    location: 'top: 76.3%;left: 50.8%;width: 12%;height: 15.7%;'
   },{
     name: 'thighL',
     show: false,
     code: 'spl',
-    location: 'top: 51%;right: 50.8%;width: 16%;height: 24%;'
+    location: 'top: 51%;right: 50.8%;width: 16%;height: 19%;'
   },{
     name: 'thighR',
     show: false,
     code: 'spr',
-    location: 'top: 51%;left: 50.8%;width: 16%;height: 24%;'
+    location: 'top: 51%;left: 50.8%;width: 16%;height: 19%;'
+  },{
+    name: 'kneeL',
+    show: false,
+    code: 'sltl',
+    location: 'top: 70%;right: 50.8%;width: 16%;height: 6.5%;'
+  },{
+    name: 'kneeR',
+    show: false,
+    code: 'sltr',
+    location: 'top: 70%;left: 50.8%;width: 16%;height: 6.5%;'
   }];
 
   return {
