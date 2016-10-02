@@ -260,12 +260,14 @@ angular.module('starter.controllers', [])
             email: "",
             username: "",
             password: "",
-            repass: "",
             phone: "",
             gender: "l"
         };
+        
+        $scope.showPassword=true;
 
-        $scope.passMatch = true;
+        //$scope.passMatch = true;
+        /*
         $scope.isMatch = function () {
             if ($scope.user.password == $scope.user.repass) {
                 $scope.passMatch = true;
@@ -273,6 +275,7 @@ angular.module('starter.controllers', [])
                 $scope.passMatch = false;
             }
         };
+        */
 
         $scope.register = function (user) {
             fail = function (msg) {
@@ -282,7 +285,7 @@ angular.module('starter.controllers', [])
                 });
             };
 
-            if (user.$valid && $scope.passMatch) {
+            if (user.$valid) {
                 $ionicLoading.show({
                     template: 'Loading...'
                 });
@@ -895,7 +898,7 @@ angular.module('starter.controllers', [])
             }
         };
         $scope.update = function (user) {
-            if (user.$valid) {
+            if (user.$valid && $scope.passMatch) {
                 console.log("user valid");
                 $ionicLoading.show({
                     template: 'Loading...'

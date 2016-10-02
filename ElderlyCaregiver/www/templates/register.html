@@ -24,11 +24,7 @@
                 </label>
                 <label class="item item-input" ng-class="{ 'has-error' : regForm.password.$invalid && !regForm.password.$error.required }">
                     <i class="icon ion-android-lock placeholder-icon"></i>
-                    <input type="password" name="password" placeholder="Password" ng-model="user.password" ng-change="isMatch()" required />
-                </label>
-                <label class="item item-input" ng-class="{ 'has-error' : !passMatch }">
-                    <i class="icon ion-android-lock placeholder-icon"></i>
-                    <input type="password" name="repass" placeholder="Ulangi Password" ng-model="user.repass" ng-change="isMatch()" required />
+                    <input type="password" name="password" ui-show-password placeholder="Password" ng-model="user.password" ng-change="isMatch()" required />
                 </label>
                 <label class="item item-input" ng-class="{ 'has-error' : regForm.phone.$invalid && !regForm.phone.$error.required }">
                     <i class="icon ion-android-phone-portrait placeholder-icon"></i>
