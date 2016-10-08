@@ -77,14 +77,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
         evt.stopPropagation();
       });
 
-      btnShowPass.on('touchend', function (evt) {
-        var syntheticClick = new Event('mousedown');
-        evt.currentTarget.dispatchEvent(syntheticClick);
-
-        //stop to block ionic default event
-        evt.stopPropagation();
-      });
-
       if (elem.attr('type') === 'password') {
         elem.after(btnShowPass);
       }
@@ -114,6 +106,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
 			url: '/register',
 			templateUrl: 'templates/register.html',
 			controller: 'RegCtrl'
+		})
+		.state('reset', {
+			url: '/reset',
+			templateUrl: 'templates/reset.html',
+			controller: 'ResetCtrl'
 		})
 		.state('app', {
 			url: '/app',

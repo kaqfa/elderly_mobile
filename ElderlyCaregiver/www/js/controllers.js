@@ -327,6 +327,68 @@ angular.module('starter.controllers', [])
         };
 	}])
 
+.controller('ResetCtrl', ['$scope', '$state', '$ionicPopup', '$ionicLoading', '$ionicHistory', 'Users', 'Elders',
+    function ($scope, $state, $ionicPopup, $ionicLoading, $ionicHistory, Users, Elders) {
+        $scope.$on('$ionicView.beforeEnter', function () {
+            if (Users.cekLogin())
+                $state.go('app.dashboard')
+        });
+
+        $scope.user = {
+            email: ""
+        };
+        
+
+        //$scope.passMatch = true;
+        /*
+        $scope.isMatch = function () {
+            if ($scope.user.password == $scope.user.repass) {
+                $scope.passMatch = true;
+            } else {
+                $scope.passMatch = false;
+            }
+        };
+        */
+
+        $scope.reset = function (user) {
+            fail = function (msg) {
+                $ionicPopup.alert({
+                    title: 'Error',
+                    template: msg
+                });
+            };
+
+            if (user.$valid) {
+                $ionicLoading.show({
+                    template: 'Loading...'
+                });
+
+                Users.reset($scope.user.email, function (data) {
+                    $ionicLoading.hide();
+                    $ionicHistory.nextViewOptions({
+                        disableBack: true
+                    });
+                    $ionicPopup.alert({
+                        template: 'Silahkan cek email anda untuk mendapatkan password baru.'
+                    });
+                    $state.go('app.login');
+                }, function (response) {
+                    $ionicLoading.hide();
+                    var msg = "";
+                    if (response.status == 400) {
+                        if(typeof response.data.notfound != 'undefined')
+                            msg = "Email tidak terdaftar";
+                        else
+                            msg = "Koneksi gagal";
+                    } else {
+                        msg = "Koneksi gagal";
+                    }
+                    fail(msg);
+                });
+            }
+        };
+    }])
+
 .controller('regParentCtrl', ['$scope', '$state', '$ionicPopup', '$ionicLoading', '$ionicHistory', 'ionicDatePicker', 'Users', 'Elders',
 	function ($scope, $state, $ionicPopup, $ionicLoading, $ionicHistory, ionicDatePicker, Users, Elders) {
         $scope.$on('$ionicView.beforeEnter', function () {

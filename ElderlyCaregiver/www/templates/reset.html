@@ -1,0 +1,22 @@
+<ion-view view-title="Lupa Password">    
+    <ion-nav-bar class="bar-positive" align-title="center">
+        <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        
+        <form name="regForm" ng-submit="reset(regForm)">
+
+            <div class="list list-inset">
+                <label class="item item-input" ng-class="{ 'has-error' : regForm.email.$invalid && !regForm.email.$error.required }">
+                    <i class="icon ion-android-mail placeholder-icon"></i>
+                    <input type="email" name="email" placeholder="Email" ng-model="user.email" required />
+                </label>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-positive">
+                    Reset Password
+                </button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

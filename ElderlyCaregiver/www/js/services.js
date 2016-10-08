@@ -135,6 +135,16 @@ angular.module('starter.services', [])
     var token = null;
 
     return {
+        reset: function(email, callback, error){
+            $http.post(ApiEndpoint.url + '/reset/', {email: email})
+            .then(function(response){              
+                if(callback != null)
+                  callback(response.data);
+            }, function(response){
+                if(error != null)
+                    error(response);
+            });
+        },
         login: function(username, password, callback, error) {
             $http.post(ApiEndpoint.url + '/login/', {username: username, password: password})
             .then(function(response){
