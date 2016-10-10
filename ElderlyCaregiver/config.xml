@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.elderlycaregiver897418" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ionicframework.elderlycaregiver897418" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Berbakti Anak</name>
-  <description>&#xD;&#xD;
-        Aplikasi berbakti untuk anak&#xD;&#xD;
-    </description>
+  <description>&#xD;&#xD; Aplikasi berbakti untuk anak&#xD;&#xD; </description>
   <author email="admin@berbakti.id" href="http://berbakti.id/">&#xD;&#xD;
       Fahri Firdausillah&#xD;&#xD;
     </author>

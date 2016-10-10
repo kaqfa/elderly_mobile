@@ -1,9 +1,9 @@
 <ion-view view-title="Profil Orang Tua" hide-back-button="true">
   <ion-content class="has-header">
-    <div class="has-mask {{user.photo==null?'bg-header':'bg-full'}}" 
-         style="background-image:url({{user.photo==null?'img/profile_girl.png':user.photo}});">
+    <div class="has-mask {{elder.photo==null?'bg-header':'bg-full'}}" 
+         style="background-image:url({{elder.photo==null?'img/profile_girl.png':elder.photo}});">
          <img ng-src="img/camera.png" ng-click="getPict()" class="img-camera">
-        <div class="img-text">{{user.first_name}} {{user.last_name}}</div>
+        <!--<div class="img-text">{{user.fullname}}</div>-->
     </div>  
     <div class="list padding" >
       <form name="updForm" ng-submit="update(updForm)">
@@ -15,19 +15,19 @@
             </label>
             <div class="item item-input">
                 <label><i class="icon ion-android-calendar placeholder-icon"></i></label>
-                <input type="text" name="birthday" ng-model="user.birthday" ng-focus="datePick();"
+                <input type="text" name="birthday" ng-model="elder.birthday" ng-focus="datePick();"
                         placeholder="Tanggal Lahir" required>
             </div>
             <label class="item item-input item-select">
                 <i class="">kelamin</i>
-                <select ng-model="user.gender">
+                <select ng-model="elder.gender">
                     <option value="l" selected>Laki-Laki</option>
                     <option value="p">Perempuan</option>
                 </select>
             </label>
             <label class="item item-input">
                 <i class="icon ion-android-phone-portrait placeholder-icon"></i>
-                <input type="text" pattern="[0-9]*" name="phone" ng-model="user.phone" placeholder="No. Handphone" required>
+                <input type="text" pattern="[0-9]*" name="phone" ng-model="elder.phone" placeholder="No. Handphone" required>
             </label>
             <div class="">
                 <button type="submit" class="button button-block button-positive">Perbaharui Data</button>

@@ -3,10 +3,24 @@ cordova build --release android
 
 cd D:\elderly\ElderlyCaregiver\platforms\android\build\outputs\apk
 keytool -genkey -v -keystore berbakti-anak.keystore -alias berbakti-anak -keyalg RSA -keysize 2048 -validity 10000
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore berbakti-anak.keystore android-release-unsigned.apk berbakti_anak
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore berbakti-anak.keystore android-release-unsigned.apk berbakti-anak
 zipalign -v 4 android-release-unsigned.apk Berbakti-anak.apk
 
 cd D:\elderly\ElderlyElder\platforms\android\build\outputs\apk
 keytool -genkey -v -keystore berbakti-ortu.keystore -alias berbakti-ortu -keyalg RSA -keysize 2048 -validity 10000
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore berbakti-ortu.keystore android-release-unsigned.apk berbakti_ortu
 zipalign -v 4 android-release-unsigned.apk Berbakti_ortu.apk
+
+- Logo XL depan pake yang baru
+- suara narasinya dibuat lebih kenceng bisa?
+- Pake font Lato / Trebuchet:
+  - Tulisan: "MENGENAL APLIKASI BERBAKTI", jangan kapital semua yang kapital huruf awal aja
+  - Tulisan: "semarang -- pekalongan" juga huruf depan kapital
+  - Tulisan: "BERBAKTI ANAK" dan "BERBAKTI ORANG TUA" juga depan saja yang kapital
+- nomor untuk anak & orang tua yang didaftarkan pake nomor XL atau Axis
+- Gambar anatomi, ganti mockup yang baru bisa? (ada tambahan sakit lutut)
+- Menu sapa anak juga pake tampilan yang baru bisa?
+- Profil di aplikasi orang tua, kemarin ada revisi dari XL nggak bisa buat update data, cuman tampilan aja
+- Loading artikel tdk muncul, sebaiknya salah satu artikel yg di click
+- di aplikasi anak rumah sakit rujukan pake versi terbaru juga bisa? (tambahan data rumah sakit)
+- alamat web nggak usah pake "www" langsung "berbakti.id", atasnya dikasih logo tulisan Berbakti

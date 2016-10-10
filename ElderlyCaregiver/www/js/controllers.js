@@ -450,7 +450,7 @@ angular.module('starter.controllers', [])
                 inputDate: $scope.subsYear(new Date(), 40),
                 mondayFirst: true,
                 dateFormat: 'dd/MM/yyyy',
-                disableWeekdays: [0],
+                // disableWeekdays: [0],
                 closeOnSelect: false,
                 templateType: 'popup'
             };
@@ -623,7 +623,7 @@ angular.module('starter.controllers', [])
                 inputDate: moment(dt, 'DD/MM/YYYY').toDate(),
                 mondayFirst: true,
                 dateFormat: 'dd/MM/yyyy',
-                disableWeekdays: [0],
+                // disableWeekdays: [0],
                 closeOnSelect: false,
                 templateType: 'popup'
             };
@@ -640,6 +640,7 @@ angular.module('starter.controllers', [])
     function ($scope, $state, $stateParams, Elders, $ionicLoading, $ionicPopup, Users, ionicDatePicker) {
         $scope.$on('$ionicView.beforeEnter', function () {
             elder = Elders.get($stateParams.parentId);
+            console.log(elder);
             if (elder != null) {
                 $scope.photo = elder.elder.photo;
                 $scope.elder = elder.elder;                
@@ -785,7 +786,7 @@ angular.module('starter.controllers', [])
                 mondayFirst: true,
                 inputDate: moment($scope.user.birthday, 'DD/MM/YYYY').toDate(),
                 dateFormat: 'dd/MM/yyyy',
-                disableWeekdays: [0],
+                // disableWeekdays: [0],
                 closeOnSelect: false,
                 templateType: 'popup'
             };
