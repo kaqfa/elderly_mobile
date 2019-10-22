@@ -18,6 +18,7 @@ function addPlatformBodyTag(indexPath, platform) {
   try {
     var platformClass = 'platform-' + platform;
     var cordovaClass = 'platform-cordova platform-webview';
+    var newFaceDet = 'platform'
 
     var html = fs.readFileSync(indexPath, 'utf8');
 
@@ -25,6 +26,7 @@ function addPlatformBodyTag(indexPath, platform) {
     if(!bodyTag) return; // no opening body tag, something's wrong
 
     if(bodyTag.indexOf(platformClass) > -1) return; // already added
+    if(newFaceDet.indexOf(platformClass) > -1) return;
 
     var newBodyTag = bodyTag;
 
@@ -56,6 +58,12 @@ function findBodyTag(html) {
   try{
     return html.match(/<body(?=[\s>])(.*?)>/gi)[0];
   }catch(e){}
+}
+
+function findFaceDet(newFaceDet){
+  try{
+    return html.match(/<body(?=[\s>])(.*?)>/gi)[0];
+  } catch(e){}
 }
 
 function findClassAttr(bodyTag) {
